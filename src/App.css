@@ -1,0 +1,42 @@
+/* #c79f27 oscar*/
+/* #1d1fff disney */
+
+* {
+  font-family: "futura book legacy", "FuturaPT-Book", "Trebuchet MS", Arial,
+    sans-serif;
+}
+
+.oscar-body {
+  height: 100vh;
+  padding: 5vmin;
+  overflow: hidden;
+}
+
+.oscar-table {
+  height: calc(100vh - 200px - 10vmin);
+  overflow: auto;
+}
+
+.oscar-logo {
+  height: 10vmin;
+  pointer-events: none;
+}
+
+.tag-category {
+  margin: 0 8px;
+}
+
+.oscar-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: #111;
+  padding: 5vmin;
+  height: 200px;
+}
+
+.watched a {
+  margin-right: 8px;
+}
