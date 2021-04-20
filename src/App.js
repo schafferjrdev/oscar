@@ -47,7 +47,9 @@ function App() {
     await setOmdb(null);
 
     axios
-      .get(`http://www.omdbapi.com/?apikey=81750ce2&i=${uuid.split("/")[4]}`)
+      .get(`http://www.omdbapi.com/?apikey=81750ce2&i=${uuid.split("/")[4]}`, {
+        crossdomain: true,
+      })
       .then(function (response) {
         // handle success
         setOmdb(response.data);
