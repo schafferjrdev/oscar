@@ -15,8 +15,12 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
   const Categories = ({ list = [] }) => {
     return (
       <div className="list-category">
-        {list.map((l) => (
-          <Tag color={CATEGORIES[l].color} className="tag-category">
+        {list.map((l, i) => (
+          <Tag
+            key={`tag_${i}`}
+            color={CATEGORIES[l].color}
+            className="tag-category"
+          >
             {CATEGORIES[l].title}
           </Tag>
         ))}
@@ -202,6 +206,7 @@ function App() {
             handleCheck={handleCheck}
             data={movie}
             index={index}
+            key={`movies_${index}`}
           />
         ))}
       </div>
