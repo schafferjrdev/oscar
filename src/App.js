@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import axios from "axios";
 import logo from "./logo.png";
 import "./App.css";
 import { Table, Checkbox, Rate, Tag, Tooltip, Popover } from "antd";
@@ -32,7 +33,11 @@ function App() {
         alt={`${omdb?.Title}_Poster`}
         src={omdb?.Poster}
       />
+      <p className="omdb-plot">
+        {omdb?.Title} &bull; {omdb?.Runtime}
+      </p>
       <p className="omdb-plot">{omdb?.Plot}</p>
+      <p className="omdb-plot">{omdb?.Actors}</p>
     </div>
   ) : (
     <LoadingOutlined />
@@ -40,9 +45,17 @@ function App() {
 
   const getOMDB = async (uuid) => {
     await setOmdb(null);
-    fetch(`http://www.omdbapi.com/?apikey=81750ce2&i=${uuid.split("/")[4]}`)
-      .then((response) => response.json())
-      .then((data) => setOmdb(data));
+
+    axios
+      .get(`http://www.omdbapi.com/?apikey=81750ce2&i=${uuid.split("/")[4]}`)
+      .then(function (response) {
+        // handle success
+        setOmdb(response.data);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      });
   };
 
   const columns = [
