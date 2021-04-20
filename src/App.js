@@ -139,7 +139,9 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
           onChange={(e) => handleCheck(index, e)}
           checked={data?.watched}
           className="watch-checkbox"
-        />
+        >
+          Já viu?
+        </Checkbox>
       </div>
     </Card>
   );
