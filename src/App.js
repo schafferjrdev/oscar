@@ -1,35 +1,70 @@
 import React, { useState, useEffect } from "react";
 import logo from "./logo.png";
 import "./App.css";
-import { Table, Checkbox, Rate, Tag, Tooltip } from "antd";
+import { Table, Checkbox, Rate, Tag, Tooltip, Popover } from "antd";
 import Countdown from "react-countdown";
 import Icon from "./Icon";
-import { NOMINEES } from "./constants";
+import { CATEGORIES, NOMINEES } from "./constants";
+import { LoadingOutlined } from "@ant-design/icons";
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [omdb, setOmdb] = useState(null);
 
   const dataSource = NOMINEES;
 
-  const VERSION = "1";
+  const Categories = ({ list = [] }) => {
+    return (
+      <div className="list-category">
+        {list.map((l) => (
+          <Tag color={CATEGORIES[l].color} className="tag-category">
+            {CATEGORIES[l].title}
+          </Tag>
+        ))}
+      </div>
+    );
+  };
+
+  const content = omdb ? (
+    <div>
+      <img
+        className="omdb-poster"
+        alt={`${omdb?.Title}_Poster`}
+        src={omdb?.Poster}
+      />
+      <p className="omdb-plot">{omdb?.Plot}</p>
+    </div>
+  ) : (
+    <LoadingOutlined />
+  );
+
+  const getOMDB = async (uuid) => {
+    await setOmdb(null);
+    fetch(`http://www.omdbapi.com/?apikey=81750ce2&i=${uuid.split("/")[4]}`)
+      .then((response) => response.json())
+      .then((data) => setOmdb(data));
+  };
 
   const columns = [
     {
       title: "Filme",
       dataIndex: "movie",
       key: "movie",
-      width: 550,
+      width: "35vw",
       render: (movie, record, index) => (
         <span className="watched">
           {movie.imdb ? (
-            <a
-              href={movie.imdb}
-              target="_blank"
-              rel="noreferrer"
-              title="Ir ao imdb"
-            >
-              <span>{movie.name}</span>
-            </a>
+            <Popover content={content} placement="right">
+              <a
+                href={movie.imdb}
+                target="_blank"
+                rel="noreferrer"
+                title="Ir ao imdb"
+                onMouseEnter={() => getOMDB(movie.imdb)}
+              >
+                <span>{movie.name}</span>
+              </a>
+            </Popover>
           ) : (
             <span>{movie.name}</span>
           )}
@@ -55,27 +90,36 @@ function App() {
       title: "Indicações",
       dataIndex: "indications",
       key: "indications",
-      width: 150,
-      sorter: (a, b) => a.indications - b.indications,
+      render: (movie, record) => (
+        <Popover
+          title="Indicações"
+          content={<Categories list={record.category} />}
+          placement="right"
+        >
+          <span className="movie-indications">{movie}</span>
+        </Popover>
+      ),
+      width: "10vw",
     },
     {
       title: "Onde ver?",
       dataIndex: "platform",
       key: "platform",
       render: (p) => <Icon type={p.name} url={p.url} />,
-      width: 150,
+      width: "10vw",
     },
     {
       title: "Legenda",
       dataIndex: "subtitle",
       key: "subtitle",
       render: (p) => <Icon type={p ? "legenda" : null} url={p} />,
-      width: 150,
+      width: "10vw",
     },
     {
       title: "Já assistiu?",
       dataIndex: "watched",
       key: "watched",
+      width: "10vw",
       render: (_, record, index) => (
         <Checkbox
           onChange={(e) => handleCheck(index, e)}
@@ -105,58 +149,19 @@ function App() {
   };
 
   useEffect(() => {
-    // getter
-    const v = localStorage.getItem("version");
+    const data = localStorage.getItem("oscar-data");
+    if (data) {
+      const parsed = JSON.parse(data);
 
-    if (VERSION > v) {
-      console.log(
-        "[VERSIONS] Versões diferentes",
-        v,
-        VERSION,
-        "Reinicia os dados"
-      );
       setMovies(
-        dataSource.map((el, index) => ({
-          ...el,
-          key: index,
-          rate: 0,
-          watched: false,
+        dataSource.map((d, i) => ({
+          rate: parsed[i].rate,
+          watched: parsed[i].watched,
+          ...d,
         }))
       );
-      localStorage.setItem("version", VERSION);
-      localStorage.removeItem("oscar-data");
-    } else if (VERSION === v) {
-      console.log("[VERSIONS] Versões corretas", v, VERSION);
-      const data = localStorage.getItem("oscar-data");
-
-      if (Boolean(data)) {
-        console.log("[STORAGE] Atualiza do storage");
-
-        setMovies(JSON.parse(data));
-      } else {
-        console.log("[STORAGE] Sem storage");
-
-        setMovies(
-          dataSource.map((el, index) => ({
-            ...el,
-            key: index,
-            rate: 0,
-            watched: false,
-          }))
-        );
-      }
     } else {
-      console.log("[VERSIONS] Sem versão definida");
-      localStorage.setItem("version", VERSION);
-      localStorage.removeItem("oscar-data");
-      setMovies(
-        dataSource.map((el, index) => ({
-          ...el,
-          key: index,
-          rate: 0,
-          watched: false,
-        }))
-      );
+      setMovies(dataSource);
     }
 
     // eslint-disable-next-line
@@ -192,7 +197,7 @@ function App() {
         dataSource={movies}
         columns={columns}
         pagination={false}
-        scroll={{ y: 400 }}
+        scroll={{ y: 400, x: 1200 }}
       />
     </div>
   );

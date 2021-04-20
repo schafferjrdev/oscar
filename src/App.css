@@ -23,7 +23,7 @@
 }
 
 .tag-category {
-  margin: 0 8px;
+  margin: 8px;
 }
 
 .oscar-header {
@@ -39,4 +39,19 @@
 
 .watched a {
   margin-right: 8px;
+}
+
+.omdb-plot,
+.omdb-poster {
+  width: 250px;
+  max-width: 250px;
+  max-height: 370px;
+}
+
+.movie-indications {
+  cursor: pointer;
+}
+
+.list-category {
+  max-width: 250px;
 }

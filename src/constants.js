@@ -60,11 +60,11 @@ export const CATEGORIES = {
     color: "blue",
   },
   score: {
-    title: "Trilha Sonora",
+    title: "Trilha Sonora Original",
     color: "purple",
   },
   song: {
-    title: "Canção",
+    title: "Canção Original",
     color: "purple",
   },
   productionDesign: {
@@ -83,11 +83,11 @@ export const CATEGORIES = {
     title: "Efeitos Visuais",
     color: "blue",
   },
-  writingOriginal: {
+  writing: {
     title: "Roteiro Adaptado",
     color: "geekblue",
   },
-  writing: {
+  writingOriginal: {
     title: "Roteiro Original",
     color: "geekblue",
   },
@@ -105,6 +105,18 @@ export const NOMINEES = [
       name: "netflix",
       url: "https://www.netflix.com/watch/81117189",
     },
+    category: [
+      "bestPicture",
+      "directing",
+      "cinematography",
+      "score",
+      "sound",
+      "leadingActor",
+      "supportingActress",
+      "costumeDesign",
+      "hair",
+      "productionDesign",
+    ],
   },
   {
     movie: {
@@ -116,6 +128,14 @@ export const NOMINEES = [
     subtitle:
       "http://legendas.tv/download/605f697d43b06/The_Father/The_Father_2020_WEBRip",
     indications: 6,
+    category: [
+      "bestPicture",
+      "leadingActor",
+      "supportingActress",
+      "editing",
+      "productionDesign",
+      "writing",
+    ],
   },
   {
     movie: {
@@ -124,6 +144,14 @@ export const NOMINEES = [
     },
     indications: 6,
     bestPicture: true,
+    category: [
+      "bestPicture",
+      "supportingActor",
+      "supportingActor",
+      "cinematography",
+      "song",
+      "writingOriginal",
+    ],
     platform: {
       name: "yts",
       url: "https://yts.mx/movies/judas-and-the-black-messiah-2021",
@@ -138,6 +166,14 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt10633456/",
     },
     indications: 6,
+    category: [
+      "bestPicture",
+      "leadingActor",
+      "supportingActress",
+      "directing",
+      "score",
+      "writingOriginal",
+    ],
     bestPicture: true,
     platform: { name: "yts", url: "https://yts.mx/movies/minari-2020" },
     subtitle:
@@ -149,6 +185,14 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt9770150",
     },
     indications: 6,
+    category: [
+      "bestPicture",
+      "leadingActress",
+      "cinematography",
+      "directing",
+      "editing",
+      "writing",
+    ],
     bestPicture: true,
     platform: { name: "yts", url: "https://yts.mx/movies/nomadland-2020" },
     subtitle:
@@ -162,6 +206,14 @@ export const NOMINEES = [
     },
     bestPicture: true,
     indications: 6,
+    category: [
+      "bestPicture",
+      "leadingActor",
+      "supportingActor",
+      "editing",
+      "sound",
+      "writingOriginal",
+    ],
     platform: {
       name: "prime",
       url: "https://www.primevideo.com/detail/0U8IBE45LTNO63PAZ9B9ZA81RN/",
@@ -173,6 +225,14 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt1070874/",
     },
     indications: 6,
+    category: [
+      "bestPicture",
+      "supportingActor",
+      "cinematography",
+      "editing",
+      "song",
+      "writingOriginal",
+    ],
     bestPicture: true,
     platform: {
       name: "netflix",
@@ -186,6 +246,13 @@ export const NOMINEES = [
     },
     bestPicture: true,
     indications: 5,
+    category: [
+      "bestPicture",
+      "leadingActress",
+      "directing",
+      "editing",
+      "writingOriginal",
+    ],
     platform: {
       name: "yts",
       url: "https://yts.mx/movies/promising-young-woman-2020",
@@ -199,6 +266,13 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt10514222",
     },
     indications: 5,
+    category: [
+      "leadingActor",
+      "leadingActress",
+      "costumeDesign",
+      "hair",
+      "productionDesign",
+    ],
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/br/title/81100780",
@@ -210,6 +284,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt6878306/",
     },
     indications: 4,
+    category: ["productionDesign", "sound", "score", "cinematography"],
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/title/81210670",
@@ -221,6 +296,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt10612922/",
     },
     indications: 3,
+    category: ["leadingActor", "writing", "song"],
     platform: {
       name: "prime",
       url: "https://www.primevideo.com/detail/0PUSORNFHNJRM15H4WEX1232JQ",
@@ -232,6 +308,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt2948372/",
     },
     indications: 3,
+    category: ["animated", "score", "sound"],
     platform: {
       name: "disney",
       url: "https://www.disneyplus.com/pt-br/movies/soul/77zlWrb9vRYp",
@@ -243,6 +320,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt13143964/",
     },
     indications: 2,
+    category: ["supportingActress", "writing"],
     platform: {
       name: "prime",
       url: "https://www.primevideo.com/detail/0H3D1IZ6BXXZESU8IM8ITTTB2C",
@@ -254,6 +332,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt4566758",
     },
     indications: 2,
+    category: ["effects", "costumeDesign"],
     platform: {
       name: "disney",
       url: "https://www.disneyplus.com/movies/mulan/2jlgPK4K0ilR",
@@ -264,6 +343,7 @@ export const NOMINEES = [
       name: "Pinóquio",
       imdb: "https://www.imdb.com/title/tt8333746",
     },
+    category: ["costumeDesign", "hair"],
     indications: 2,
     platform: { name: "yts", url: "https://yts.mx/movies/pinocchio-2019" },
     subtitle: "https://www.opensubtitles.org/pt/subtitles/8230810/pinocchio-pb",
@@ -274,6 +354,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt6723592",
     },
     indications: 2,
+    category: ["effects", "productionDesign"],
     platform: { name: "yts", url: "https://yts.mx/movies/tenet-2020" },
     subtitle:
       "http://legendas.tv/download/5fc9cf65209ea/Tenet/Tenet_2020_IMAX_BluRay_BRRip_BDRip",
@@ -284,6 +365,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt10288566/",
     },
     indications: 2,
+    category: ["directing", "international"],
     platform: { name: "yts", url: "https://yts.mx/movies/another-round-2020" },
     subtitle:
       "http://legendas.tv/download/5fe3207aa6118/Another_Round_Druk/Another_Round_2020_WEB_DL_WEBRip_HDRip",
@@ -294,6 +376,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt9214832/",
     },
     indications: 2,
+    category: ["costumeDesign", "hair"],
     platform: { name: "yts", url: "https://yts.mx/movies/emma-2020" },
     subtitle:
       "http://legendas.tv/download/5eb8e3d4d3919/Emma/Emma_2020_BluRay_BRRip_BDRip_WEB_DL_WEBRip_HDRip",
@@ -304,6 +387,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt11161474/",
     },
     indications: 1,
+    category: ["leadingActress"],
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/title/81128745",
@@ -315,6 +399,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt8521718",
     },
     indications: 1,
+    category: ["leadingActress"],
     platform: {
       name: "yts",
       url: "https://yts.mx/movies/the-united-states-vs-billie-holiday-2021",
@@ -327,6 +412,7 @@ export const NOMINEES = [
       name: "Era uma Vez um Sonho",
       imdb: "https://www.imdb.com/title/tt6772802/?ref_=nv_sr_srsg_0",
     },
+    category: ["supportingActress"],
     indications: 1,
     platform: {
       name: "netflix",
@@ -339,6 +425,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt6571548/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["writing"],
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/watch/80202877",
@@ -350,6 +437,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt7146812/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["animated"],
     platform: {
       name: "disney",
       url:
@@ -362,6 +450,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt7488208/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["animated"],
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/br/title/80214236",
@@ -373,6 +462,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt6193408/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["animated"],
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/br/title/80242602",
@@ -384,6 +474,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt5198068/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["animated"],
     platform: { name: "yts", url: "https://yts.mx/movies/wolfwalkers-2020" },
     subtitle:
       "http://legendas.tv/download/5feb79fde03db/Wolfwalkers/Wolfwalkers_2020_720p_WEB_h264_KOGi",
@@ -394,6 +485,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt9586294/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["international"],
     platform: { name: "yts", url: "https://yts.mx/movies/better-days-2019" },
   },
   {
@@ -402,6 +494,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt10706602/?ref_=nv_sr_srsg_0",
     },
     indications: 2,
+    category: ["international", "documentary"],
     platform: {
       name: "x",
       url:
@@ -416,6 +509,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt10360862/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["international"],
     platform: { name: "stremio", url: "https://bit.ly/3cyXdZY." },
   },
   {
@@ -424,6 +518,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt8633462/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["international"],
     platform: {
       name: "x",
       url:
@@ -438,6 +533,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt8923484/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["documentary"],
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/br/title/81001496",
@@ -449,6 +545,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt11394298/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["documentary"],
     platform: {
       name: "x",
       url:
@@ -463,6 +560,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt12888462/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["documentary"],
     platform: { name: "netflix", url: "http://www.netflix.com/title/81045007" },
   },
   {
@@ -471,6 +569,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt11416746/?ref_=nv_sr_srsg_3",
     },
     indications: 1,
+    category: ["documentary"],
     platform: {
       name: "prime",
       url:
@@ -483,6 +582,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt9777644/",
     },
     indications: 1,
+    category: ["score"],
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/br/title/81045635",
@@ -494,6 +594,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt8580274/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["song"],
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/title/80244088",
@@ -505,6 +606,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt10627584/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["song"],
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/title/81046378",
@@ -516,6 +618,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt6048922/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["sound"],
     platform: { name: "yts", url: "https://yts.mx/movies/greyhound-2020" },
     subtitle:
       "http://legendas.tv/download/5f0bb4b454533/Greyhound/Greyhound_2020_WEB_DL_WEBRip_HDRip_Subpack",
@@ -526,12 +629,11 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt2222042/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["effects"],
     platform: {
-      name: "yts",
-      url: "https://yts.mx/movies/love-and-monsters-2020",
+      name: "netflix",
+      url: "https://www.netflix.com/watch/81277430?source=35",
     },
-    subtitle:
-      "http://legendas.tv/download/5fdcb50587a0d/Love_and_Monsters/Love_And_Monsters_2020_1080p_BluRay_x264_AAC5_1_YTS_MX",
   },
   {
     movie: {
@@ -539,6 +641,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt10539608/?ref_=fn_al_tt_1",
     },
     indications: 1,
+    category: ["effects"],
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/br/title/80244645",
@@ -550,6 +653,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt3661394/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    category: ["effects"],
     platform: {
       name: "disney",
       url: "https://www.disneyplus.com/pt-br/movies/o-grande-ivan/7LzGbpg0fPJH",
@@ -561,6 +665,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt11643154/",
     },
     indications: 1,
+    category: ["documentaryShort"],
     platform: { name: "youtube", url: "https://youtu.be/J7uBf1gD6JY" },
   },
   {
@@ -569,6 +674,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt13793326/",
     },
     indications: 1,
+    category: ["documentaryShort"],
     platform: {
       name: "youtube",
       url: "https://www.youtube.com/watch?v=LoEZR5miMvo",
@@ -580,6 +686,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt11512676/",
     },
     indications: 1,
+    category: ["documentaryShort"],
     platform: {
       name: "youtube",
       url: "https://www.youtube.com/watch?v=BpS-Y7ndNeQ",
@@ -591,6 +698,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt12979636/",
     },
     indications: 1,
+    category: ["documentaryShort"],
     platform: {
       name: "drive",
       url:
@@ -603,6 +711,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt8993180/?ref_=fn_al_tt_1",
     },
     indications: 1,
+    category: ["documentaryShort"],
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/title/81304985",
@@ -614,6 +723,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt13167288/",
     },
     indications: 1,
+    category: ["animatedShort"],
     platform: {
       name: "disney",
       url:
@@ -626,6 +736,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt11884670/",
     },
     indications: 1,
+    category: ["animatedShort"],
     platform: {
       name: "drive",
       url:
@@ -638,6 +749,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt11768948/?ref_=fn_al_tt_1",
     },
     indications: 1,
+    category: ["animatedShort"],
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/title/81349306",
@@ -649,10 +761,10 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt14039636/",
     },
     indications: 1,
+    category: ["animatedShort"],
     platform: {
-      name: "drive",
-      url:
-        "https://drive.google.com/file/d/15hJO49oFhSetO4cAOTRqKuGZSOAE3Jhh/view?usp=sharing",
+      name: "youtube",
+      url: "https://youtu.be/XyL-qMQgK4Y",
     },
   },
   {
@@ -661,6 +773,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt12706728/",
     },
     indications: 1,
+    category: ["animatedShort"],
     platform: {
       name: "drive",
       url:
@@ -673,13 +786,11 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt9280166/",
     },
     indications: 1,
+    category: ["shortMovie"],
     platform: {
-      name: "x",
-      url:
-        "https://1337x.to/torrent/4804283/Feeling-Through-2019-1080p-WEBRip-x264-AAC-HORiZON-ArtSubs/",
+      name: "youtube",
+      url: "https://youtu.be/h1CqzntEZZ8",
     },
-    subtitle:
-      "http://legendas.tv/download/604c04cb34941/Feeling_Through/Feeling_Through_2019_1080p_WEBRip_x264_AAC_HORiZON_ArtSubs_curta",
   },
   {
     movie: {
@@ -687,6 +798,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt11962160/",
     },
     indications: 1,
+    category: ["shortMovie"],
     platform: {
       name: "x",
       url:
@@ -701,6 +813,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt11474480/",
     },
     indications: 1,
+    category: ["shortMovie"],
     platform: {
       name: "drive",
       url:
@@ -709,14 +822,14 @@ export const NOMINEES = [
   },
   {
     movie: {
-      name: "Two Distant Strangers",
+      name: "Dois Estranhos",
       imdb: "https://www.imdb.com/title/tt13472984/",
     },
     indications: 1,
+    category: ["shortMovie"],
     platform: {
-      name: "drive",
-      url:
-        "https://drive.google.com/file/d/10RcEeA1sAvZCi-NuXuORDz4uYlKDE4o-/view?usp=sharing",
+      name: "netflix",
+      url: "https://www.netflix.com/watch/81447229?trackId=14277281",
     },
   },
   {
@@ -725,6 +838,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt10538710/",
     },
     indications: 1,
+    category: ["shortMovie"],
     platform: {
       name: "tport",
       url: "https://tportmarket.com/films/white-eye/?shareID=WhiteEye#",
