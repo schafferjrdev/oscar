@@ -4,12 +4,13 @@
 * {
   font-family: "futura book legacy", "FuturaPT-Book", "Trebuchet MS", Arial,
     sans-serif;
+  box-sizing: border-box;
 }
 
 .oscar-body {
   height: 100vh;
-  padding: 5vmin;
-  overflow: hidden;
+  /* padding: 5vmin; */
+  /* overflow: hidden; */
 }
 
 .oscar-table {
@@ -24,6 +25,18 @@
 
 .tag-category {
   margin: 8px;
+  text-transform: uppercase;
+}
+
+.tag-major {
+  text-transform: uppercase;
+}
+
+.title-movie {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
 }
 
 .oscar-header {
@@ -33,12 +46,14 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: #111;
-  padding: 5vmin;
   height: 200px;
+  background-color: #fff;
 }
 
-.watched a {
-  margin-right: 8px;
+.watched {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
 }
 
 .omdb-plot,
@@ -49,9 +64,83 @@
 }
 
 .movie-indications {
-  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }
 
 .list-category {
   max-width: 250px;
+}
+
+.movie-list {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  grid-template-rows: auto;
+  gap: 16px;
+  padding: 50px 16px;
+  background-color: #efefef;
+}
+
+.watch-checkbox {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.poster-image {
+  height: 150px;
+  object-fit: cover;
+}
+
+.movie-card {
+  transition: all ease 0.3s;
+}
+.checked {
+  opacity: 0.4;
+}
+
+.movie-card:hover {
+  opacity: 1;
+}
+
+.movie-checker {
+  position: absolute;
+  top: -1px;
+  right: -1px;
+  z-index: 20;
+  width: 40px;
+  height: 40px;
+  background-color: #efefef;
+}
+
+.movie-plot {
+  min-height: 132px;
+  padding-top: 12px;
+}
+
+@media (min-width: 650px) {
+  .movie-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 769px) {
+  .movie-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (min-width: 1025px) {
+  .movie-list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1919px) {
+  .movie-list {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }

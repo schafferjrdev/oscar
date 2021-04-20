@@ -2,17 +2,15 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import logo from "./logo.png";
 import "./App.css";
-import { Table, Checkbox, Rate, Tag, Tooltip, Popover } from "antd";
+import { Checkbox, Rate, Tag, Tooltip, Popover, Card, Divider } from "antd";
 import Countdown from "react-countdown";
 import Icon from "./Icon";
 import { CATEGORIES, NOMINEES } from "./constants";
-import { LoadingOutlined } from "@ant-design/icons";
 
-function App() {
-  const [movies, setMovies] = useState([]);
+const { Meta } = Card;
+
+const MovieCard = ({ handleRate, handleCheck, data, index }) => {
   const [omdb, setOmdb] = useState(null);
-
-  const dataSource = NOMINEES;
 
   const Categories = ({ list = [] }) => {
     return (
@@ -26,28 +24,11 @@ function App() {
     );
   };
 
-  const content = omdb ? (
-    <div>
-      <img
-        className="omdb-poster"
-        alt={`${omdb?.Title}_Poster`}
-        src={omdb?.Poster}
-      />
-      <p className="omdb-plot">
-        {omdb?.Title} &bull; {omdb?.Runtime}
-      </p>
-      <p className="omdb-plot">{omdb?.Plot}</p>
-      <p className="omdb-plot">{omdb?.Actors}</p>
-    </div>
-  ) : (
-    <LoadingOutlined />
-  );
-
   const getOMDB = async (uuid) => {
     await setOmdb(null);
 
     axios
-      .get(`https://www.omdbapi.com/?apikey=81750ce2&i=${uuid.split("/")[4]}`)
+      .get(`https://www.omdbapi.com/?apikey=81750ce2&i=${uuid?.split("/")[4]}`)
       .then(function (response) {
         // handle success
         setOmdb(response.data);
@@ -58,89 +39,97 @@ function App() {
       });
   };
 
-  const columns = [
-    {
-      title: "Filme",
-      dataIndex: "movie",
-      key: "movie",
-      width: "35vw",
-      render: (movie, record, index) => (
-        <span className="watched">
-          {movie.imdb ? (
-            <Popover content={content} placement="right">
-              <a
-                href={movie.imdb}
-                target="_blank"
-                rel="noreferrer"
-                title="Ir ao imdb"
-                onMouseEnter={() => getOMDB(movie.imdb)}
-              >
-                <span>{movie.name}</span>
-              </a>
-            </Popover>
-          ) : (
-            <span>{movie.name}</span>
-          )}
-          {record.bestPicture && (
-            <Tag color="gold" className="tag-category">
-              MELHOR FILME
-            </Tag>
-          )}
-          <Tooltip title="Sua nota pessoal" placement="right">
-            <span>
-              <Rate
-                allowHalf
-                allowClear
-                onChange={(val) => handleRate(index, val)}
-                value={record.rate}
-              />
-            </span>
-          </Tooltip>
-        </span>
-      ),
-    },
-    {
-      title: "Indicações",
-      dataIndex: "indications",
-      key: "indications",
-      render: (movie, record) => (
+  useEffect(() => {
+    getOMDB(data?.movie.imdb);
+  }, [data]);
+
+  return (
+    <Card
+      cover={
+        <img
+          onClick={() =>
+            handleCheck(index, { target: { checked: !data?.watched } })
+          }
+          className="poster-image"
+          alt="movie_poster"
+          src={omdb?.Poster}
+        />
+      }
+      loading={!omdb}
+      hoverable
+      style={{ width: "100%" }}
+      className={`movie-card${data?.watched ? " checked" : ""}`}
+      actions={
+        data?.subtitle
+          ? [
+              <Icon type={data?.platform.name} url={data?.platform.url} />,
+              <Icon
+                type={data?.subtitle ? "legenda" : null}
+                url={data?.subtitle}
+              />,
+            ]
+          : [<Icon type={data?.platform.name} url={data?.platform.url} />]
+      }
+    >
+      <Meta
+        title={
+          <span className="watched">
+            <a
+              href={data?.movie.imdb}
+              target="_blank"
+              rel="noreferrer"
+              title="Ir ao imdb"
+            >
+              <span>{data?.movie.name}</span>
+            </a>
+
+            <Tooltip title="Sua nota pessoal" placement="right">
+              <span>
+                <Rate
+                  allowHalf
+                  allowClear
+                  onChange={(val) => handleRate(index, val)}
+                  value={data?.rate}
+                />
+              </span>
+            </Tooltip>
+          </span>
+        }
+        description={`${omdb?.Title} • ${omdb?.Year} • ${omdb?.Runtime}`}
+      />
+      <div>
+        <p className="movie-plot">{omdb?.Plot}</p>
+        <Divider />
+
         <Popover
           title="Indicações"
-          content={<Categories list={record.category} />}
-          placement="right"
+          content={<Categories list={data?.category} />}
+          placement="top"
+          className="movie-indications"
         >
-          <span className="movie-indications">{movie}</span>
+          <span>Indicações: {data?.indications}</span>
+
+          {data?.major && (
+            <Tag color={CATEGORIES[data?.major]?.color} className="tag-major">
+              {CATEGORIES[data?.major]?.title}
+            </Tag>
+          )}
         </Popover>
-      ),
-      width: "10vw",
-    },
-    {
-      title: "Onde ver?",
-      dataIndex: "platform",
-      key: "platform",
-      render: (p) => <Icon type={p.name} url={p.url} />,
-      width: "10vw",
-    },
-    {
-      title: "Legenda",
-      dataIndex: "subtitle",
-      key: "subtitle",
-      render: (p) => <Icon type={p ? "legenda" : null} url={p} />,
-      width: "10vw",
-    },
-    {
-      title: "Já assistiu?",
-      dataIndex: "watched",
-      key: "watched",
-      width: "10vw",
-      render: (_, record, index) => (
+      </div>
+      <div className="movie-checker">
         <Checkbox
           onChange={(e) => handleCheck(index, e)}
-          checked={record.watched}
+          checked={data?.watched}
+          className="watch-checkbox"
         />
-      ),
-    },
-  ];
+      </div>
+    </Card>
+  );
+};
+
+function App() {
+  const dataSource = NOMINEES;
+  const [movies, setMovies] = useState([]);
 
   const handleRate = (index, val) => {
     setMovies((prevState) => {
@@ -206,12 +195,16 @@ function App() {
           />
         </span>
       </header>
-      <Table
-        dataSource={movies}
-        columns={columns}
-        pagination={false}
-        scroll={{ y: 400, x: 1200 }}
-      />
+      <div className="movie-list">
+        {movies.map((movie, index) => (
+          <MovieCard
+            handleRate={handleRate}
+            handleCheck={handleCheck}
+            data={movie}
+            index={index}
+          />
+        ))}
+      </div>
     </div>
   );
 }

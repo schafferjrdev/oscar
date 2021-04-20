@@ -101,6 +101,7 @@ export const NOMINEES = [
     },
     indications: 10,
     bestPicture: true,
+    major: "bestPicture",
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/watch/81117189",
@@ -124,6 +125,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt10272386/",
     },
     bestPicture: true,
+    major: "bestPicture",
     platform: { name: "yts", url: "https://yts.mx/movies/the-father-2020" },
     subtitle:
       "http://legendas.tv/download/605f697d43b06/The_Father/The_Father_2020_WEBRip",
@@ -144,6 +146,7 @@ export const NOMINEES = [
     },
     indications: 6,
     bestPicture: true,
+    major: "bestPicture",
     category: [
       "bestPicture",
       "supportingActor",
@@ -175,6 +178,7 @@ export const NOMINEES = [
       "writingOriginal",
     ],
     bestPicture: true,
+    major: "bestPicture",
     platform: { name: "yts", url: "https://yts.mx/movies/minari-2020" },
     subtitle:
       "http://legendas.tv/download/5ffe4a26a0bca/Minari/Minari_2020_720p_WEBSCR_DD2_0_x264_NOGRP_EVO",
@@ -194,6 +198,7 @@ export const NOMINEES = [
       "writing",
     ],
     bestPicture: true,
+    major: "bestPicture",
     platform: { name: "yts", url: "https://yts.mx/movies/nomadland-2020" },
     subtitle:
       "http://legendas.tv/download/5ffc9424e6d2d/Nomadland/Nomadland_2020_1080p_WEBSCR_DD2_0_x264_NOGRP_Nomadland_2020_READNFO_1080p_WEBSCR_X264_AC3_EVO",
@@ -205,6 +210,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt5363618/",
     },
     bestPicture: true,
+    major: "bestPicture",
     indications: 6,
     category: [
       "bestPicture",
@@ -234,6 +240,7 @@ export const NOMINEES = [
       "writingOriginal",
     ],
     bestPicture: true,
+    major: "bestPicture",
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/watch/81043755",
@@ -245,6 +252,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt9620292/",
     },
     bestPicture: true,
+    major: "bestPicture",
     indications: 5,
     category: [
       "bestPicture",
@@ -308,6 +316,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt2948372/",
     },
     indications: 3,
+    major: "animated",
     category: ["animated", "score", "sound"],
     platform: {
       name: "disney",
@@ -437,6 +446,7 @@ export const NOMINEES = [
       imdb: "https://www.imdb.com/title/tt7146812/?ref_=nv_sr_srsg_0",
     },
     indications: 1,
+    major: "animated",
     category: ["animated"],
     platform: {
       name: "disney",
@@ -451,6 +461,7 @@ export const NOMINEES = [
     },
     indications: 1,
     category: ["animated"],
+    major: "animated",
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/br/title/80214236",
@@ -463,6 +474,7 @@ export const NOMINEES = [
     },
     indications: 1,
     category: ["animated"],
+    major: "animated",
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/br/title/80242602",
@@ -475,6 +487,7 @@ export const NOMINEES = [
     },
     indications: 1,
     category: ["animated"],
+    major: "animated",
     platform: { name: "yts", url: "https://yts.mx/movies/wolfwalkers-2020" },
     subtitle:
       "http://legendas.tv/download/5feb79fde03db/Wolfwalkers/Wolfwalkers_2020_720p_WEB_h264_KOGi",
@@ -724,6 +737,7 @@ export const NOMINEES = [
     },
     indications: 1,
     category: ["animatedShort"],
+    major: "animatedShort",
     platform: {
       name: "disney",
       url:
@@ -737,6 +751,7 @@ export const NOMINEES = [
     },
     indications: 1,
     category: ["animatedShort"],
+    major: "animatedShort",
     platform: {
       name: "drive",
       url:
@@ -750,6 +765,7 @@ export const NOMINEES = [
     },
     indications: 1,
     category: ["animatedShort"],
+    major: "animatedShort",
     platform: {
       name: "netflix",
       url: "https://www.netflix.com/title/81349306",
@@ -762,6 +778,7 @@ export const NOMINEES = [
     },
     indications: 1,
     category: ["animatedShort"],
+    major: "animatedShort",
     platform: {
       name: "youtube",
       url: "https://youtu.be/XyL-qMQgK4Y",
@@ -774,6 +791,7 @@ export const NOMINEES = [
     },
     indications: 1,
     category: ["animatedShort"],
+    major: "animatedShort",
     platform: {
       name: "drive",
       url:
