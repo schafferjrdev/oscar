@@ -116,8 +116,15 @@
 }
 
 .movie-plot {
-  min-height: 132px;
+  min-height: 216px;
   padding-top: 12px;
+  display: flex;
+  flex-direction: column;
+}
+
+.movie-plot p {
+  display: flex;
+  flex-direction: column;
 }
 
 @media (min-width: 650px) {

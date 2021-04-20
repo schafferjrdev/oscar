@@ -57,6 +57,7 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
           className="poster-image"
           alt="movie_poster"
           src={omdb?.Poster}
+          title="Clique para marcar que viu"
         />
       }
       loading={!omdb}
@@ -102,7 +103,16 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
         description={`${omdb?.Title} • ${omdb?.Year} • ${omdb?.Runtime}`}
       />
       <div>
-        <p className="movie-plot">{omdb?.Plot}</p>
+        <p className="movie-plot">
+          <p>
+            <b>Sinopse</b>
+            {omdb?.Plot}
+          </p>
+          <p>
+            <b>Elenco</b>
+            {omdb?.Actors}
+          </p>
+        </p>
         <Divider />
 
         <Popover
