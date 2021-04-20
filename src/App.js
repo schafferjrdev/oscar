@@ -5,6 +5,7 @@ import "./App.css";
 import { Checkbox, Rate, Tag, Tooltip, Popover, Card, Divider } from "antd";
 import Countdown from "react-countdown";
 import Icon from "./Icon";
+import { LoadingOutlined } from "@ant-design/icons";
 import { CATEGORIES, NOMINEES } from "./constants";
 
 const { Meta } = Card;
@@ -50,15 +51,19 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
   return (
     <Card
       cover={
-        <img
-          onClick={() =>
-            handleCheck(index, { target: { checked: !data?.watched } })
-          }
-          className="poster-image"
-          alt="movie_poster"
-          src={omdb?.Poster}
-          title="Clique para marcar que viu"
-        />
+        omdb?.Poster ? (
+          <img
+            onClick={() =>
+              handleCheck(index, { target: { checked: !data?.watched } })
+            }
+            className="poster-image"
+            alt="movie_poster"
+            src={omdb?.Poster}
+            title="Clique para marcar que viu"
+          />
+        ) : (
+          <LoadingOutlined />
+        )
       }
       loading={!omdb}
       hoverable
@@ -85,7 +90,7 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
               rel="noreferrer"
               title="Ir ao imdb"
             >
-              <span>{data?.movie.name}</span>
+              <b>{data?.movie.name}</b>
             </a>
 
             <Tooltip title="Sua nota pessoal" placement="right">
