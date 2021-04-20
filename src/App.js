@@ -66,7 +66,6 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
         )
       }
       loading={!omdb}
-      hoverable
       style={{ width: "100%" }}
       className={`movie-card${data?.watched ? " checked" : ""}`}
       actions={

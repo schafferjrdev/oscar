@@ -66,6 +66,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
+  cursor: pointer;
 }
 
 .list-category {
@@ -92,6 +93,7 @@
 .poster-image {
   height: 150px;
   object-fit: cover;
+  cursor: pointer;
 }
 
 .movie-card {
