@@ -12,6 +12,32 @@
   /* overflow: hidden; */
 }
 
+.dark-mode {
+  filter: invert(1);
+  img,
+  .watched a,
+  .ant-tag,
+  .ant-rate-star-full,
+  .ant-rate-star-first,
+  .ant-checkbox,
+  .dark-button {
+    filter: invert(1);
+  }
+
+  .ant-popover-placement-top > .ant-popover-content > .ant-popover-arrow,
+  .ant-popover-placement-topLeft > .ant-popover-content > .ant-popover-arrow,
+  .ant-popover-placement-topRight > .ant-popover-content > .ant-popover-arrow,
+  .ant-popover-inner {
+    background-color: #ddd;
+    bottom: 6.2px;
+    border-top-color: #0000;
+    border-right-color: #ddd;
+    border-bottom-color: #ddd;
+    border-left-color: #0000;
+    box-shadow: 3px 3px 7px rgb(150 150 150 / 7%);
+  }
+}
+
 .oscar-table {
   height: calc(100vh - 200px - 10vmin);
   overflow: auto;
@@ -137,7 +163,7 @@
 }
 
 .movie-plot {
-  min-height: 216px;
+  min-height: 260px;
   padding-top: 12px;
   display: flex;
   flex-direction: column;
@@ -146,6 +172,32 @@
 .movie-plot p {
   display: flex;
   flex-direction: column;
+}
+
+.dark-button {
+  position: absolute;
+  cursor: pointer;
+  font-size: 32px;
+  right: 16px;
+  top: 16px;
+  transition: all ease 0.25s;
+  color: #c79f27;
+  &:hover {
+    transform: scale(1.1);
+  }
+  &:active {
+    transform: scale(0.9);
+    animation: rotate 1 0.5s;
+  }
+}
+
+@keyframes rotate {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(180deg);
+  }
 }
 
 @media (min-width: 650px) {

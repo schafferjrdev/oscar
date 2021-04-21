@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import logo from "./logo.png";
-import "./App.css";
+import "./App.scss";
 import { Checkbox, Rate, Tag, Tooltip, Popover, Card, Divider } from "antd";
 import Countdown from "react-countdown";
 import Icon from "./Icon";
@@ -150,6 +150,7 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
 function App() {
   const dataSource = NOMINEES;
   const [movies, setMovies] = useState([]);
+  const [darkMode, setDarkMode] = useState(false);
 
   const handleRate = (index, val) => {
     setMovies((prevState) => {
@@ -186,6 +187,12 @@ function App() {
       setMovies(dataSource);
     }
 
+    const dark = localStorage.getItem("dark-mode");
+
+    if (dark) {
+      setDarkMode(dark === "true");
+    }
+
     // eslint-disable-next-line
   }, []);
 
@@ -195,8 +202,19 @@ function App() {
     return number > 1 ? `${number} ${word}s` : `${number} ${word}`;
   };
 
+  const handleDarkMode = () => {
+    setDarkMode(!darkMode);
+    localStorage.setItem("dark-mode", !darkMode);
+  };
+
   return (
-    <div className="oscar-body">
+    <div className={`oscar-body${darkMode ? " dark-mode" : ""}`}>
+      <span
+        onClick={handleDarkMode}
+        class="material-icons-outlined dark-button"
+      >
+        {darkMode ? "light_mode" : "dark_mode"}
+      </span>
       <header className="oscar-header">
         <img src={logo} className="oscar-logo" alt="oscar-logo" />
         <span>Checklist para o Oscar 2021</span>
