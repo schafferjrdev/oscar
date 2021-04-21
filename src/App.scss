@@ -14,6 +14,20 @@
 
 .dark-mode {
   filter: invert(1);
+
+  .ant-card,
+  .ant-card-actions {
+    background-color: #ccc;
+  }
+
+  .ant-card-actions {
+    border-top-color: #bbb;
+  }
+
+  .ant-card-actions > li:not(:last-child) {
+    border-right-color: #bbb;
+  }
+
   img,
   .watched a,
   .ant-tag,
