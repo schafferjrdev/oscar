@@ -10,46 +10,6 @@
   height: 100vh;
 }
 
-.dark-mode {
-  filter: invert(1);
-
-  .ant-card,
-  .ant-card-actions {
-    background-color: #ccc;
-  }
-
-  .ant-card-actions {
-    border-top-color: #bbb;
-  }
-
-  .ant-card-actions > li:not(:last-child) {
-    border-right-color: #bbb;
-  }
-
-  img,
-  .watched a,
-  .ant-tag,
-  .ant-rate-star-full,
-  .ant-rate-star-first,
-  .ant-checkbox,
-  .dark-button {
-    filter: invert(1);
-  }
-
-  .ant-popover-placement-top > .ant-popover-content > .ant-popover-arrow,
-  .ant-popover-placement-topLeft > .ant-popover-content > .ant-popover-arrow,
-  .ant-popover-placement-topRight > .ant-popover-content > .ant-popover-arrow,
-  .ant-popover-inner {
-    background-color: #ddd;
-    bottom: 6.2px;
-    border-top-color: #0000;
-    border-right-color: #ddd;
-    border-bottom-color: #ddd;
-    border-left-color: #0000;
-    box-shadow: 3px 3px 7px rgb(150 150 150 / 7%);
-  }
-}
-
 .oscar-table {
   height: calc(100vh - 200px - 10vmin);
   overflow: auto;
@@ -232,5 +192,53 @@
 @media (min-width: 1919px) {
   .movie-list {
     grid-template-columns: repeat(5, 1fr);
+  }
+}
+
+.dark-mode {
+  .oscar-header {
+    background-color: #000;
+    color: #eee;
+  }
+
+  .movie-list,
+  .movie-checker {
+    background-color: #101010;
+  }
+
+  .watch-checkbox {
+    color: #eee;
+  }
+
+  .ant-card-meta-description {
+    color: #aaa;
+  }
+
+  .ant-card,
+  .ant-card-actions {
+    background-color: #333;
+    color: #eee;
+    border-color: #333;
+  }
+
+  .ant-card-actions {
+    border-top-color: #666;
+  }
+
+  .ant-card-actions > li:not(:last-child) {
+    border-right-color: #666;
+  }
+
+  .ant-rate-star-zero {
+    .ant-rate-star-first,
+    .ant-rate-star-second {
+      color: #0e0e0e;
+    }
+  }
+
+  .ant-rate-star-half {
+    .ant-rate-star-second {
+      color: #0e0e0e;
+    }
   }
 }
