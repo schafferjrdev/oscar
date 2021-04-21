@@ -8,8 +8,6 @@
 
 .oscar-body {
   height: 100vh;
-  /* padding: 5vmin; */
-  /* overflow: hidden; */
 }
 
 .dark-mode {
@@ -197,17 +195,16 @@
   transition: all ease 0.25s;
   color: #c79f27;
   &:hover {
-    transform: scale(1.1);
+    transform: rotate(-90deg);
   }
   &:active {
-    transform: scale(0.9);
     animation: rotate 1 1s;
   }
 }
 
 @keyframes rotate {
   from {
-    transform: rotate(0deg);
+    transform: rotate(-90deg);
   }
   to {
     transform: rotate(360deg);
