@@ -134,13 +134,13 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
           )}
         </Popover>
       </div>
-      <div className="movie-checker">
+      <div className={`movie-checker${data?.watched ? " watch-checked" : ""}`}>
         <Checkbox
           onChange={(e) => handleCheck(index, e)}
           checked={data?.watched}
           className="watch-checkbox"
         >
-          Já viu?
+          {data?.watched ? null : "Já viu?"}
         </Checkbox>
       </div>
     </Card>

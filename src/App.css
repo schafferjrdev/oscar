@@ -116,6 +116,25 @@
   width: 90px;
   height: 40px;
   background-color: #efefef;
+  transition: all ease 0.2s;
+}
+
+.watch-checked {
+  width: 40px !important;
+  overflow: hidden;
+}
+
+.ant-checkbox-checked.ant-checkbox + span {
+  position: absolute;
+  opacity: 0;
+  padding: 0;
+  animation: op 3s;
+  transition: opacity ease 0.1s;
+}
+
+.ant-checkbox + span {
+  transition: opacity ease 0.4s;
+  opacity: 1;
 }
 
 .movie-plot {
