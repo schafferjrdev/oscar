@@ -87,6 +87,9 @@
   justify-content: center;
   align-items: center;
   flex-direction: row-reverse;
+
+  border: 1px solid transparent;
+  transition: border ease 0.3s;
 }
 
 .poster-image {
@@ -98,12 +101,25 @@
 .movie-card {
   transition: all ease 0.3s;
 }
+
+.ant-card-bordered .ant-card-cover {
+  margin-right: 0px;
+  margin-left: 0px;
+  margin-top: 0px;
+}
+
 .checked {
   opacity: 0.4;
 }
 
 .movie-card:hover {
   opacity: 1;
+  border-color: #c79f27 !important;
+
+  .watch-checkbox {
+    border-bottom-color: #c79f27;
+    border-left-color: #c79f27;
+  }
 }
 
 .movie-checker {
@@ -218,7 +234,7 @@
   .ant-card-actions {
     background-color: #333;
     color: #eee;
-    border-color: #333;
+    border-color: #101010;
   }
 
   .ant-card-actions {
