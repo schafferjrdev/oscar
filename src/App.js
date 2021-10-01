@@ -3,7 +3,7 @@ import axios from "axios";
 import logo from "./logo.png";
 import "./App.scss";
 import { Checkbox, Rate, Tag, Tooltip, Popover, Card, Divider } from "antd";
-import Countdown from "react-countdown";
+// import Countdown from "react-countdown";
 import Icon from "./Icon";
 import { LoadingOutlined } from "@ant-design/icons";
 import { CATEGORIES, NOMINEES } from "./constants";
@@ -15,12 +15,12 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
 
   const Categories = ({ list = [] }) => {
     return (
-      <div className="list-category">
+      <div className='list-category'>
         {list.map((l, i) => (
           <Tag
             key={`tag_${i}`}
             color={CATEGORIES[l].color}
-            className="tag-category"
+            className='tag-category'
           >
             {CATEGORIES[l].title}
           </Tag>
@@ -56,10 +56,10 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
             onClick={() =>
               handleCheck(index, { target: { checked: !data?.watched } })
             }
-            className="poster-image"
-            alt="movie_poster"
+            className='poster-image'
+            alt='movie_poster'
             src={omdb?.Poster}
-            title="Clique para marcar que viu"
+            title='Clique para marcar que viu'
           />
         ) : (
           <LoadingOutlined />
@@ -69,30 +69,31 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
       style={{ width: "100%" }}
       className={`movie-card${data?.watched ? " checked" : ""}`}
       actions={
-        data?.subtitle
-          ? [
-              <Icon type={data?.platform.name} url={data?.platform.url} />,
-              <Icon
-                type={data?.subtitle ? "legenda" : null}
-                url={data?.subtitle}
-              />,
-            ]
-          : [<Icon type={data?.platform.name} url={data?.platform.url} />]
+        // data?.subtitle
+        //   ? [
+        //       <Icon type={data?.platform.name} url={data?.platform.url} />,
+        //       <Icon
+        //         type={data?.subtitle ? "legenda" : null}
+        //         url={data?.subtitle}
+        //       />,
+        //     ]
+        //   : [<Icon type={data?.platform.name} url={data?.platform.url} />]
+        [<Icon type={data?.platform.name} url={data?.platform.url} />]
       }
     >
       <Meta
         title={
-          <span className="watched">
+          <span className='watched'>
             <a
               href={data?.movie.imdb}
-              target="_blank"
-              rel="noreferrer"
-              title="Ir ao imdb"
+              target='_blank'
+              rel='noreferrer'
+              title='Ir ao imdb'
             >
               <b>{data?.movie.name}</b>
             </a>
 
-            <Tooltip title="Sua nota pessoal" placement="right">
+            <Tooltip title='Sua nota pessoal' placement='right'>
               <span>
                 <Rate
                   allowHalf
@@ -107,7 +108,7 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
         description={`${omdb?.Title} • ${omdb?.Year} • ${omdb?.Runtime}`}
       />
       <div>
-        <p className="movie-plot">
+        <p className='movie-plot'>
           <p>
             <b>Sinopse</b>
             {omdb?.Plot}
@@ -120,15 +121,15 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
         <Divider />
 
         <Popover
-          title="Indicações"
+          title='Indicações'
           content={<Categories list={data?.category} />}
-          placement="top"
-          className="movie-indications"
+          placement='top'
+          className='movie-indications'
         >
           <span>Indicações: {data?.indications}</span>
 
           {data?.major && (
-            <Tag color={CATEGORIES[data?.major]?.color} className="tag-major">
+            <Tag color={CATEGORIES[data?.major]?.color} className='tag-major'>
               {CATEGORIES[data?.major]?.title}
             </Tag>
           )}
@@ -138,7 +139,7 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
         <Checkbox
           onChange={(e) => handleCheck(index, e)}
           checked={data?.watched}
-          className="watch-checkbox"
+          className='watch-checkbox'
         >
           {data?.watched ? null : "Já viu?"}
         </Checkbox>
@@ -196,11 +197,11 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
-  const oscarDate = new Date("04/25/2021 21:00");
+  // const oscarDate = new Date("04/25/2021 21:00");
 
-  const pluralize = (number, word) => {
-    return number > 1 ? `${number} ${word}s` : `${number} ${word}`;
-  };
+  // const pluralize = (number, word) => {
+  //   return number > 1 ? `${number} ${word}s` : `${number} ${word}`;
+  // };
 
   const handleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -211,15 +212,15 @@ function App() {
     <div className={`oscar-body${darkMode ? " dark-mode" : ""}`}>
       <span
         onClick={handleDarkMode}
-        class="material-icons-outlined dark-button"
+        class='material-icons-outlined dark-button'
       >
         {darkMode ? "light_mode" : "dark_mode"}
       </span>
-      <header className="oscar-header">
-        <img src={logo} className="oscar-logo" alt="oscar-logo" />
+      <header className='oscar-header'>
+        <img src={logo} className='oscar-logo' alt='oscar-logo' />
         <span>Checklist para o Oscar 2021</span>
 
-        <span className="countdown-span">
+        {/* <span className="countdown-span">
           <Countdown
             date={oscarDate}
             renderer={({ days, hours, minutes, seconds, completed }) => {
@@ -231,9 +232,9 @@ function App() {
               );
             }}
           />
-        </span>
+        </span> */}
       </header>
-      <div className="movie-list">
+      <div className='movie-list'>
         {movies.map((movie, index) => (
           <MovieCard
             handleRate={handleRate}
