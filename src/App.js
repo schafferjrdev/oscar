@@ -157,7 +157,7 @@ function App() {
     setMovies((prevState) => {
       const newState = [...prevState];
       newState[index].rate = val;
-      localStorage.setItem("oscar-data", JSON.stringify(newState));
+      localStorage.setItem("oscar-data-2022", JSON.stringify(newState));
       return newState;
     });
   };
@@ -167,13 +167,13 @@ function App() {
     setMovies((prevState) => {
       const newState = [...prevState];
       newState[index].watched = val;
-      localStorage.setItem("oscar-data", JSON.stringify(newState));
+      localStorage.setItem("oscar-data-2022", JSON.stringify(newState));
       return newState;
     });
   };
 
   useEffect(() => {
-    const data = localStorage.getItem("oscar-data");
+    const data = localStorage.getItem("oscar-data-2022");
     if (data) {
       const parsed = JSON.parse(data);
 
