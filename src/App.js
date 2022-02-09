@@ -3,7 +3,7 @@ import axios from "axios";
 import logo from "./logo.png";
 import "./App.scss";
 import { Checkbox, Rate, Tag, Tooltip, Popover, Card, Divider } from "antd";
-// import Countdown from "react-countdown";
+import Countdown from "react-countdown";
 import Icon from "./Icon";
 import { LoadingOutlined } from "@ant-design/icons";
 import { CATEGORIES, NOMINEES } from "./constants";
@@ -126,7 +126,7 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
           placement='top'
           className='movie-indications'
         >
-          <span>Indicações: {data?.indications}</span>
+          <span>Indicações: {data?.category?.length}</span>
 
           {data?.major && (
             <Tag color={CATEGORIES[data?.major]?.color} className='tag-major'>
@@ -179,8 +179,8 @@ function App() {
 
       setMovies(
         dataSource.map((d, i) => ({
-          rate: parsed[i].rate,
-          watched: parsed[i].watched,
+          rate: parsed[i]?.rate,
+          watched: parsed[i]?.watched,
           ...d,
         }))
       );
@@ -197,11 +197,11 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
-  // const oscarDate = new Date("04/25/2021 21:00");
+  const oscarDate = new Date("03/27/2022 21:00");
 
-  // const pluralize = (number, word) => {
-  //   return number > 1 ? `${number} ${word}s` : `${number} ${word}`;
-  // };
+  const pluralize = (number, word) => {
+    return number > 1 ? `${number} ${word}s` : `${number} ${word}`;
+  };
 
   const handleDarkMode = () => {
     setDarkMode(!darkMode);
@@ -218,9 +218,9 @@ function App() {
       </span>
       <header className='oscar-header'>
         <img src={logo} className='oscar-logo' alt='oscar-logo' />
-        <span>Checklist para o Oscar 2021</span>
+        <span>Checklist para o Oscar 2022</span>
 
-        {/* <span className="countdown-span">
+        <span className='countdown-span'>
           <Countdown
             date={oscarDate}
             renderer={({ days, hours, minutes, seconds, completed }) => {
@@ -232,7 +232,7 @@ function App() {
               );
             }}
           />
-        </span> */}
+        </span>
       </header>
       <div className='movie-list'>
         {movies.map((movie, index) => (
