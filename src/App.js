@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { database, checkMovie, rateMovie } from "./firebase";
+import { ref, onValue } from "firebase/database";
 import axios from "axios";
 import logo from "./logo.png";
 import "./App.scss";
@@ -6,7 +8,7 @@ import { Checkbox, Rate, Tag, Tooltip, Popover, Card, Divider } from "antd";
 import Countdown from "react-countdown";
 import Icon from "./Icon";
 import { LoadingOutlined } from "@ant-design/icons";
-import { CATEGORIES, NOMINEES } from "./constants";
+import { CATEGORIES } from "./constants";
 
 const { Meta } = Card;
 
@@ -108,7 +110,7 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
         description={`${omdb?.Title} • ${omdb?.Year} • ${omdb?.Runtime}`}
       />
       <div>
-        <p className='movie-plot'>
+        <div className='movie-plot'>
           <p>
             <b>Sinopse</b>
             {omdb?.Plot}
@@ -117,7 +119,7 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
             <b>Elenco</b>
             {omdb?.Actors}
           </p>
-        </p>
+        </div>
         <Divider />
 
         <Popover
@@ -149,17 +151,33 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
 };
 
 function App() {
-  const dataSource = NOMINEES;
   const [movies, setMovies] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
+  console.log("movies", movies);
+
+  useEffect(() => {
+    const moviesRef = ref(database, "movies");
+
+    onValue(
+      moviesRef,
+      (snapshot) => {
+        const data = snapshot.val();
+        setMovies(data);
+      },
+      {
+        onlyOnce: true,
+      }
+    );
+    // eslint-disable-next-line
+  }, []);
 
   const handleRate = (index, val) => {
     setMovies((prevState) => {
       const newState = [...prevState];
       newState[index].rate = val;
-      localStorage.setItem("oscar-data-2022", JSON.stringify(newState));
       return newState;
     });
+    rateMovie(val, index);
   };
 
   const handleCheck = (index, e) => {
@@ -167,33 +185,16 @@ function App() {
     setMovies((prevState) => {
       const newState = [...prevState];
       newState[index].watched = val;
-      localStorage.setItem("oscar-data-2022", JSON.stringify(newState));
       return newState;
     });
+    checkMovie(val, index);
   };
 
   useEffect(() => {
-    const data = localStorage.getItem("oscar-data-2022");
-    if (data) {
-      const parsed = JSON.parse(data);
-
-      setMovies(
-        dataSource.map((d, i) => ({
-          rate: parsed[i]?.rate,
-          watched: parsed[i]?.watched,
-          ...d,
-        }))
-      );
-    } else {
-      setMovies(dataSource);
-    }
-
     const dark = localStorage.getItem("dark-mode");
-
     if (dark) {
       setDarkMode(dark === "true");
     }
-
     // eslint-disable-next-line
   }, []);
 
@@ -212,7 +213,7 @@ function App() {
     <div className={`oscar-body${darkMode ? " dark-mode" : ""}`}>
       <span
         onClick={handleDarkMode}
-        class='material-icons-outlined dark-button'
+        className='material-icons-outlined dark-button'
       >
         {darkMode ? "light_mode" : "dark_mode"}
       </span>
