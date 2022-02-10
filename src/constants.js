@@ -31,7 +31,7 @@ export const CATEGORIES = {
     title: "Direção",
     color: "gold",
   },
-  documentary: {
+  DocumentaryFeature: {
     title: "Documentário",
     color: "yellow",
   },
@@ -43,7 +43,7 @@ export const CATEGORIES = {
     title: "Animação (curta)",
     color: "orange",
   },
-  animated: {
+  AnimatedFeature: {
     title: "Animação",
     color: "orange",
   },
