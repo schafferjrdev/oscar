@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { database, checkMovie, rateMovie } from "./firebase";
+import { database } from "./firebase";
 import { ref, onValue } from "firebase/database";
 import axios from "axios";
 import logo from "./logo.png";
@@ -153,7 +153,6 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
 function App() {
   const [movies, setMovies] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
-  console.log("movies", movies);
 
   useEffect(() => {
     const moviesRef = ref(database, "movies");
@@ -162,7 +161,22 @@ function App() {
       moviesRef,
       (snapshot) => {
         const data = snapshot.val();
-        setMovies(data);
+
+        const storage = localStorage.getItem("oscar-data-2022");
+        if (storage) {
+          const parsed = JSON.parse(storage);
+          console.log("storage", parsed);
+
+          setMovies(parsed);
+        } else {
+          setMovies(
+            data.map((d, i) => ({
+              ...d,
+              rate: 0,
+              watched: false,
+            }))
+          );
+        }
       },
       {
         onlyOnce: true,
@@ -175,9 +189,9 @@ function App() {
     setMovies((prevState) => {
       const newState = [...prevState];
       newState[index].rate = val;
+      localStorage.setItem("oscar-data-2022", JSON.stringify(newState));
       return newState;
     });
-    rateMovie(val, index);
   };
 
   const handleCheck = (index, e) => {
@@ -185,9 +199,9 @@ function App() {
     setMovies((prevState) => {
       const newState = [...prevState];
       newState[index].watched = val;
+      localStorage.setItem("oscar-data-2022", JSON.stringify(newState));
       return newState;
     });
-    checkMovie(val, index);
   };
 
   useEffect(() => {
