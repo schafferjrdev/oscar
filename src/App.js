@@ -164,11 +164,17 @@ function App() {
 
         const storage = localStorage.getItem("oscar-data-2022");
         if (storage) {
+          console.log("has oscar local data, loading...");
           const parsed = JSON.parse(storage);
-          console.log("storage", parsed);
-
-          setMovies(parsed);
+          setMovies(
+            data.map((d, i) => ({
+              ...d,
+              rate: parsed[i]?.rate,
+              watched: parsed[i]?.watched,
+            }))
+          );
         } else {
+          console.log("no local data found, loading from server...");
           setMovies(
             data.map((d, i) => ({
               ...d,
