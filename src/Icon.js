@@ -4,6 +4,7 @@ import netflix from "./icons/netflix.png";
 import prime from "./icons/prime.png";
 import youtube from "./icons/youtube.png";
 import hbo from "./icons/hbo.png";
+import stars from "./icons/stars.png";
 // import yts from "./icons/yts.png";
 // import legenda from "./icons/legenda.png";
 // import x from "./icons/1337x.png";
@@ -20,6 +21,7 @@ const Icon = ({ type, url }) => {
     netflix: netflix,
     youtube: youtube,
     hbo: hbo,
+    stars: stars,
     // yts: yts,
     // legenda: legenda,
     // x: x,
