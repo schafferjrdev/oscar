@@ -173,7 +173,7 @@
   position: absolute;
   cursor: pointer;
   font-size: 32px;
-  right: 16px;
+  right: 24px;
   top: 16px;
   transition: all ease 0.25s;
   color: #c79f27;
@@ -183,6 +183,15 @@
   &:active {
     animation: rotate 1 1s;
   }
+}
+
+.share-button {
+  position: absolute;
+  cursor: pointer;
+  font-size: 32px;
+  right: 64px;
+  top: 16px;
+  color: #c79f27;
 }
 
 @keyframes rotate {
@@ -289,6 +298,11 @@
   .ant-popover-arrow-content::before {
     background: linear-gradient(to left, #1f1f1f 50%, #1f1f1f 50%) no-repeat -10px -10px;
     background-color: #1f1f1f;
+  }
+
+  .ant-message-notice-content {
+    background-color: #1f1f1f;
+    color: rgba(255, 255, 255, 0.85);
   }
 }
 
