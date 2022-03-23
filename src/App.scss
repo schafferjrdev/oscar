@@ -23,10 +23,16 @@
 .tag-category {
   margin: 8px;
   text-transform: uppercase;
+  user-select: none;
 }
 
 .tag-major {
   text-transform: uppercase;
+  user-select: none;
+}
+
+.nominees-count {
+  user-select: none;
 }
 
 .title-movie {
@@ -69,6 +75,7 @@
 
 .list-category {
   max-width: 250px;
+  user-select: none;
 }
 
 .movie-list {
@@ -166,7 +173,7 @@
   position: absolute;
   cursor: pointer;
   font-size: 32px;
-  right: 16px;
+  right: 24px;
   top: 16px;
   transition: all ease 0.25s;
   color: #c79f27;
@@ -176,6 +183,15 @@
   &:active {
     animation: rotate 1 1s;
   }
+}
+
+.share-button {
+  position: absolute;
+  cursor: pointer;
+  font-size: 32px;
+  right: 64px;
+  top: 16px;
+  color: #c79f27;
 }
 
 @keyframes rotate {
@@ -212,6 +228,10 @@
 }
 
 .dark-mode {
+  .oscar-body {
+    background-color: #000;
+  }
+
   .oscar-header {
     background-color: #000;
     color: #eee;
@@ -256,5 +276,65 @@
     .ant-rate-star-second {
       color: #0e0e0e;
     }
+  }
+  .ant-popover {
+    color: rgba(255, 255, 255, 0.85);
+
+    .ant-popover-inner {
+      background-color: #1f1f1f;
+      box-shadow: 0 3px 6px -4px rgb(0 0 0 / 48%), 0 6px 16px 0 rgb(0 0 0 / 32%),
+        0 9px 28px 8px rgb(0 0 0 / 20%);
+
+      .ant-popover-title {
+        color: rgba(255, 255, 255, 0.85);
+      }
+    }
+  }
+
+  .ant-popover-arrow-content {
+    background-color: #1f1f1f;
+  }
+
+  .ant-popover-arrow-content::before {
+    background: linear-gradient(to left, #1f1f1f 50%, #1f1f1f 50%) no-repeat -10px -10px;
+    background-color: #1f1f1f;
+  }
+
+  .ant-message-notice-content {
+    background-color: #1f1f1f;
+    color: rgba(255, 255, 255, 0.85);
+  }
+}
+
+.ant-popover-arrow {
+  background: transparent;
+  border-bottom-color: #c79f27 !important;
+  border-right-color: #c79f27 !important;
+}
+.ant-popover-inner {
+  border: 1px solid #c79f27 !important;
+}
+
+.ant-popover-title {
+  border-bottom: 1px solid rgba(200, 160, 40, 0.25);
+}
+
+@media (hover: none) and (pointer: coarse) {
+  /* smartphones */
+
+  body {
+    user-select: none;
+  }
+
+  .movie-card:hover {
+    border-color: transparent !important;
+
+    .watch-checkbox {
+      border-bottom-color: transparent;
+      border-left-color: transparent;
+    }
+  }
+  .checked {
+    opacity: 0.4 !important;
   }
 }
