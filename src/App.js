@@ -284,12 +284,27 @@ function App() {
   }
 
   const handleShare = () => {
-    copyTextToClipboard(
-      `Eu já assisti esses aqui: ${movies
-        .filter((e) => e.watched)
-        .map((e) => e.movie.name)
-        .join(", ")}\n\nMarque você também em https://oscars.netlify.app`
-    );
+    let text;
+    switch (movies.filter((e) => e.watched).length) {
+      case 0:
+        text = `Ainda não vi nenhum\n\nMarque você também em https://oscars.netlify.app`;
+        break;
+      case 1:
+        text = `Eu só vi ${movies
+          .filter((e) => e.watched)
+          .map((e) => e.movie.name)
+          .join(", ")}\n\nMarque você também em https://oscars.netlify.app`;
+
+        break;
+      default:
+        text = `Eu já assisti esses aqui: ${movies
+          .filter((e) => e.watched)
+          .map((e) => e.movie.name)
+          .join(", ")}\n\nMarque você também em https://oscars.netlify.app`;
+        break;
+    }
+
+    copyTextToClipboard(text);
     message.success("Texto copiado!");
   };
 
