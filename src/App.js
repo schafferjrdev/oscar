@@ -134,10 +134,12 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
         <Popover
           title='Indicações'
           content={<Categories list={data?.category} />}
-          placement='top'
+          placement='topRight'
           className='movie-indications'
         >
-          <span>Indicações: {data?.category?.length}</span>
+          <span className='nominees-count'>
+            Indicações: {data?.category?.length}
+          </span>
 
           {data?.major && (
             <Tag color={CATEGORIES[data?.major]?.color} className='tag-major'>
