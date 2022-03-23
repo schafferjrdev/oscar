@@ -80,7 +80,9 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
         //       />,
         //     ]
         //   : [<Icon type={data?.platform.name} url={data?.platform.url} />]
-        [<Icon type={data?.platform.name} url={data?.platform.url} />]
+        data?.platform.url
+          ? [<Icon type={data?.platform.name} url={data?.platform.url} />]
+          : null
       }
     >
       <Meta
@@ -125,10 +127,12 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
         <Popover
           title='Indicações'
           content={<Categories list={data?.category} />}
-          placement='top'
+          placement='topRight'
           className='movie-indications'
         >
-          <span>Indicações: {data?.category?.length}</span>
+          <span className='nominees-count'>
+            Indicações: {data?.category?.length}
+          </span>
 
           {data?.major && (
             <Tag color={CATEGORIES[data?.major]?.color} className='tag-major'>
@@ -153,7 +157,6 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
 function App() {
   const [movies, setMovies] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
-  console.log("movies", movies);
 
   useEffect(() => {
     const moviesRef = ref(database, "movies");
@@ -192,8 +195,10 @@ function App() {
 
   useEffect(() => {
     const dark = localStorage.getItem("dark-mode");
-    if (dark) {
+    const body = document.querySelector("body");
+    if (dark === "true") {
       setDarkMode(dark === "true");
+      body.classList.add("dark-mode");
     }
     // eslint-disable-next-line
   }, []);
@@ -206,11 +211,14 @@ function App() {
 
   const handleDarkMode = () => {
     setDarkMode(!darkMode);
+    const body = document.querySelector("body");
+    body.classList.toggle("dark-mode", !darkMode);
+
     localStorage.setItem("dark-mode", !darkMode);
   };
 
   return (
-    <div className={`oscar-body${darkMode ? " dark-mode" : ""}`}>
+    <div className='oscar-body'>
       <span
         onClick={handleDarkMode}
         className='material-icons-outlined dark-button'

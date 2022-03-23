@@ -1,3 +1,18 @@
+/*
+"BestPicture",
+"BestDirector",
+"BestActor",
+"SupportingActor",
+"SupportingActress",
+"AdaptedScreenplay",
+"Cinematography",
+"FilmEditing",
+"Sound",
+"ProductionDesign",
+"OriginalScore",
+"OriginalScreenplay",
+*/
+
 export const CATEGORIES = {
   BestPicture: {
     title: "Melhor Filme",
