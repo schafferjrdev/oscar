@@ -283,29 +283,70 @@ function App() {
     document.body.removeChild(textArea);
   }
 
-  const handleShare = () => {
+  const handleShare = async () => {
     let text;
     switch (movies.filter((e) => e.watched).length) {
       case 0:
-        text = `Ainda não vi nenhum\n\nMarque você também em https://oscars.netlify.app`;
+        text = `Ainda não vi nenhum`;
         break;
       case 1:
         text = `Eu só vi ${movies
           .filter((e) => e.watched)
           .map((e) => e.movie.name)
-          .join(", ")}\n\nMarque você também em https://oscars.netlify.app`;
+          .join(", ")}`;
 
         break;
       default:
         text = `Eu já assisti esses aqui: ${movies
           .filter((e) => e.watched)
           .map((e) => e.movie.name)
-          .join(", ")}\n\nMarque você também em https://oscars.netlify.app`;
+          .join(", ")}`;
         break;
     }
 
-    copyTextToClipboard(text);
-    message.success("Texto copiado!");
+    const shareData = {
+      title: "Oscars 2022",
+      text: text,
+      url: "https://oscars.netlify.app",
+    };
+
+    function detectMob() {
+      const toMatch = [
+        /Android/i,
+        /webOS/i,
+        /iPhone/i,
+        /iPad/i,
+        /iPod/i,
+        /BlackBerry/i,
+        /Windows Phone/i,
+      ];
+      const IE = window.innerWidth <= 800 && window.innerHeight <= 600;
+      const others = toMatch.some((toMatchItem) => {
+        return navigator.userAgent.match(toMatchItem);
+      });
+
+      return others || IE;
+    }
+
+    console.log(detectMob());
+    if (detectMob()) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        copyTextToClipboard(
+          text + "\n\nMarque você também em https://oscars.netlify.app"
+        );
+        message.success("Texto copiado!");
+
+        console.log(err);
+      }
+    } else {
+      copyTextToClipboard(
+        text + "\n\nMarque você também em https://oscars.netlify.app"
+      );
+
+      message.success("Texto copiado!");
+    }
   };
 
   return (
