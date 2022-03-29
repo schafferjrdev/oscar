@@ -323,12 +323,6 @@ function App() {
         break;
     }
 
-    const shareData = {
-      title: "Oscars 2022",
-      text: text,
-      url: "https://oscars.netlify.app",
-    };
-
     function detectMob() {
       const toMatch = [
         /Android/i,
@@ -350,12 +344,14 @@ function App() {
     console.log(detectMob());
     if (detectMob()) {
       try {
-        await navigator.share(shareData);
+        await navigator.share({
+          url: text + "\n\nMarque você também em https://oscars.netlify.app",
+        });
       } catch (err) {
-        copyTextToClipboard(
-          text + "\n\nMarque você também em https://oscars.netlify.app"
-        );
-        message.success("Texto copiado!");
+        // copyTextToClipboard(
+        //   text + "\n\nMarque você também em https://oscars.netlify.app"
+        // );
+        // message.success("copiado para o ctrl+V");
 
         console.log(err);
       }
@@ -364,7 +360,7 @@ function App() {
         text + "\n\nMarque você também em https://oscars.netlify.app"
       );
 
-      message.success("Texto copiado!");
+      message.success("copiado para o ctrl+V");
     }
   };
 
