@@ -344,10 +344,7 @@ function App() {
     console.log(detectMob());
     if (detectMob()) {
       try {
-        await navigator.share({
-          text: text,
-          url: "https://oscars.netlify.app",
-        });
+        await navigator.share(text);
       } catch (err) {
         // copyTextToClipboard(
         //   text + "\n\nMarque você também em https://oscars.netlify.app"
