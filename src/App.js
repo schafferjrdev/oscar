@@ -368,6 +368,13 @@ function App() {
     }
   };
 
+  const detectIOS = () => {
+    const toMatch = [/iPhone/i, /iPad/i, /iPod/i];
+    return toMatch.some((toMatchItem) => {
+      return navigator.userAgent.match(toMatchItem);
+    });
+  };
+
   return (
     <div className='oscar-body'>
       <span
@@ -380,7 +387,7 @@ function App() {
         onClick={handleShare}
         className='material-icons-outlined share-button'
       >
-        ios_share
+        {detectIOS() ? "ios_share" : "share"}
       </span>
       <header className='oscar-header'>
         <img src={logo} className='oscar-logo' alt='oscar-logo' />
