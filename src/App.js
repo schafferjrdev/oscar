@@ -17,7 +17,7 @@ import {
 import Countdown from "react-countdown";
 import Icon from "./Icon";
 import { LoadingOutlined } from "@ant-design/icons";
-import { CATEGORIES } from "./constants";
+import { CATEGORIES, LOCAL_STORAGE_KEY } from "./constants";
 
 const { Meta } = Card;
 
@@ -89,7 +89,9 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
         //       />,
         //     ]
         //   : [<Icon type={data?.platform.name} url={data?.platform.url} />]
-        [<Icon type={data?.platform.name} url={data?.platform.url} />]
+        data?.platform.url
+          ? [<Icon type={data?.platform.name} url={data?.platform.url} />]
+          : null
       }
     >
       <Meta
@@ -173,7 +175,7 @@ function App() {
       (snapshot) => {
         const data = snapshot.val();
 
-        const storage = localStorage.getItem("oscar-data-2022");
+        const storage = localStorage.getItem(LOCAL_STORAGE_KEY);
         if (storage) {
           console.log("has oscar local data, loading...");
           const parsed = JSON.parse(storage);
@@ -206,7 +208,7 @@ function App() {
     setMovies((prevState) => {
       const newState = [...prevState];
       newState[index].rate = val;
-      localStorage.setItem("oscar-data-2022", JSON.stringify(newState));
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newState));
       return newState;
     });
   };
@@ -216,7 +218,7 @@ function App() {
     setMovies((prevState) => {
       const newState = [...prevState];
       newState[index].watched = val;
-      localStorage.setItem("oscar-data-2022", JSON.stringify(newState));
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newState));
       return newState;
     });
   };
@@ -231,7 +233,7 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
-  const oscarDate = new Date("03/27/2022 21:00");
+  const oscarDate = new Date("03/12/2023 21:00");
 
   const pluralize = (number, word) => {
     return number > 1 ? `${number} ${word}s` : `${number} ${word}`;
@@ -389,7 +391,7 @@ function App() {
       </span>
       <header className='oscar-header'>
         <img src={logo} className='oscar-logo' alt='oscar-logo' />
-        <span>Checklist para o Oscar 2022</span>
+        <span>Checklist para o Oscar 2023</span>
 
         <span className='countdown-span'>
           <Countdown
