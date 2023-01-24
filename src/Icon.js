@@ -1,10 +1,14 @@
 import React from "react";
-import disney from "./icons/disney.png";
-import netflix from "./icons/netflix.png";
-import prime from "./icons/prime.png";
+import disney from "./icons/disney.webp";
+import netflix from "./icons/netflix.webp";
+import prime from "./icons/prime.webp";
 import youtube from "./icons/youtube.png";
-import hbo from "./icons/hbo.png";
-import stars from "./icons/stars.png";
+import cinema from "./icons/cinema.png";
+import hbo from "./icons/hbo.webp";
+import stars from "./icons/stars.webp";
+import globo from "./icons/globo.webp";
+import mubi from "./icons/mubi.webp";
+import apple from "./icons/apple.webp";
 // import yts from "./icons/yts.png";
 // import legenda from "./icons/legenda.png";
 // import x from "./icons/1337x.png";
@@ -22,6 +26,10 @@ const Icon = ({ type, url }) => {
     youtube: youtube,
     hbo: hbo,
     stars: stars,
+    globo: globo,
+    mubi: mubi,
+    apple: apple,
+    cinema: cinema,
     // yts: yts,
     // legenda: legenda,
     // x: x,

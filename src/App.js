@@ -143,9 +143,12 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
             Indicações: {data?.category?.length}
           </span>
 
-          {data?.major && (
-            <Tag color={CATEGORIES[data?.major]?.color} className='tag-major'>
-              {CATEGORIES[data?.major]?.title}
+          {data?.category && (
+            <Tag
+              color={CATEGORIES[data?.category[0]]?.color}
+              className='tag-major'
+            >
+              {CATEGORIES[data?.category[0]]?.title}
             </Tag>
           )}
         </Popover>
@@ -212,7 +215,7 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
-  const oscarDate = new Date("03/27/2022 21:00");
+  const oscarDate = new Date("03/12/2023 21:00");
 
   const pluralize = (number, word) => {
     return number > 1 ? `${number} ${word}s` : `${number} ${word}`;
@@ -305,7 +308,7 @@ function App() {
     }
 
     const shareData = {
-      title: "Oscars 2022",
+      title: "Oscars 2023",
       text: text,
       url: "https://oscars.netlify.app",
     };
@@ -372,7 +375,7 @@ function App() {
       </span>
       <header className='oscar-header'>
         <img src={logo} className='oscar-logo' alt='oscar-logo' />
-        <span>Checklist para o Oscar 2022</span>
+        <span>Checklist para o Oscar 2023</span>
 
         <span className='countdown-span'>
           <Countdown
