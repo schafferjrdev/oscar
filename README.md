@@ -1,4 +1,4 @@
-## Oscar 2022 Checklist
+## Oscar Checklist
 
 Apenas um site que mostra os filmes e uma ação de marcar o que já foi visto.
 
