@@ -143,9 +143,12 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
             Indicações: {data?.category?.length}
           </span>
 
-          {data?.major && (
-            <Tag color={CATEGORIES[data?.major]?.color} className='tag-major'>
-              {CATEGORIES[data?.major]?.title}
+          {data?.category && (
+            <Tag
+              color={CATEGORIES[data?.category[0]]?.color}
+              className='tag-major'
+            >
+              {CATEGORIES[data?.category[0]]?.title}
             </Tag>
           )}
         </Popover>
