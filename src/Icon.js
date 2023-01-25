@@ -29,7 +29,6 @@ const Icon = ({ type, url }) => {
     globo: globo,
     mubi: mubi,
     apple: apple,
-    cinema: cinema,
     vimeo: vimeo,
     // yts: yts,
     // legenda: legenda,
