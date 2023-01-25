@@ -80,8 +80,7 @@
 
 .movie-list {
   display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  grid-template-rows: auto;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
   gap: 16px;
   padding: 50px 16px;
   background-color: #efefef;
@@ -200,30 +199,6 @@
   }
   to {
     transform: rotate(360deg);
-  }
-}
-
-@media (min-width: 650px) {
-  .movie-list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-@media (min-width: 769px) {
-  .movie-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1025px) {
-  .movie-list {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
-@media (min-width: 1919px) {
-  .movie-list {
-    grid-template-columns: repeat(5, 1fr);
   }
 }
 
