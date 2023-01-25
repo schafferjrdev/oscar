@@ -3,7 +3,6 @@ import disney from "./icons/disney.webp";
 import netflix from "./icons/netflix.webp";
 import prime from "./icons/prime.webp";
 import youtube from "./icons/youtube.png";
-import cinema from "./icons/cinema.png";
 import hbo from "./icons/hbo.webp";
 import stars from "./icons/stars.webp";
 import globo from "./icons/globo.webp";
