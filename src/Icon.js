@@ -9,6 +9,7 @@ import stars from "./icons/stars.webp";
 import globo from "./icons/globo.webp";
 import mubi from "./icons/mubi.webp";
 import apple from "./icons/apple.webp";
+import vimeo from "./icons/vimeo.png";
 // import yts from "./icons/yts.png";
 // import legenda from "./icons/legenda.png";
 // import x from "./icons/1337x.png";
@@ -30,6 +31,7 @@ const Icon = ({ type, url }) => {
     mubi: mubi,
     apple: apple,
     cinema: cinema,
+    vimeo: vimeo,
     // yts: yts,
     // legenda: legenda,
     // x: x,
