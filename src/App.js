@@ -364,7 +364,7 @@ function App() {
       }
     } else {
       copyTextToClipboard(
-        text + "\n\nMarque você também em https://oscars.netlify.app"
+        text + " \n\nMarque você também em https://oscars.netlify.app"
       );
 
       message.success("copiado para o ctrl+V");

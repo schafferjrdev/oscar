@@ -11,8 +11,8 @@
         "ProductionDesign",
         "CostumeDesign",
         "Cinematography",
-        "Editing",
-        "MakeupAndHairstyling",
+        "FilmEditing",
+        "MakeupandHairstyling",
         "Sound",
         "OriginalScore"
       ],
@@ -35,6 +35,7 @@
         "AdaptedScreenplay",
         "ProductionDesign",
         "CostumeDesign",
+        "OriginalSong",
         "OriginalSong"
       ],
       "movie": {
@@ -54,10 +55,35 @@
         "BestDirector",
         "BestActress",
         "SupportingActor",
+        "AdaptedScreenplay",
         "ProductionDesign",
         "CostumeDesign",
         "Cinematography",
-        "Editing",
+        "FilmEditing",
+        "MakeupandHairstyling",
+        "OriginalScore"
+      ],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt14230458/",
+        "name": "Pobres Criaturas"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": [
+        "BestPicture",
+        "BestDirector",
+        "BestActress",
+        "SupportingActor",
+        "ProductionDesign",
+        "CostumeDesign",
+        "Cinematography",
+        "FilmEditing",
         "OriginalScore",
         "OriginalSong"
       ],
@@ -79,7 +105,7 @@
         "BestActress",
         "OriginalScreenplay",
         "Cinematography",
-        "MakeupAndHairstyling",
+        "MakeupandHairstyling",
         "Sound"
       ],
       "movie": {
@@ -99,7 +125,7 @@
         "BestActor",
         "SupportingActress",
         "OriginalScreenplay",
-        "Editing"
+        "FilmEditing"
       ],
       "movie": {
         "imdb": "https://www.imdb.com/title/tt14849194/",
@@ -118,7 +144,7 @@
         "BestDirector",
         "BestActress",
         "OriginalScreenplay",
-        "Editing"
+        "FilmEditing"
       ],
       "movie": {
         "imdb": "https://www.imdb.com/title/tt17009710/",
@@ -148,7 +174,7 @@
       "category": [
         "BestPicture",
         "BestActor",
-        "BestSupportingActor",
+        "SupportingActor",
         "AdaptedScreenplay",
         "OriginalScore"
       ],
@@ -183,7 +209,7 @@
       "watched": false
     },
     {
-      "category": ["InternationalFeature", "MakeupAndHairstyling"],
+      "category": ["InternationalFeature", "MakeupandHairstyling"],
       "movie": {
         "imdb": "https://www.imdb.com/title/tt16277242/",
         "name": "A Sociedade da Neve"
@@ -386,6 +412,97 @@
       "platform": {
         "name": "",
         "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["Sound", "VisualEffects"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt9603212/",
+        "name": "Missão: Impossível - Acerto de Contas"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["Sound", "VisualEffects"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt11858890/",
+        "name": "Resistência"
+      },
+      "platform": {
+        "name": "stars",
+        "url": "https://www.starplus.com/pt-br/video/141d2581-a35b-466c-b9c6-e660a1443876"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["MakeupandHairstyling"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt14454876/",
+        "name": "Golda - A Mulher de Uma Nação"
+      },
+      "platform": {
+        "name": "prime",
+        "url": "https://www.primevideo.com/dp/amzn1.dv.gti.316fb753-27cc-4205-ac6b-aec2cda51e74"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["Cinematography"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt21113540/",
+        "name": "O Conde"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["OriginalScore"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt1462764/",
+        "name": "Indiana Jones e a Relíquia do Destino"
+      },
+      "platform": {
+        "name": "disney",
+        "url": "https://www.disneyplus.com/video/737441f3-340d-4935-bcde-cefe81c1f708"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["OriginalSong"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt8105234/",
+        "name": "Flamin' Hot - O Sabor que Mudou a História"
+      },
+      "platform": {
+        "name": "stars",
+        "url": "https://www.starplus.com/video/bd8955f7-10a2-40c0-b81b-057debfcc2d3"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["OriginalSong"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt28865980/",
+        "name": "American Symphony"
+      },
+      "platform": {
+        "name": "netflix",
+        "url": "https://www.netflix.com/watch/81728930"
       },
       "rate": 0,
       "watched": false
