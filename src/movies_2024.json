@@ -1,0 +1,459 @@
+{
+  "movies": [
+    {
+      "category": [
+        "BestPicture",
+        "BestDirector",
+        "BestActor",
+        "SupportingActor",
+        "SupportingActress",
+        "AdaptedScreenplay",
+        "ProductionDesign",
+        "CostumeDesign",
+        "Cinematography",
+        "Editing",
+        "MakeupAndHairstyling",
+        "Sound",
+        "OriginalScore"
+      ],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt15398776/",
+        "name": "Oppenheimer"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": [
+        "BestPicture",
+        "SupportingActor",
+        "SupportingActress",
+        "AdaptedScreenplay",
+        "ProductionDesign",
+        "CostumeDesign",
+        "OriginalSong"
+      ],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt1517268/",
+        "name": "Barbie"
+      },
+      "platform": {
+        "name": "hbo",
+        "url": "https://play.hbomax.com/player/urn:hbo:feature:GZKiGfgp33sN_dwEAAA9Q"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": [
+        "BestPicture",
+        "BestDirector",
+        "BestActress",
+        "SupportingActor",
+        "ProductionDesign",
+        "CostumeDesign",
+        "Cinematography",
+        "Editing",
+        "OriginalScore",
+        "OriginalSong"
+      ],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt5537002/",
+        "name": "Assassinos da Lua das Flores"
+      },
+      "platform": {
+        "name": "apple",
+        "url": "https://tv.apple.com/us/movie/killers-of-the-flower-moon/umc.cmc.5x1fg9vferlfeutzpq6rra1zf"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": [
+        "BestPicture",
+        "BestActor",
+        "BestActress",
+        "OriginalScreenplay",
+        "Cinematography",
+        "MakeupAndHairstyling",
+        "Sound"
+      ],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt5535276/",
+        "name": "Maestro"
+      },
+      "platform": {
+        "name": "netflix",
+        "url": "https://www.netflix.com/title/81171868"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": [
+        "BestPicture",
+        "BestActor",
+        "SupportingActress",
+        "OriginalScreenplay",
+        "Editing"
+      ],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt14849194/",
+        "name": "Os Rejeitados"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": [
+        "BestPicture",
+        "BestDirector",
+        "BestActress",
+        "OriginalScreenplay",
+        "Editing"
+      ],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt17009710/",
+        "name": "Anatomia de Uma Queda"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["BestPicture", "OriginalScreenplay"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt13238346/",
+        "name": "Vidas Passadas"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": [
+        "BestPicture",
+        "BestActor",
+        "BestSupportingActor",
+        "AdaptedScreenplay",
+        "OriginalScore"
+      ],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt23561236/",
+        "name": "American Fiction"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": [
+        "BestPicture",
+        "BestDirector",
+        "AdaptedScreenplay",
+        "InternationalFeature",
+        "Sound"
+      ],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt7160372/",
+        "name": "A Zona de Interesse"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["InternationalFeature", "MakeupAndHairstyling"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt16277242/",
+        "name": "A Sociedade da Neve"
+      },
+      "platform": {
+        "name": "netflix",
+        "url": "https://www.netflix.com/title/81268316"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["InternationalFeature"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt26612950/",
+        "name": "The Teachers Lounge"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["InternationalFeature"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt14225838/",
+        "name": "Io Capitano"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["InternationalFeature"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt27503384/",
+        "name": "Perfect Days"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["AnimatedFeature"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt6587046/",
+        "name": "O Menino e a Garça"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["AnimatedFeature"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt15789038/",
+        "name": "Elementos"
+      },
+      "platform": {
+        "name": "disney",
+        "url": "https://www.disneyplus.com/video/cf073394-aae3-46df-8179-14983b3b09a3"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["AnimatedFeature"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt19500164/",
+        "name": "Nimona"
+      },
+      "platform": {
+        "name": "netflix",
+        "url": "https://www.netflix.com/watch/81444554"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["AnimatedFeature"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt13429870/",
+        "name": "Meu Amigo Robô"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["AnimatedFeature"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt9362722/",
+        "name": "Homem-Aranha: Através do Aranhaverso"
+      },
+      "platform": {
+        "name": "hbo",
+        "url": "https://play.hbomax.com/feature/urn:hbo:feature:GZS_zdAcKjrqspgEAABKH"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["ProductionDesign", "CostumeDesign", "VisualEffects"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt13287846/",
+        "name": "Napoleão"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["VisualEffects"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt23289160/",
+        "name": "Godzilla Minus One"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["VisualEffects"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt6791350/",
+        "name": "Guardiões da Galáxia Vol. 3"
+      },
+      "platform": {
+        "name": "disney",
+        "url": "https://www.disneyplus.com/video/2bd7042a-59ee-4e2c-a479-1c9b713b0958?distributionPartner=google"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["BestActress", "SupportingActress"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt5302918/",
+        "name": "Nyad"
+      },
+      "platform": {
+        "name": "netflix",
+        "url": "https://www.netflix.com/title/81447231"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["OriginalScreenplay"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt13651794/",
+        "name": "Segredos de um Escândalo"
+      },
+      "platform": {
+        "name": "netflix",
+        "url": "https://www.netflix.com/title/81702955"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["BestActor"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt14160834/",
+        "name": "Rustin"
+      },
+      "platform": {
+        "name": "netflix",
+        "url": "https://www.netflix.com/title/81111528"
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["SupportingActress"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt1200263/",
+        "name": "A Cor Púrpura"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["AnimatedShort"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt10346066/",
+        "name": "Letter to a Pig"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["AnimatedShort"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt11020596/",
+        "name": "Ninety-Five Senses"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["AnimatedShort"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt28058015/",
+        "name": "Our Uniform"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["AnimatedShort"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt20862526/",
+        "name": "Pachyderme"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    },
+    {
+      "category": ["AnimatedShort"],
+      "movie": {
+        "imdb": "https://www.imdb.com/title/tt29795707/",
+        "name": "War Is Over! Inspired by the Music of John & Yoko"
+      },
+      "platform": {
+        "name": "",
+        "url": ""
+      },
+      "rate": 0,
+      "watched": false
+    }
+  ]
+}

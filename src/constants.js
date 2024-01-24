@@ -47,7 +47,7 @@ export const CATEGORIES = {
     title: "Animação",
     color: "orange",
   },
-  InternationalFeatureFilm: {
+  InternationalFeature: {
     title: "Filme Internacional",
     color: "red",
   },
@@ -130,9 +130,9 @@ export const all_categories = [
   "AnimatedShort",
   "DocumentaryFeature",
   "DocumentaryShort",
-  "InternationalFeatureFilm",
+  "InternationalFeature",
   "VisualEffects",
   "shortMovie",
 ];
 
-export const LOCAL_STORAGE_KEY = "oscar-data-2023";
+export const LOCAL_STORAGE_KEY = "oscar-data-2024";
