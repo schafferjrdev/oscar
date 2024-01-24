@@ -1,4 +1,4 @@
-## Oscar 2023 Checklist
+## Oscar 2024 Checklist
 
 Apenas um site que mostra os filmes e uma ação de marcar o que já foi visto.
 

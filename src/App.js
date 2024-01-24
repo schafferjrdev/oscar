@@ -50,7 +50,7 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
-  const oscarDate = new Date("03/12/2023 21:00");
+  const oscarDate = new Date("03/10/2024 21:00");
 
   const pluralize = (number, word) => {
     return number > 1 ? `${number} ${word}s` : `${number} ${word}`;
@@ -143,7 +143,7 @@ function App() {
     }
 
     const shareData = {
-      title: "Oscars 2023",
+      title: "Oscars 2024",
       text: text,
       url: "https://oscars.netlify.app",
     };
@@ -210,7 +210,7 @@ function App() {
       </span>
       <header className='oscar-header'>
         <img src={logo} className='oscar-logo' alt='oscar-logo' />
-        <span>Checklist para o Oscar 2023</span>
+        <span>Checklist para o Oscar 2024</span>
 
         <span className='countdown-span'>
           <Countdown
