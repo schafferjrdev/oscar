@@ -8,6 +8,7 @@
 }
 .ant-drawer-content-wrapper {
   height: 100% !important;
+  z-index: 1002;
 }
 .ant-drawer-body {
   padding: 0;
@@ -502,7 +503,14 @@ hr {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 1025px) {
+  .movie-list {
+    padding-bottom: 100px;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 641px) {
   .mobile {
     display: block;
   }
