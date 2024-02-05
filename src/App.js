@@ -40,6 +40,7 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
 
   const showDrawer = (e) => {
     console.log("openning drawer");
+    console.log("drawer flag", drawerOpen);
     e.preventDefault();
     setDrawerOpen(true);
   };
@@ -96,6 +97,10 @@ const MovieCard = ({ handleRate, handleCheck, data, index }) => {
     getOMDB(data?.movie.imdb);
     getTMDB(data?.movie.imdb);
   }, [data]);
+
+  useEffect(() => {
+    console.log("drawer open?", drawerOpen);
+  }, [drawerOpen]);
 
   return (
     <div className={`new-card ${data?.watched ? " checked" : ""}`}>

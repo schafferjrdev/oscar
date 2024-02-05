@@ -8,7 +8,7 @@
 }
 .ant-drawer-content-wrapper {
   height: 100% !important;
-  z-index: 1002;
+  z-index: 1102;
 }
 .ant-drawer-body {
   padding: 0;
@@ -503,13 +503,29 @@ hr {
   }
 }
 
+// Notebook
+@media screen and (max-width: 1367px) {
+  .movie-list {
+    padding-bottom: 100px;
+    grid-template-columns: 1fr 1fr;
+  }
+  .poster-image-section {
+    max-width: 250px;
+  }
+}
+
+// Tablet
 @media screen and (max-width: 1025px) {
   .movie-list {
     padding-bottom: 100px;
     grid-template-columns: 1fr 1fr;
   }
+  .poster-image-section {
+    max-width: 195px;
+  }
 }
 
+// Mobile
 @media screen and (max-width: 641px) {
   .mobile {
     display: block;
