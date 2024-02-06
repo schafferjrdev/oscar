@@ -62,7 +62,7 @@ function Card({ data, showDrawer, index }) {
   }, [data]);
 
   const handleShowDrawer = () => {
-    console.log({
+    showDrawer({
       index: index,
       data: data,
       tmdb: tmdb,
