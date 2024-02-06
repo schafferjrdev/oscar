@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./App.scss";
 import { Drawer as AntdDrawer, Rate, Popover, Tag } from "antd";
 import Icon from "./Icon";
