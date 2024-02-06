@@ -109,13 +109,6 @@ function App() {
 
   return (
     <div className='oscar-body'>
-      <Drawer
-        open={drawerOpen}
-        movie={selectedMovie}
-        onClose={onClose}
-        handleRate={handleRate}
-        handleCheck={handleCheck}
-      />
       <Header
         movies={movies}
         darkMode={darkMode}
@@ -131,6 +124,13 @@ function App() {
           />
         ))}
       </div>
+      <Drawer
+        open={drawerOpen}
+        movie={selectedMovie}
+        onClose={onClose}
+        handleRate={handleRate}
+        handleCheck={handleCheck}
+      />
     </div>
   );
 }
