@@ -89,7 +89,7 @@ function Drawer({ movie, handleCheck, index, handleRate, open, onClose }) {
               <p>
                 <span className='banner-body'>{tmdb?.overview}</span>
               </p>
-              {data?.platform.url ? (
+              {data?.platform?.url ? (
                 <>
                   <hr />
                   <p className='banner-topic'>WATCH NOW</p>
