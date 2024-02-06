@@ -65,7 +65,7 @@ function Drawer({ movie, handleCheck, index, handleRate, open, onClose }) {
           <div className='drawer-header'>
             <p className='drawer-name'>
               <span>
-                <b className='drawer-main'>{data?.movie.name}</b>
+                <b className='drawer-main'>{data?.movie?.name}</b>
                 <span className='drawer-sub'>{omdb?.Year}</span>
               </span>
               <span>
@@ -94,7 +94,7 @@ function Drawer({ movie, handleCheck, index, handleRate, open, onClose }) {
                   <hr />
                   <p className='banner-topic'>WATCH NOW</p>
 
-                  <Icon type={data?.platform.name} url={data?.platform.url} />
+                  <Icon type={data?.platform?.name} url={data?.platform?.url} />
                 </>
               ) : null}
               <hr />
@@ -179,7 +179,7 @@ function Drawer({ movie, handleCheck, index, handleRate, open, onClose }) {
               <div className='banner-information'>
                 <div className='banner-upper'>
                   <span className='banner-title'>
-                    <span className='banner-name'>{data?.movie.name}</span>
+                    <span className='banner-name'>{data?.movie?.name}</span>
                     <span>
                       <Rate
                         allowHalf
@@ -198,14 +198,14 @@ function Drawer({ movie, handleCheck, index, handleRate, open, onClose }) {
                   <p>
                     <span className='banner-body'>{tmdb?.overview}</span>
                   </p>
-                  {data?.platform.url ? (
+                  {data?.platform?.url ? (
                     <>
                       <hr />
                       <p className='banner-topic'>WATCH NOW</p>
 
                       <Icon
-                        type={data?.platform.name}
-                        url={data?.platform.url}
+                        type={data?.platform?.name}
+                        url={data?.platform?.url}
                       />
                     </>
                   ) : null}
