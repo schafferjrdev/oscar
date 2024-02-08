@@ -6,7 +6,12 @@ import Countdown from "react-countdown";
 import { StarFilled } from "@ant-design/icons";
 import oscars_logo from "../icons/oscars.svg";
 import { OSCAR_DATE } from "../utils/constants";
-import { pluralize, detectMob } from "../utils/functions";
+import {
+  pluralize,
+  pluralize_word,
+  detectMob,
+  convertMinutesToTimeObject,
+} from "../utils/functions";
 
 function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
   const watched = info.filter((e) => e.watched);
@@ -21,7 +26,16 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
     .filter((e) => e.rate === 5)
     .map((e) => e.movie.imdb?.split("/")[4]);
 
+  const runtimes = watched.map((e) => e.movie.imdb?.split("/")[4]);
+
   const [fiveStars, setFiveStars] = useState([]);
+  const [timespent, setTimespent] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+  });
+
+  const [displayWatch, setDisplayWatch] = useState(true);
 
   const getTMDB = async (uuid) => {
     const options = {
@@ -44,18 +58,35 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
     }
   };
 
-  const fetchDataForAllIds = async () => {
+  const getOMDB = async (uuid) => {
     try {
-      const results = await Promise.all(five_stars.map((id) => getTMDB(id)));
-      console.log("Dados para todos os IDs:", results);
-      setFiveStars(results);
+      const response = await axios.get(
+        `https://www.omdbapi.com/?apikey=81750ce2&i=${uuid}`
+      );
+      return response.data;
+    } catch (error) {
+      console.error(`Erro ao buscar dados para o ID ${uuid}:`, error.message);
+      throw error; // Rejeita a promessa para que o Promise.all() saiba que algo deu errado
+    }
+  };
+
+  const fetchAllData = async () => {
+    try {
+      const posters = await Promise.all(five_stars.map((id) => getTMDB(id)));
+      const time = await Promise.all(runtimes.map((id) => getOMDB(id)));
+      const all_time = time
+        .map((e) => parseInt(e.Runtime.split(" ")[0]))
+        .reduce((acumulador, elemento) => acumulador + elemento, 0);
+      console.log("Dados para todos os IDs:", all_time);
+      setTimespent(convertMinutesToTimeObject(all_time));
+      setFiveStars(posters);
     } catch (error) {
       console.error("Erro ao buscar dados:", error);
     }
   };
 
   useEffect(() => {
-    fetchDataForAllIds();
+    fetchAllData();
     // eslint-disable-next-line
   }, [info]);
 
@@ -112,39 +143,55 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
         </div>
 
         <div className='settings-box conclusion'>
-          <div className='percent-movies'>
-            <Tag color='#54788a' className='tag-category'>
-              Todos Filmes
-            </Tag>
-            <span className='percent'>
-              {Math.floor((watched.length * 100) / info.length)}%
-            </span>
-            <span>
-              {watched.length}/{info.length} filmes
-            </span>
+          <div
+            className='percent-movies'
+            onClick={() => setDisplayWatch(!displayWatch)}
+          >
+            {displayWatch ? (
+              <>
+                <Tag color='#54788a' className='tag-category'>
+                  Todos Filmes
+                </Tag>
+                <span className='percent'>
+                  {Math.floor((watched.length * 100) / info.length)}%
+                </span>
+                <span>
+                  {watched.length}/{info.length} filmes
+                </span>
+              </>
+            ) : (
+              <>
+                <Tag color='gold' className='tag-category'>
+                  Melhor Filme
+                </Tag>
+                <span className='percent'>
+                  {Math.floor((besties_watched.length * 100) / besties.length)}%
+                </span>
+                <span>
+                  {besties_watched.length}/{besties.length} filmes
+                </span>
+              </>
+            )}
           </div>
-          {/* <div className='timespent'>
-            <div>
-              <span>5</span> dias
-            </div>
-            <div>
-              <span>20</span> horas
-            </div>
-            <div>
-              <span>5</span> minutos
-            </div>
-          </div> */}
 
-          <div className='percent-movies'>
-            <Tag color='gold' className='tag-category'>
-              Melhor Filme
-            </Tag>
-            <span className='percent'>
-              {Math.floor((besties_watched.length * 100) / besties.length)}%
-            </span>
-            <span>
-              {besties_watched.length}/{besties.length} filmes
-            </span>
+          <div className='timespent'>
+            <div>
+              <b>
+                <span>Tempo Total Visto</span>
+              </b>
+            </div>
+            <div>
+              <span>{timespent.days}</span>{" "}
+              {pluralize_word(timespent.days, "dia")}
+            </div>
+            <div>
+              <span>{timespent.hours}</span>{" "}
+              {pluralize_word(timespent.hours, "hora")}
+            </div>
+            <div>
+              <span>{timespent.minutes}</span>{" "}
+              {pluralize_word(timespent.minutes, "minuto")}
+            </div>
           </div>
         </div>
 

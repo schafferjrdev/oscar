@@ -41,6 +41,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
               handleCheck={handleCheck}
               index={index}
               value={data?.watched}
+              className='checkwatch-card-drawer'
             />
             <img
               onClick={(e) => onClose(e)}
@@ -145,8 +146,6 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
         </div>
 
         <div className='movie-banner desktop'>
-          <CloseOutlined className='close-button' onClick={(e) => onClose(e)} />
-
           <img
             className='banner-image'
             alt='movie_poster'
@@ -167,12 +166,19 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                     : omdb?.Poster
                 }
               />
-              <Checkwatch
-                handleCheck={handleCheck}
-                index={index}
-                value={data?.watched}
-              />
               <div className='banner-information'>
+                <div className='float-buttons'>
+                  <Checkwatch
+                    handleCheck={handleCheck}
+                    index={index}
+                    value={data?.watched}
+                    className='round-button'
+                  />
+                  <CloseOutlined
+                    className='close-button round-button'
+                    onClick={(e) => onClose(e)}
+                  />
+                </div>
                 <div className='banner-upper'>
                   <span className='banner-title'>
                     <span className='banner-name'>{data?.movie?.name}</span>

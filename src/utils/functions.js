@@ -65,7 +65,27 @@ export const detectIOS = () => {
 export const pluralize = (number, word) => {
   return number > 1 ? `${number} ${word}s` : `${number} ${word}`;
 };
+export const pluralize_word = (number, word) => {
+  return (number = 1 ? `${word}s` : `${word}`);
+};
 
 export const nomination_plural = (nominations) => {
   return nominations > 1 ? `${nominations} indicações` : "1 indicação";
 };
+
+export function convertMinutesToTimeObject(minutes) {
+  if (typeof minutes !== "number" || minutes < 0) {
+    throw new Error("O argumento deve ser um número não negativo.");
+  }
+
+  const days = Math.floor(minutes / (24 * 60));
+  const remainingMinutes = minutes % (24 * 60);
+  const hours = Math.floor(remainingMinutes / 60);
+  const finalMinutes = remainingMinutes % 60;
+
+  return {
+    days,
+    hours,
+    minutes: finalMinutes,
+  };
+}

@@ -87,6 +87,7 @@ function Card({ data, showDrawer, index, handleCheck }) {
               handleCheck={handleCheck}
               index={index}
               value={data?.watched}
+              className='checkwatch-card'
             />
             <StarsDisplay stars={data?.rate} className='stars-poster' />
           </div>
