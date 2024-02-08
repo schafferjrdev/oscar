@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { database } from "./firebase";
+import { database } from "../db/firebase";
 import { ref, onValue } from "firebase/database";
 import "./App.scss";
 import Header from "./Header";
 import Card from "./Card";
 import Drawer from "./Drawer";
-import { LOCAL_STORAGE_KEY } from "./constants";
+import Settings from "./Settings";
+import { LOCAL_STORAGE_KEY } from "../utils/constants";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -21,7 +22,7 @@ function App() {
 
         const storage = localStorage.getItem(LOCAL_STORAGE_KEY);
         if (storage) {
-          console.log("has oscar local data, loading...");
+          console.info("has oscar local data, loading...");
           const parsed = JSON.parse(storage);
           setMovies(
             data.map((d, i) => ({
@@ -31,7 +32,7 @@ function App() {
             }))
           );
         } else {
-          console.log("no local data found, loading from server...");
+          console.error("no local data found, loading from server...");
           setMovies(
             data.map((d, i) => ({
               ...d,
@@ -52,16 +53,16 @@ function App() {
     setMovies((prevState) => {
       const newState = [...prevState];
       newState[index].rate = val;
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newState));
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...newState]));
       return newState;
     });
   };
 
-  const handleCheck = (index) => {
+  const handleCheck = (index, val) => {
     setMovies((prevState) => {
       const newState = [...prevState];
-      newState[index].watched = !newState[index].watched;
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(newState));
+      newState[index].watched = val;
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...newState]));
       return newState;
     });
   };
@@ -76,12 +77,12 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
-  const handleDarkMode = () => {
-    setDarkMode(!darkMode);
+  const handleDarkMode = (val) => {
+    setDarkMode(val);
     const body = document.querySelector("body");
-    body.classList.toggle("dark-mode", !darkMode);
+    body.classList.toggle("dark-mode", val);
 
-    localStorage.setItem("dark-mode", !darkMode);
+    localStorage.setItem("dark-mode", val);
   };
 
   const [drawerOpen, setDrawerOpen] = useState(false);
@@ -93,7 +94,7 @@ function App() {
   });
 
   const showDrawer = (information) => {
-    console.log("info", information);
+    console.info("[Opening the drawer...]", information);
     setselectedMovie(information);
     setDrawerOpen(true);
   };
@@ -108,13 +109,13 @@ function App() {
     setDrawerOpen(false);
   };
 
+  const [settingsOpen, setSettingsOpen] = useState(false);
+
+  const onSettingsClose = () => setSettingsOpen(false);
+
   return (
     <div className='oscar-body'>
-      <Header
-        movies={movies}
-        darkMode={darkMode}
-        handleDarkMode={handleDarkMode}
-      />
+      <Header movies={movies} openSettings={setSettingsOpen} />
       <div className='movie-list'>
         {movies.map((movie, index) => (
           <Card
@@ -122,15 +123,23 @@ function App() {
             data={movie}
             index={index}
             key={`movies_${index}`}
+            handleCheck={handleCheck}
           />
         ))}
       </div>
       <Drawer
-        open={drawerOpen}
         info={selectedMovie}
+        open={drawerOpen}
         onClose={onClose}
         handleRate={handleRate}
         handleCheck={handleCheck}
+      />
+      <Settings
+        open={settingsOpen}
+        onClose={onSettingsClose}
+        darkMode={darkMode}
+        handleDarkMode={handleDarkMode}
+        info={movies}
       />
     </div>
   );

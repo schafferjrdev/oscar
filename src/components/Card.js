@@ -2,15 +2,12 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./App.scss";
 import Icon from "./Icon";
+import Checkwatch from "./Checkwatch";
+import StarsDisplay from "./StarsDisplay";
+import { nomination_plural } from "../utils/functions";
+import { LoadingOutlined } from "@ant-design/icons";
 
-import {
-  LoadingOutlined,
-  EyeFilled,
-  EyeInvisibleFilled,
-  StarFilled,
-} from "@ant-design/icons";
-
-function Card({ data, showDrawer, index }) {
+function Card({ data, showDrawer, index, handleCheck }) {
   const [omdb, setOmdb] = useState(null);
   const [tmdb, setTmdb] = useState(null);
 
@@ -25,7 +22,7 @@ function Card({ data, showDrawer, index }) {
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -52,7 +49,7 @@ function Card({ data, showDrawer, index }) {
       })
       .catch(function (error) {
         // handle error
-        console.log(error);
+        console.error(error);
       });
   };
 
@@ -71,10 +68,7 @@ function Card({ data, showDrawer, index }) {
   };
 
   return (
-    <div
-      className={`new-card ${data?.watched ? " checked" : ""}`}
-      onClick={handleShowDrawer}
-    >
+    <div className={`new-card ${data?.watched ? " checked" : ""}`}>
       <div>
         {tmdb?.poster_path || omdb?.Poster ? (
           <div className='poster-image-section'>
@@ -87,30 +81,28 @@ function Card({ data, showDrawer, index }) {
                   : omdb?.Poster
               }
               title='Clique para marcar que viu'
+              onClick={handleShowDrawer}
             />
-            <span
-              className={`checkbox-watch ${data?.watched ? "" : "not-seen"}`}
-            >
-              {data?.watched ? <EyeFilled /> : <EyeInvisibleFilled />}
-            </span>
+            <Checkwatch
+              handleCheck={handleCheck}
+              index={index}
+              value={data?.watched}
+            />
+            <StarsDisplay stars={data?.rate} className='stars-poster' />
           </div>
         ) : (
           <LoadingOutlined />
         )}
       </div>
       <div className='card-data'>
-        <p className='card-title'>
+        <p className='card-title' onClick={handleShowDrawer}>
           <span className='card-title-name'>{data?.movie.name} </span>
           <span className='card-title-year'>{omdb?.Year}</span>
         </p>
         <p className='card-subtitle'>
-          {omdb?.Runtime} • {data?.category?.length} indicações
-          {data?.rate > 0 ? (
-            <>
-              {" "}
-              • <span> {data?.rate} </span> <StarFilled />
-            </>
-          ) : null}
+          <span>
+            {omdb?.Runtime} • {nomination_plural(data?.category?.length)}
+          </span>
         </p>
 
         <p className='plot-text'>

@@ -1,3 +1,5 @@
+export const OSCAR_DATE = new Date("03/10/2024 21:00");
+
 export const CATEGORIES = {
   BestPicture: {
     title: "Melhor Filme",

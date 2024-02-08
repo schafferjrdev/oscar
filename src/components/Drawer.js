@@ -2,16 +2,13 @@ import React from "react";
 import "./App.scss";
 import { Drawer as AntdDrawer, Rate, Popover, Tag } from "antd";
 import Icon from "./Icon";
-import {
-  CloseOutlined,
-  EyeFilled,
-  EyeInvisibleFilled,
-} from "@ant-design/icons";
-import CaretDown from "./icons/CaretDown.svg";
-import { CATEGORIES } from "./constants";
+import Checkwatch from "./Checkwatch";
+import { CloseOutlined } from "@ant-design/icons";
+import CaretDown from "../icons/CaretDown.svg";
+import { CATEGORIES } from "../utils/constants";
+import { nomination_plural } from "../utils/functions";
 
 function Drawer({ info, handleCheck, handleRate, open, onClose }) {
-  console.log("[DRAWER] info", info);
   const { data, tmdb, omdb, index } = info;
 
   const Categories = ({ list = [] }) => {
@@ -40,12 +37,11 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
       <div className='movie-details'>
         <div className='drawer-backdrop mobile'>
           <div className='drawer-actions'>
-            <span
-              className={`checkbox-watch ${data?.watched ? "" : "not-seen"}`}
-              onClick={() => handleCheck(index)}
-            >
-              {data?.watched ? <EyeFilled /> : <EyeInvisibleFilled />}
-            </span>
+            <Checkwatch
+              handleCheck={handleCheck}
+              index={index}
+              value={data?.watched}
+            />
             <img
               onClick={(e) => onClose(e)}
               src={CaretDown}
@@ -136,7 +132,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                 <p>
                   <b>Oscar</b>
                   <span className='banner-body'>
-                    {data?.category?.length} indicações
+                    {nomination_plural(data?.category?.length)}
                   </span>
                 </p>
                 <p>
@@ -171,12 +167,11 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                     : omdb?.Poster
                 }
               />
-              <span
-                className={`checkbox-watch ${data?.watched ? "" : "not-seen"}`}
-                onClick={() => handleCheck(index)}
-              >
-                {data?.watched ? <EyeFilled /> : <EyeInvisibleFilled />}
-              </span>
+              <Checkwatch
+                handleCheck={handleCheck}
+                index={index}
+                value={data?.watched}
+              />
               <div className='banner-information'>
                 <div className='banner-upper'>
                   <span className='banner-title'>
@@ -248,7 +243,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                     <p>
                       <b>Oscar</b>
                       <span className='banner-body'>
-                        {data?.category?.length} indicações
+                        {nomination_plural(data?.category?.length)}
                       </span>
                     </p>
                     <p>
