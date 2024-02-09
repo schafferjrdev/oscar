@@ -15,27 +15,29 @@ import {
 
 function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
   const watched = info.filter((e) => e.watched);
-  const besties = info.filter((e) => e.category.includes("BestPicture"));
-  const besties_watched = besties.filter((e) => e.watched);
+  const besties_movies = info.filter((e) => e.category.includes("BestPicture"));
+  const besties_watched = besties_movies.filter((e) => e.watched);
+
   const note = info.filter((e) => e.rate > 0).map((e) => e.rate);
-  const average = Math.floor(
+  const average =
     note.reduce((acumulador, elemento) => acumulador + elemento, 0) /
-      note.length
-  );
+    note.length;
   const five_stars = info
     .filter((e) => e.rate === 5)
     .map((e) => e.movie.imdb?.split("/")[4]);
 
   const runtimes = watched.map((e) => e.movie.imdb?.split("/")[4]);
+  const besties = watched
+    .filter((e) => e.category.includes("BestPicture"))
+    .map((e) => e.movie.imdb?.split("/")[4]);
 
   const [fiveStars, setFiveStars] = useState([]);
+  const [bestMovies, setBestMovies] = useState([]);
   const [timespent, setTimespent] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
   });
-
-  const [displayWatch, setDisplayWatch] = useState(true);
 
   const getTMDB = async (uuid) => {
     const options = {
@@ -72,6 +74,7 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
 
   const fetchAllData = async () => {
     try {
+      const best = await Promise.all(besties.map((id) => getTMDB(id)));
       const posters = await Promise.all(five_stars.map((id) => getTMDB(id)));
       const time = await Promise.all(runtimes.map((id) => getOMDB(id)));
       const all_time = time
@@ -80,6 +83,7 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
       console.log("Dados para todos os IDs:", all_time);
       setTimespent(convertMinutesToTimeObject(all_time));
       setFiveStars(posters);
+      setBestMovies(best);
     } catch (error) {
       console.error("Erro ao buscar dados:", error);
     }
@@ -100,6 +104,21 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
     >
       <div className='settings-content'>
         <div className='settings-header'>
+          {detectMob() ? (
+            <span
+              onClick={(e) => onClose(e)}
+              className='material-icons-outlined  caret down'
+            >
+              keyboard_arrow_down
+            </span>
+          ) : (
+            <span
+              onClick={(e) => onClose(e)}
+              className='material-icons-outlined  caret left'
+            >
+              arrow_back_ios_new
+            </span>
+          )}
           <Switch
             onChange={(e) => handleDarkMode(e)}
             defaultChecked={darkMode}
@@ -141,39 +160,18 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
             }}
           />
         </div>
-
         <div className='settings-box conclusion'>
-          <div
-            className='percent-movies'
-            onClick={() => setDisplayWatch(!displayWatch)}
-          >
-            {displayWatch ? (
-              <>
-                <Tag color='#54788a' className='tag-category'>
-                  Todos Filmes
-                </Tag>
-                <span className='percent'>
-                  {Math.floor((watched.length * 100) / info.length)}%
-                </span>
-                <span>
-                  {watched.length}/{info.length} filmes
-                </span>
-              </>
-            ) : (
-              <>
-                <Tag color='gold' className='tag-category'>
-                  Melhor Filme
-                </Tag>
-                <span className='percent'>
-                  {Math.floor((besties_watched.length * 100) / besties.length)}%
-                </span>
-                <span>
-                  {besties_watched.length}/{besties.length} filmes
-                </span>
-              </>
-            )}
+          <div className='percent-movies'>
+            <Tag color='#54788a' className='tag-category'>
+              Todos Filmes
+            </Tag>
+            <span className='percent'>
+              {Math.floor((watched.length * 100) / info.length)}%
+            </span>
+            <span>
+              {watched.length}/{info.length} filmes
+            </span>
           </div>
-
           <div className='timespent'>
             <div>
               <b>
@@ -195,24 +193,69 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
           </div>
         </div>
 
-        <div className='settings-box average-stars'>
-          <span>
-            Seus filmes 5 <StarFilled />
-          </span>
+        <div className='settings-box minilist-categories'>
+          <div className='percent-movies'>
+            <Tag color='gold' className='tag-category no-margin'>
+              Melhor Filme
+            </Tag>
+            <span>
+              {besties_watched.length}/{besties_movies.length} filmes
+            </span>
+            <span className='percent'>
+              {Math.floor(
+                (besties_watched.length * 100) / besties_movies.length
+              )}
+              %
+            </span>
+          </div>
+
           <div className='miniposter-list'>
-            {fiveStars.map((i) => (
+            {bestMovies.map((i) => (
               <img
-                key={i?.poster_path}
+                key={`${i?.poster_path}_besties`}
                 className='miniposter'
                 alt='Movie Poster'
                 src={`https://image.tmdb.org/t/p/w500${i?.poster_path}`}
               />
             ))}
           </div>
-          <hr />
-          <span>
-            Sua média de notas é {average} <StarFilled /> ({note.length} filmes)
-          </span>
+        </div>
+
+        <div className='settings-box average-stars'>
+          {note.length === 0 ? (
+            <div>
+              Você ainda não marcou <StarFilled /> nos filmes...
+            </div>
+          ) : (
+            <>
+              {fiveStars.length > 0 ? (
+                <>
+                  <span>
+                    Seus filmes 5 <StarFilled />
+                  </span>
+                  <div className='miniposter-list'>
+                    {fiveStars.map((i) => (
+                      <img
+                        key={i?.poster_path}
+                        className='miniposter'
+                        alt='Movie Poster'
+                        src={`https://image.tmdb.org/t/p/w500${i?.poster_path}`}
+                      />
+                    ))}
+                  </div>
+                  <hr />
+                </>
+              ) : null}
+              <span>
+                Sua média de notas é {average.toFixed(1)} <StarFilled />
+              </span>
+              <span>
+                Total de <b>{note.length}</b>{" "}
+                {pluralize_word(note.length, "filme")}
+                {pluralize_word(note.length, " avaliado")}
+              </span>
+            </>
+          )}
         </div>
       </div>
     </Drawer>

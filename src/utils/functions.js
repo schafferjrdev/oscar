@@ -66,7 +66,8 @@ export const pluralize = (number, word) => {
   return number > 1 ? `${number} ${word}s` : `${number} ${word}`;
 };
 export const pluralize_word = (number, word) => {
-  return (number = 1 ? `${word}s` : `${word}`);
+  console.log(number, word);
+  return number === 1 ? `${word}` : `${word}s`;
 };
 
 export const nomination_plural = (nominations) => {

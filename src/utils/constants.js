@@ -62,7 +62,7 @@ export const CATEGORIES = {
     color: "blue",
   },
   OriginalScore: {
-    title: "Trilha Sonora Original",
+    title: "Trilha Sonora",
     color: "purple",
   },
   OriginalSong: {
@@ -136,5 +136,7 @@ export const all_categories = [
   "VisualEffects",
   "shortMovie",
 ];
+
+export const minilist_categories = ["BestPicture", "AnimatedFeature"];
 
 export const LOCAL_STORAGE_KEY = "oscar-data-2024";
