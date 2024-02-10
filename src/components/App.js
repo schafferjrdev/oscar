@@ -7,6 +7,7 @@ import Card from "./Card";
 import Drawer from "./Drawer";
 import Settings from "./Settings";
 import { LOCAL_STORAGE_KEY } from "../utils/constants";
+import { sparkles } from "../utils/functions";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -56,6 +57,11 @@ function App() {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...newState]));
       return newState;
     });
+    if (val === 5) {
+      const e = document.querySelector(".banner-stars");
+      console.log("5 stars", e);
+      sparkles(e);
+    }
   };
 
   const handleCheck = (index, val) => {

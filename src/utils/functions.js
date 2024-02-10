@@ -1,3 +1,27 @@
+import party, { Color } from "party-js";
+party.settings.gravity = 250;
+
+export function conffeti(e) {
+  party.sparkles(e.currentTarget, {
+    count: party.variation.range(20, 30),
+    size: party.variation.range(0.2, 0.9),
+    color: Color.fromHex("#b4912f"),
+    spread: 360,
+    speed: party.variation.range(70, 100),
+    shapes: ["square", "circle"],
+  });
+}
+
+export function sparkles(e) {
+  party.sparkles(e, {
+    count: party.variation.range(15, 25),
+    size: party.variation.range(0.3, 0.9),
+    color: Color.fromHex("#b4912f"),
+    spread: 60,
+    speed: party.variation.range(50, 100),
+  });
+}
+
 export function copyTextToClipboard(text) {
   var textArea = document.createElement("textarea");
   textArea.style.position = "fixed";
@@ -66,7 +90,6 @@ export const pluralize = (number, word) => {
   return number > 1 ? `${number} ${word}s` : `${number} ${word}`;
 };
 export const pluralize_word = (number, word) => {
-  console.log(number, word);
   return number === 1 ? `${word}` : `${word}s`;
 };
 

@@ -80,7 +80,6 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
       const all_time = time
         .map((e) => parseInt(e.Runtime.split(" ")[0]))
         .reduce((acumulador, elemento) => acumulador + elemento, 0);
-      console.log("Dados para todos os IDs:", all_time);
       setTimespent(convertMinutesToTimeObject(all_time));
       setFiveStars(posters);
       setBestMovies(best);

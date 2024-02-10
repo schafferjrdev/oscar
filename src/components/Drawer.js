@@ -182,7 +182,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                 <div className='banner-upper'>
                   <span className='banner-title'>
                     <span className='banner-name'>{data?.movie?.name}</span>
-                    <span>
+                    <span className='banner-stars'>
                       <Rate
                         allowHalf
                         allowClear
