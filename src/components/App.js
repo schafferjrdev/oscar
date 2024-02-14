@@ -50,7 +50,7 @@ function App() {
     // eslint-disable-next-line
   }, []);
 
-  const handleRate = (index, val) => {
+  const handleRate = (index, val, ref) => {
     setMovies((prevState) => {
       const newState = [...prevState];
       newState[index].rate = val;
@@ -58,8 +58,7 @@ function App() {
       return newState;
     });
     if (val === 5) {
-      const e = document.querySelector(".banner-stars");
-      console.log("5 stars", e);
+      const e = document.querySelector(`#${ref}`);
       sparkles(e);
     }
   };

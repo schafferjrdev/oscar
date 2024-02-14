@@ -5,6 +5,7 @@ import { Drawer, Switch, Tag } from "antd";
 import Countdown from "react-countdown";
 import { StarFilled } from "@ant-design/icons";
 import oscars_logo from "../icons/oscars.svg";
+import Down from "../icons/Down";
 import { OSCAR_DATE } from "../utils/constants";
 import {
   pluralize,
@@ -104,16 +105,15 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
       <div className='settings-content'>
         <div className='settings-header'>
           {detectMob() ? (
-            <span
+            <Down
               onClick={(e) => onClose(e)}
-              className='material-icons-outlined  caret down'
-            >
-              keyboard_arrow_down
-            </span>
+              alt='Icon Caret Down'
+              className='caret down'
+            />
           ) : (
             <span
               onClick={(e) => onClose(e)}
-              className='material-icons-outlined  caret left'
+              className='material-icons-outlined caret left'
             >
               arrow_back_ios_new
             </span>

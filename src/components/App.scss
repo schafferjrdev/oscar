@@ -59,7 +59,6 @@
 .minilist-categories {
   display: flex;
   flex-direction: column;
-  overflow-x: auto;
   .percent-movies {
     display: flex;
     flex-direction: row;
@@ -204,11 +203,6 @@
   font-size: 2rem;
 }
 .checkwatch-card-drawer {
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 4px 8px;
-  min-width: 60px;
   font-size: 2rem;
 }
 
@@ -590,6 +584,26 @@ hr {
   }
 }
 
+.ant-rate-star-focused {
+  .ant-rate-star-first,
+  .ant-rate-star-second {
+    color: #b4912f;
+  }
+}
+
+.ant-rate-star-zero {
+  .ant-rate-star-first,
+  .ant-rate-star-second {
+    color: #ccc;
+  }
+}
+
+.ant-rate-star-half {
+  .ant-rate-star-second {
+    color: #ccc;
+  }
+}
+
 .dark-mode {
   .ant-drawer-content {
     background-color: #0f1c2f;
@@ -632,18 +646,6 @@ hr {
     border-right-color: #666;
   }
 
-  // .ant-rate-star-zero {
-  //   .ant-rate-star-first,
-  //   .ant-rate-star-second {
-  //     color: #0e0e0e;
-  //   }
-  // }
-
-  // .ant-rate-star-half {
-  //   .ant-rate-star-second {
-  //     color: #0e0e0e;
-  //   }
-  // }
   .new-card {
     color: #eee;
   }
@@ -858,7 +860,7 @@ hr {
 
   .backdrop-drawer-image {
     width: 100%;
-    height: 100%;
+    height: 102%;
     background: linear-gradient(
       180deg,
       rgba(0, 0, 0, 1) 5%,
@@ -881,7 +883,7 @@ hr {
     left: 0;
     z-index: 1002;
     color: #eee;
-    font-size: 1rem;
+    font-size: 2rem;
     font-weight: 700;
     cursor: pointer;
     width: 100%;
@@ -889,9 +891,7 @@ hr {
     padding: 0 16px;
     display: flex;
     justify-content: flex-end;
-    img {
-      width: 2rem;
-    }
+    color: white;
   }
 
   .drawer-header {
@@ -917,12 +917,12 @@ hr {
       line-height: 1.2rem;
     }
     .drawer-main {
-      font-size: 1.1rem;
+      font-size: 1.5rem;
       margin: 0;
       margin-right: 8px;
     }
     .drawer-sub {
-      font-size: 0.7rem;
+      font-size: 0.8rem;
       margin: 0;
     }
   }
@@ -934,13 +934,20 @@ hr {
   }
 }
 
+.subtitle-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 8px;
+  .ant-rate {
+    font-size: 32px;
+  }
+}
+
 // Mobile
 @media screen and (max-width: 641px) {
-  .settings-drawer {
-    .ant-drawer-content-wrapper {
-      height: 92% !important;
-      z-index: 1102;
-    }
+  .settings-header {
+    flex-direction: row-reverse;
   }
 
   .ant-drawer-content {

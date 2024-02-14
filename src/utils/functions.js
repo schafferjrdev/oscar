@@ -2,7 +2,7 @@ import party, { Color } from "party-js";
 party.settings.gravity = 250;
 
 export function conffeti(e) {
-  party.sparkles(e.currentTarget, {
+  party.sparkles(e, {
     count: party.variation.range(20, 30),
     size: party.variation.range(0.2, 0.9),
     color: Color.fromHex("#b4912f"),

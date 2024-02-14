@@ -4,7 +4,7 @@ import { Drawer as AntdDrawer, Rate, Popover, Tag } from "antd";
 import Icon from "./Icon";
 import Checkwatch from "./Checkwatch";
 import { CloseOutlined } from "@ant-design/icons";
-import CaretDown from "../icons/CaretDown.svg";
+import Down from "../icons/Down";
 import { CATEGORIES } from "../utils/constants";
 import { nomination_plural } from "../utils/functions";
 
@@ -37,17 +37,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
       <div className='movie-details'>
         <div className='drawer-backdrop mobile'>
           <div className='drawer-actions'>
-            <Checkwatch
-              handleCheck={handleCheck}
-              index={index}
-              value={data?.watched}
-              className='checkwatch-card-drawer'
-            />
-            <img
-              onClick={(e) => onClose(e)}
-              src={CaretDown}
-              alt='Icon Caret Down'
-            />
+            <Down onClick={(e) => onClose(e)} alt='Icon Caret Down' />
           </div>
           <div className='backdrop-drawer-image'></div>
           <img
@@ -70,15 +60,26 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                 <i className='drawer-sub'>{omdb?.Title}</i>
               </span>
             </p>
-            <Rate
-              allowHalf
-              allowClear
-              onChange={(val) => handleRate(index, val)}
-              value={data?.rate}
-            />
           </div>
           <div className='banner-information'>
             <div className='banner-upper'>
+              <p className='subtitle-actions'>
+                <Rate
+                  id='banner-stars-mobile'
+                  allowHalf
+                  allowClear
+                  onChange={(val) =>
+                    handleRate(index, val, "banner-stars-mobile")
+                  }
+                  value={data?.rate}
+                />
+                <Checkwatch
+                  handleCheck={handleCheck}
+                  index={index}
+                  value={data?.watched}
+                  className='checkwatch-card-drawer round-button'
+                />
+              </p>
               <p className='banner-subtitle'>
                 {omdb?.Runtime} • {omdb?.Genre}
               </p>
@@ -182,11 +183,14 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                 <div className='banner-upper'>
                   <span className='banner-title'>
                     <span className='banner-name'>{data?.movie?.name}</span>
-                    <span className='banner-stars'>
+
+                    <span id='banner-stars-desktop'>
                       <Rate
                         allowHalf
                         allowClear
-                        onChange={(val) => handleRate(index, val)}
+                        onChange={(val) =>
+                          handleRate(index, val, "banner-stars-desktop")
+                        }
                         value={data?.rate}
                       />
                     </span>

@@ -8,7 +8,7 @@ function Checkwatch({ handleCheck, index, value, className }) {
   const handleClick = (e) => {
     handleCheck(index, !value);
     if (!value) {
-      conffeti(e);
+      conffeti(e.currentTarget);
     }
   };
 
