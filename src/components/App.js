@@ -8,7 +8,6 @@ import Drawer from "./Drawer";
 import Settings from "./Settings";
 import { LOCAL_STORAGE_KEY } from "../utils/constants";
 import { sparkles } from "../utils/functions";
-import movies_2025 from "../db/movies_2025.json";
 
 function App() {
   const [movies, setMovies] = useState([]);

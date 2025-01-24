@@ -123,7 +123,7 @@ export function translate(text) {
     return null;
   }
   const match = text.match(pattern);
-  const [_, nominated, award, wins, nominations] = match;
+  const [nominated, award, wins, nominations] = match;
   const translated = [];
 
   if (nominated && award) {
