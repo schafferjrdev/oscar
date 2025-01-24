@@ -98,7 +98,8 @@
                 "ProductionDesign",
                 "FilmEditing",
                 "Sound",
-                "VisualEffects"
+                "VisualEffects",
+                "MakeupandHairstyling"
             ],
             "nominees": [
                 "Cynthia Erivo - Indicada a Melhor Atriz",
@@ -292,7 +293,7 @@
             "platform": [
                 {
                     "name": "debut",
-                    "debu": "Estreia 13/02/2025"
+                    "debut": "Estreia 13/02/2025"
                 }
             ],
             "rate": 0,
@@ -313,7 +314,7 @@
             "platform": [
                 {
                     "name": "debut",
-                    "debu": "Estreia 30/01/2025"
+                    "debut": "Estreia 30/01/2025"
                 }
             ],
             "rate": 0,
@@ -335,7 +336,7 @@
             "platform": [
                 {
                     "name": "debut",
-                    "debu": "Estreia 30/01/2025"
+                    "debut": "Estreia 30/01/2025"
                 }
             ],
             "rate": 0,
@@ -377,7 +378,7 @@
             "platform": [
                 {
                     "name": "debut",
-                    "debu": "Estreia 20/02/2025"
+                    "debut": "Estreia 20/02/2025"
                 }
             ],
             "rate": 0,
@@ -427,7 +428,8 @@
         {
             "category": [
                 "AnimatedFeature",
-                "OriginalScore"
+                "OriginalScore",
+                "Sound"
             ],
             "movie": {
                 "imdb": "https://www.imdb.com/pt/title/tt29623480/",

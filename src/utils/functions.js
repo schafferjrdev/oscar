@@ -123,7 +123,8 @@ export function translate(text) {
     return null;
   }
   const match = text.match(pattern);
-  const [nominated, award, wins, nominations] = match;
+  // eslint-disable-next-line no-unused-vars
+  const [_, nominated, award, wins, nominations] = match;
   const translated = [];
 
   if (nominated && award) {
