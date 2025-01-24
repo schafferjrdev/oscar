@@ -28,20 +28,21 @@ function Header({ movies, openSettings, handleSearch, handleFocus, search }) {
     }
 
     const fernandaText =
-      "Cê viu a Fernanda Torres? TO-TAL-MEN-TE IN-DI-CA-DA, veja também os filmes em https://oscars.netlify.app\n\n";
+      "Cê viu a Fernanda Torres? TO-TAL-MEN-TE IN-DI-CA-DA, veja também os filmes em ";
+    const url = "https://oscars.netlify.app\n\n";
 
     if (detectMob()) {
       try {
         await navigator.share({
           title: text,
           text: fernandaText + text,
-          url: "https://oscars.netlify.app",
+          url: url,
         });
       } catch (err) {
         console.error(err);
       }
     } else {
-      copyTextToClipboard(fernandaText + text);
+      copyTextToClipboard(fernandaText + url + text);
 
       message.success("copiado para o ctrl+V");
     }
