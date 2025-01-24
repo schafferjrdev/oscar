@@ -4,6 +4,7 @@
   /* margin: 8px; */
   border-radius: 5px;
   transition: all ease 0.3s;
+  margin-right: 8px;
 }
 
 .platform-icon:hover {

@@ -1,4 +1,4 @@
-export const OSCAR_DATE = new Date("03/10/2024 21:00");
+export const OSCAR_DATE = new Date("03/02/2025 21:00");
 
 export const CATEGORIES = {
   BestPicture: {
@@ -30,7 +30,7 @@ export const CATEGORIES = {
     color: "green",
   },
   BestDirector: {
-    title: "Direção",
+    title: "Melhor Direção",
     color: "gold",
   },
   DocumentaryFeature: {
@@ -50,7 +50,7 @@ export const CATEGORIES = {
     color: "orange",
   },
   InternationalFeature: {
-    title: "Filme Internacional",
+    title: "Melhor Filme Internacional",
     color: "red",
   },
   MakeupandHairstyling: {
@@ -73,7 +73,7 @@ export const CATEGORIES = {
     title: "Design de produção",
     color: "green",
   },
-  shortMovie: {
+  ShortMovie: {
     title: "Curta-metragem",
     color: "orange",
   },
@@ -134,9 +134,9 @@ export const all_categories = [
   "DocumentaryShort",
   "InternationalFeature",
   "VisualEffects",
-  "shortMovie",
+  "ShortMovie",
 ];
 
 export const minilist_categories = ["BestPicture", "AnimatedFeature"];
 
-export const LOCAL_STORAGE_KEY = "oscar-data-2024";
+export const LOCAL_STORAGE_KEY = "oscar-data-2025";

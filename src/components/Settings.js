@@ -22,15 +22,15 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
   const note = info.filter((e) => e.rate > 0).map((e) => e.rate);
   const average =
     note.reduce((acumulador, elemento) => acumulador + elemento, 0) /
-    note.length;
+    note?.length;
   const five_stars = info
     .filter((e) => e.rate === 5)
-    .map((e) => e.movie.imdb?.split("/")[4]);
+    .map((e) => e.movie.imdb?.match(/tt\d+/));
 
-  const runtimes = watched.map((e) => e.movie.imdb?.split("/")[4]);
+  const runtimes = watched.map((e) => e.movie.imdb?.match(/tt\d+/));
   const besties = watched
     .filter((e) => e.category.includes("BestPicture"))
-    .map((e) => e.movie.imdb?.split("/")[4]);
+    .map((e) => e.movie.imdb?.match(/tt\d+/));
 
   const [fiveStars, setFiveStars] = useState([]);
   const [bestMovies, setBestMovies] = useState([]);
@@ -165,10 +165,10 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
               Todos Filmes
             </Tag>
             <span className='percent'>
-              {Math.floor((watched.length * 100) / info.length)}%
+              {Math.floor((watched?.length * 100) / info.length)}%
             </span>
             <span>
-              {watched.length}/{info.length} filmes
+              {watched?.length}/{info?.length} filmes
             </span>
           </div>
           <div className='timespent'>

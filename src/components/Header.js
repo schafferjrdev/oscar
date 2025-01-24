@@ -1,22 +1,22 @@
 import React from "react";
-import { message } from "antd";
+import { message, Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
 import { detectMob, copyTextToClipboard, detectIOS } from "../utils/functions";
 import logo from "../icons/logo.png";
 import "./App.scss";
 
-function Header({ movies, openSettings }) {
+function Header({ movies, openSettings, handleSearch, handleFocus, search }) {
   const handleShare = async () => {
     let text;
-    switch (movies.filter((e) => e.watched).length) {
+    switch (movies.filter((e) => e.watched)?.length) {
       case 0:
-        text = `Ainda não vi nenhum`;
+        text = "";
         break;
       case 1:
-        text = `Eu só vi ${movies
+        text = `Eu só vi o filme '${movies
           .filter((e) => e.watched)
           .map((e) => e.movie.name)
-          .join(", ")}`;
+          .join(", ")}'`;
 
         break;
       default:
@@ -39,7 +39,8 @@ function Header({ movies, openSettings }) {
       }
     } else {
       copyTextToClipboard(
-        text + " \n\nMarque você também em https://oscars.netlify.app"
+        "Cê viu a Fernanda Torres? TO-TAL-MEN-TE IN-DI-CA-DA, veja também os filmes em https://oscars.netlify.app\n\n" +
+          text
       );
 
       message.success("copiado para o ctrl+V");
@@ -55,6 +56,28 @@ function Header({ movies, openSettings }) {
       <header className='oscar-header'>
         <img src={logo} className='oscar-logo' alt='oscar-logo' />
         <div className='header-action'>
+          <Input
+            bordered={false}
+            className={`search-box ${search?.length > 0 && "opened"}`}
+            onChange={handleSearch}
+            onFocus={handleFocus}
+            value={search}
+            prefix={
+              <span className='material-icons-outlined header-button'>
+                search
+              </span>
+            }
+            suffix={
+              <span
+                className={`material-icons-outlined header-button ${
+                  search?.length === 0 && "hidden"
+                }`}
+                onClick={handleFocus}
+              >
+                close
+              </span>
+            }
+          />
           <span
             onClick={handleShare}
             className='material-icons-outlined header-button'

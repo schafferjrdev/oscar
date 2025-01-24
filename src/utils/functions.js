@@ -113,3 +113,33 @@ export function convertMinutesToTimeObject(minutes) {
     minutes: finalMinutes,
   };
 }
+
+const pattern =
+  /(?:Nominated for (\d+) (\w+)\.?)?\s*(\d+ wins?)?(?: & )?(\d+ nominations? total)?/;
+
+// Função para traduzir as indicações
+export function translate(text) {
+  if (!text) {
+    return null;
+  }
+  const match = text.match(pattern);
+  const [_, nominated, award, wins, nominations] = match;
+  const translated = [];
+
+  if (nominated && award) {
+    translated.push(`Indicado a ${nominated} ${award}.`);
+  }
+  if (wins) {
+    const winsPt = wins.replace("wins", "vitórias").replace("win", "vitória");
+    translated.push(winsPt);
+  }
+  if (nominations) {
+    const nominationsPt = nominations.replace(
+      "nominations total",
+      "indicações no total"
+    );
+    translated.push(nominationsPt);
+  }
+
+  return translated.join(" & ");
+}

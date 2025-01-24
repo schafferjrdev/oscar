@@ -7,13 +7,25 @@ import StarsDisplay from "./StarsDisplay";
 import { nomination_plural } from "../utils/functions";
 import { LoadingOutlined } from "@ant-design/icons";
 
-function Card({ data, showDrawer, index, handleCheck }) {
+function Card({ data, showDrawer, index, handleCheck, search }) {
   const [omdb, setOmdb] = useState(null);
   const [tmdb, setTmdb] = useState(null);
 
+  const regex = new RegExp(search, "i"); // 'i' makes the search case-insensitive
+  const hidden = ![
+    omdb?.Actors || "",
+    omdb?.Writer || "",
+    omdb?.Director || "",
+    omdb?.Title || "",
+    tmdb?.original_title || "",
+    data?.movie?.name || "",
+    data?.category?.join(",") || "",
+    data?.platform?.map((e) => e?.name).join(",") || "",
+  ].some((str) => regex.test(str));
+
   const getOMDB = async (uuid) => {
     await setOmdb(null);
-    const imdb = uuid?.split("/")[4];
+    const imdb = uuid?.match(/tt\d+/);
     axios
       .get(`https://www.omdbapi.com/?apikey=81750ce2&i=${imdb}`)
       .then(function (response) {
@@ -36,7 +48,7 @@ function Card({ data, showDrawer, index, handleCheck }) {
           "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OWUyMWU1NWNjMTg0YzBmNTBkYjc4Njk1NzlhYWE3MCIsInN1YiI6IjY0NDAwZDc1MzdiM2E5MDQ0NTQzMmZhYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uB0qMp0SyCG2Lph-6EUJK4eopBlIurD7SdBw8bTb_Uw",
       },
     };
-    const imdb = uuid?.split("/")[4];
+    const imdb = uuid?.match(/tt\d+/);
 
     axios
       .get(
@@ -68,7 +80,11 @@ function Card({ data, showDrawer, index, handleCheck }) {
   };
 
   return (
-    <div className={`new-card ${data?.watched ? " checked" : ""}`}>
+    <div
+      className={`new-card ${data?.watched ? " checked" : ""} ${
+        hidden ? "hidden" : ""
+      }`}
+    >
       <div>
         {tmdb?.poster_path || omdb?.Poster ? (
           <div className='poster-image-section'>
@@ -110,9 +126,11 @@ function Card({ data, showDrawer, index, handleCheck }) {
           {!!tmdb?.overview ? tmdb?.overview : omdb?.Plot}
         </p>
         <div>
-          {data?.platform.url ? (
-            <Icon type={data?.platform.name} url={data?.platform.url} />
-          ) : null}
+          {data?.platform?.length > 0
+            ? data?.platform?.map((p) => (
+                <Icon key={p.name} type={p.name} url={p.url} debut={p?.debut} />
+              ))
+            : null}
         </div>
       </div>
     </div>

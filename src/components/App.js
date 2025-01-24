@@ -8,6 +8,7 @@ import Drawer from "./Drawer";
 import Settings from "./Settings";
 import { LOCAL_STORAGE_KEY } from "../utils/constants";
 import { sparkles } from "../utils/functions";
+import movies_2025 from "../db/movies_2025.json";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -118,9 +119,26 @@ function App() {
 
   const onSettingsClose = () => setSettingsOpen(false);
 
+  const [search, setSearch] = useState("");
+
+  const handleFocus = () => {
+    setSearch("");
+  };
+
+  const handleSearch = (e) => {
+    const searchText = e.target.value;
+    setSearch(searchText);
+  };
+
   return (
     <div className='oscar-body'>
-      <Header movies={movies} openSettings={setSettingsOpen} />
+      <Header
+        movies={movies}
+        openSettings={setSettingsOpen}
+        handleSearch={handleSearch}
+        handleFocus={handleFocus}
+        search={search}
+      />
       <div className='movie-list'>
         {movies.map((movie, index) => (
           <Card
@@ -129,6 +147,7 @@ function App() {
             index={index}
             key={`movies_${index}`}
             handleCheck={handleCheck}
+            search={search}
           />
         ))}
       </div>

@@ -1,0 +1,809 @@
+{
+    "movies": [
+        {
+            "category": [
+                "BestPicture",
+                "InternationalFeature",
+                "BestActress"
+            ],
+            "nominees": [
+                "Fernanda Torres - Indicada a Melhor Atriz"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt14961016/",
+                "name": "Ainda Estou Aqui"
+            },
+            "platform": [
+                {
+                    "name": "ingresso",
+                    "url": "https://www.ingresso.com/filme/ainda-estou-aqui"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "BestActress",
+                "BestDirector",
+                "SupportingActress",
+                "InternationalFeature",
+                "MakeupandHairstyling",
+                "OriginalScore",
+                "AdaptedScreenplay",
+                "OriginalSong",
+                "OriginalSong",
+                "FilmEditing",
+                "Sound",
+                "Cinematography"
+            ],
+            "nominees": [
+                "Karla Sofía Gascón - Indicada a Melhor Atriz",
+                "Zoe Saldaña - Indicada a Melhor Atriz Coadjuvante",
+                "Jacques Audiard - Indicado a Melhor Direção"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt20221436/",
+                "name": "Emilia Pérez"
+            },
+            "platform": [
+                {
+                    "name": "debut",
+                    "debut": "Estreia 06/02/2025"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "BestActor",
+                "BestDirector",
+                "SupportingActor",
+                "SupportingActress",
+                "OriginalScore",
+                "OriginalScreenplay",
+                "ProductionDesign",
+                "FilmEditing",
+                "Cinematography"
+            ],
+            "nominees": [
+                "Adrien Brody - Indicado a Melhor Ator",
+                "Felicity Jones - Indicada a Melhor Atriz Coadjuvante",
+                "Guy Pearce - Indicado a Melhor Ator Coadjuvante",
+                "Brady Cobert - Indicado a Melhor Direção"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt8999762/",
+                "name": "O Brutalista"
+            },
+            "platform": [
+                {
+                    "name": "debut",
+                    "debut": "Estreia 20/02/2025"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "BestActress",
+                "SupportingActress",
+                "CostumeDesign",
+                "OriginalScore",
+                "ProductionDesign",
+                "FilmEditing",
+                "Sound",
+                "VisualEffects"
+            ],
+            "nominees": [
+                "Cynthia Erivo - Indicada a Melhor Atriz",
+                "Ariana Grande - Indicada a Melhor Atriz Coadjuvante"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt1262426/",
+                "name": "Wicked"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "BestDirector",
+                "BestActor",
+                "SupportingActress",
+                "SupportingActor",
+                "CostumeDesign",
+                "AdaptedScreenplay",
+                "Sound"
+            ],
+            "nominees": [
+                "Timothée Chalamet - Indicado a Melhor Ator",
+                "Monica Barbaro - Indicada a Melhor Atriz Coadjuvante",
+                "Edward Norton  - Indicado a Melhor Ator Coadjuvante",
+                "James Mangold - Indicado a Melhor Direção"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt11563598/",
+                "name": "Um Completo Desconhecido"
+            },
+            "platform": [
+                {
+                    "name": "debut",
+                    "debut": "Estreia 27/02/2025"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestActor",
+                "BestPicture",
+                "SupportingActress",
+                "CostumeDesign",
+                "OriginalScore",
+                "AdaptedScreenplay",
+                "ProductionDesign",
+                "FilmEditing"
+            ],
+            "nominees": [
+                "Ralph Fiennes - Indicado a Melhor Ator",
+                "Isabella Rossellini - Indicada a Melhor Atriz Coadjuvante"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt20215234/",
+                "name": "Conclave"
+            },
+            "platform": [
+                {
+                    "name": "ingresso",
+                    "url": "https://www.ingresso.com/filme/conclave"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "BestDirector",
+                "BestActress",
+                "SupportingActor",
+                "OriginalScreenplay",
+                "FilmEditing"
+            ],
+            "nominees": [
+                "Mikey Madison - Indicada a Melhor Atriz",
+                "Yura Borisov - Indicado a Melhor Ator Coadjuvante",
+                "Sean Baker - Indicado a Melhor Direção"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt28607951/",
+                "name": "Anora"
+            },
+            "platform": [
+                {
+                    "name": "ingresso",
+                    "url": "https://www.ingresso.com/filme/anora"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "BestDirector",
+                "BestActress",
+                "MakeupandHairstyling",
+                "OriginalScreenplay"
+            ],
+            "nominees": [
+                "Demi Moore - Indicada a Melhor Atriz",
+                "Coralie Fargeat - Indicada a Melhor Direção"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt17526714/",
+                "name": "A Substância"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "ProductionDesign",
+                "Sound",
+                "VisualEffects",
+                "Cinematography"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt15239678/",
+                "name": "Duna: Parte 2"
+            },
+            "platform": [
+                {
+                    "name": "hbo",
+                    "url": "https://play.max.com/video/watch/914be9f6-e1b2-4f5f-aa34-de07a2a3423b"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "AdaptedScreenplay"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt23055660/",
+                "name": "Nickel Boys"
+            },
+            "platform": [
+                {
+                    "name": "debut",
+                    "debut": "Em breve no Prime Video"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "Cinematography",
+                "CostumeDesign",
+                "MakeupandHairstyling",
+                "ProductionDesign"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt5040012/",
+                "name": "Nosferatu"
+            },
+            "platform": [
+                {
+                    "name": "ingresso",
+                    "url": "https://www.ingresso.com/filme/nosferatu"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestActor",
+                "AdaptedScreenplay",
+                "OriginalSong"
+            ],
+            "nominees": [
+                "Colman Domingo - Indicado a Melhor Ator"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt28479262/",
+                "name": "Sing Sing"
+            },
+            "platform": [
+                {
+                    "name": "debut",
+                    "debu": "Estreia 13/02/2025"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "SupportingActor",
+                "OriginalScreenplay"
+            ],
+            "nominees": [
+                "Kieran Culkin - Indicado a Melhor Ator Coadjuvante"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt21823606/",
+                "name": "A Verdadeira Dor"
+            },
+            "platform": [
+                {
+                    "name": "debut",
+                    "debu": "Estreia 30/01/2025"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestActor",
+                "SupportingActor"
+            ],
+            "nominees": [
+                "Sebastian Stan - Indicado a Melhor Ator",
+                "Jeremy Strong - Indicado a Melhor Ator Coadjuvante"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt8368368/",
+                "name": "O Aprendiz"
+            },
+            "platform": [
+                {
+                    "name": "debut",
+                    "debu": "Estreia 30/01/2025"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "InternationalFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt10236164/",
+                "name": "A Garota da Agulha"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "InternationalFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt32178949/",
+                "name": "A Semente do Fruto Sagrado"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedFeature",
+                "InternationalFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt4772188/",
+                "name": "Flow"
+            },
+            "platform": [
+                {
+                    "name": "debut",
+                    "debu": "Estreia 20/02/2025"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt22022452/",
+                "name": "DivertidaMente 2"
+            },
+            "platform": [
+                {
+                    "name": "disney",
+                    "url": "https://www.disneyplus.com/pt-br/play/ec9f9fa3-fbae-4a25-b722-12c3b8ab0ef4"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt23770030/",
+                "name": "Memórias de um Caracol"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt17163970/",
+                "name": "Wallace & Gromit: Avengança"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedFeature",
+                "OriginalScore"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt29623480/",
+                "name": "Robô Selvagem"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "CostumeDesign"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt9218128/",
+                "name": "Gladiador II"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "MakeupandHairstyling"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt21097228/",
+                "name": "Um Homem Diferente"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "ShortMovie"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt27655666/",
+                "name": "A Lien"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "ShortMovie"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt27654431/",
+                "name": "Anuja"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "ShortMovie"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt18349602/",
+                "name": "I'm Not a Robot"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "ShortMovie"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt15802124/",
+                "name": "The Last Ranger"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "ShortMovie"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt20519854/",
+                "name": "O Homem que Não Se Calou"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt30835281/",
+                "name": "Beautiful Men"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt28768883/",
+                "name": "In the Shadow of the Cypress"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt31888603/",
+                "name": "Magic Candies"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt28768679/",
+                "name": "Wander to Wonder"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt28356173/",
+                "name": "Yuck!"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "OriginalScreenplay"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt28082769/",
+                "name": "September 5"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "OriginalSong"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt24458622/",
+                "name": "Batalhão 6888"
+            },
+            "platform": [
+                {
+                    "name": "netflix",
+                    "url": "https://www.netflix.com/watch/81590591"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "OriginalSong"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt20316978/",
+                "name": "Elton John: Never Too Late"
+            },
+            "platform": [
+                {
+                    "name": "disney",
+                    "url": "https://www.disneyplus.com/pt-br/play/f599cc14-3c89-4827-826e-66cc82f3e8ec"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt30227076/",
+                "name": "Black Box Diaries"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt30953759/",
+                "name": "No Other Land"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt30294282/",
+                "name": "Porcelain War"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt14452174/",
+                "name": "Soundtrack to A Coup D'Etat"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt30319854/",
+                "name": "Sugarcane"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt33385063/",
+                "name": "Death By Numbers"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt31556921/",
+                "name": "I am Ready, Warden"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt6195094/",
+                "name": "Incident"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt32280470/",
+                "name": "Instruments of a Beating Heart"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt29497240/",
+                "name": "The Only Girl in the Orchestra"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "VisualEffects"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt18412256/",
+                "name": "Alien: Romulus"
+            },
+            "platform": [
+                {
+                    "name": "disney",
+                    "url": "https://www.disneyplus.com/pt-br/play/f3c75b7d-aba5-4fee-923d-aca962ad2d5f"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "VisualEffects"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt14260836/",
+                "name": "Better Man"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "VisualEffects"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt11389872/",
+                "name": "O Reino do Planeta dos Macacos"
+            },
+            "platform": [
+                {
+                    "name": "disney",
+                    "url": "https://www.disneyplus.com/pt-br/play/99e15d53-926e-4074-b9f4-6524d10c8bed"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "Cinematography"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt22893404/",
+                "name": "Maria"
+            },
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        }
+    ]
+}
