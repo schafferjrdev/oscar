@@ -86,7 +86,9 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
             </div>
             <div className='movie-plot'>
               <p>
-                <span className='banner-body'>{tmdb?.overview}</span>
+                <span className='banner-body'>
+                  {!!tmdb?.overview ? tmdb?.overview : omdb?.Plot}
+                </span>
               </p>
               {data?.platform?.length > 0 ? (
                 <>
@@ -217,7 +219,9 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                 </div>
                 <div className='movie-plot'>
                   <p>
-                    <span className='banner-body'>{tmdb?.overview}</span>
+                    <span className='banner-body'>
+                      {!!tmdb?.overview ? tmdb?.overview : omdb?.Plot}
+                    </span>
                   </p>
                   {data?.platform?.length > 0 ? (
                     <>
