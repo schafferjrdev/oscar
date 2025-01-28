@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 import "./App.scss";
 import Icon from "./Icon";
@@ -10,6 +11,8 @@ import { LoadingOutlined } from "@ant-design/icons";
 function Card({ data, showDrawer, index, handleCheck, search }) {
   const [omdb, setOmdb] = useState(null);
   const [tmdb, setTmdb] = useState(null);
+  const { id } = useParams();
+  const navigate = useNavigate();
 
   const regex = new RegExp(search, "i"); // 'i' makes the search case-insensitive
   const hidden = ![
@@ -71,6 +74,7 @@ function Card({ data, showDrawer, index, handleCheck, search }) {
   }, [data]);
 
   const handleShowDrawer = () => {
+    navigate(`/${omdb?.imdbID}`);
     showDrawer({
       index: index,
       data: data,
@@ -78,6 +82,18 @@ function Card({ data, showDrawer, index, handleCheck, search }) {
       omdb: omdb,
     });
   };
+
+  useEffect(() => {
+    if (data?.movie.imdb.includes(id)) {
+      showDrawer({
+        index: index,
+        data: data,
+        tmdb: tmdb,
+        omdb: omdb,
+      });
+    }
+    // eslint-disable-next-line
+  }, [id, data, tmdb, omdb]);
 
   return (
     <div

@@ -199,7 +199,15 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                 </div>
                 <div className='banner-upper'>
                   <span className='banner-title'>
-                    <span className='banner-name'>{data?.movie?.name}</span>
+                    <span className='banner-name'>
+                      <a
+                        target='_blank'
+                        rel='noreferrer'
+                        href={data?.movie?.imdb}
+                      >
+                        {data?.movie?.name}
+                      </a>
+                    </span>
 
                     <span id='banner-stars-desktop'>
                       <Rate

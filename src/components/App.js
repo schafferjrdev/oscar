@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate, Routes, Route, useParams } from "react-router-dom";
 import { database } from "../db/firebase";
 import { ref, onValue } from "firebase/database";
 import "./App.scss";
@@ -9,9 +10,11 @@ import Settings from "./Settings";
 import { LOCAL_STORAGE_KEY } from "../utils/constants";
 import { sparkles } from "../utils/functions";
 
-function App() {
+function Home() {
   const [movies, setMovies] = useState([]);
   const [darkMode, setDarkMode] = useState(false);
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   useEffect(() => {
     const moviesRef = ref(database, "movies");
@@ -105,6 +108,7 @@ function App() {
   };
 
   const onClose = () => {
+    navigate("/");
     setselectedMovie({
       index: null,
       data: {},
@@ -128,6 +132,13 @@ function App() {
     const searchText = e.target.value;
     setSearch(searchText);
   };
+
+  useEffect(() => {
+    if (!id) {
+      onClose();
+    }
+    // eslint-disable-next-line
+  }, [id]);
 
   return (
     <div className='oscar-body'>
@@ -165,6 +176,15 @@ function App() {
         info={movies}
       />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <Routes>
+      <Route path='/:id' element={<Home />} />
+      <Route path='*' element={<Home />} />
+    </Routes>
   );
 }
 
