@@ -1,31 +1,13 @@
 import React from "react";
-import "./App.scss";
-import { Drawer as AntdDrawer, Rate, Popover, Tag } from "antd";
+
+import { Drawer as AntdDrawer, Rate } from "antd";
 import Icon from "./Icon";
 import Checkwatch from "./Checkwatch";
 import { CloseOutlined } from "@ant-design/icons";
 import Down from "../icons/Down";
-import { CATEGORIES } from "../utils/constants";
-import { nomination_plural, translate } from "../utils/functions";
 
 function Drawer({ info, handleCheck, handleRate, open, onClose }) {
   const { data, tmdb, omdb, index } = info;
-
-  const Categories = ({ list = [] }) => {
-    return (
-      <div className='list-category'>
-        {list.map((l, i) => (
-          <Tag
-            key={`tag_${i}`}
-            color={CATEGORIES[l].color}
-            className='tag-category'
-          >
-            {CATEGORIES[l].title}
-          </Tag>
-        ))}
-      </div>
-    );
-  };
 
   return (
     <AntdDrawer
@@ -53,7 +35,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
           <div className='drawer-header'>
             <p className='drawer-name'>
               <span>
-                <b className='drawer-main'>{data?.movie?.name}</b>
+                <b className='drawer-main'>{tmdb?.title}</b>
                 <span className='drawer-sub'>{omdb?.Year}</span>
               </span>
               <span>
@@ -90,10 +72,10 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                   {!!tmdb?.overview ? tmdb?.overview : omdb?.Plot}
                 </span>
               </p>
-              {data?.platform?.length > 0 ? (
+              {data?.platform?.length > 0 && data?.platform[0].url !== "" ? (
                 <>
                   <hr />
-                  <p className='banner-topic'>ASSISTA AGORA</p>
+                  <p className='banner-topic'>ASSISTA EM:</p>
                   <div>
                     {data?.platform.map((p) => (
                       <Icon
@@ -121,43 +103,6 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                   <b>Elenco</b>
                   <span className='banner-body'>{omdb?.Actors}</span>
                 </p>
-
-                <hr />
-                <p className='banner-topic awards'>
-                  <span>PRÊMIOS & INDICAÇÕES</span>
-                  <Popover
-                    title='Indicações'
-                    content={<Categories list={data?.category} />}
-                    placement='left'
-                    className='movie-indications'
-                  >
-                    {data?.category && (
-                      <Tag
-                        color={CATEGORIES[data?.category[0]]?.color}
-                        className='tag-major'
-                      >
-                        {CATEGORIES[data?.category[0]]?.title}
-                      </Tag>
-                    )}
-                  </Popover>
-                </p>
-                <div>
-                  <p>
-                    <b>Oscar</b>
-                    <span className='banner-body'>
-                      {nomination_plural(data?.category?.length)}
-                    </span>
-                    {data?.nominees?.map((n) => (
-                      <span className='banner-body'>{n}</span>
-                    ))}
-                  </p>
-                  <p>
-                    <b>Premiações</b>
-                    <span className='banner-body'>
-                      {translate(omdb?.Awards)}
-                    </span>
-                  </p>
-                </div>
               </div>
             </div>
           </div>
@@ -205,7 +150,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                         rel='noreferrer'
                         href={data?.movie?.imdb}
                       >
-                        {data?.movie?.name}
+                        {tmdb?.title}
                       </a>
                     </span>
 
@@ -231,10 +176,11 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                       {!!tmdb?.overview ? tmdb?.overview : omdb?.Plot}
                     </span>
                   </p>
-                  {data?.platform?.length > 0 ? (
+                  {data?.platform?.length > 0 &&
+                  data?.platform[0].url !== "" ? (
                     <>
                       <hr />
-                      <p className='banner-topic'>ASSISTA AGORA</p>
+                      <p className='banner-topic'>ASSISTA EM:</p>
                       <div>
                         {data?.platform.map((p) => (
                           <Icon type={p.name} url={p.url} debut={p?.debut} />
@@ -257,47 +203,6 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                       <b>Elenco</b>
                       <span className='banner-body'>{omdb?.Actors}</span>
                     </p>
-
-                    <hr />
-                    <p className='banner-topic awards'>
-                      <span>PRÊMIOS & INDICAÇÕES</span>
-
-                      {/* <Popover
-                        title='Indicações'
-                        content={<Categories list={data?.category} />}
-                        placement='left'
-                        className='movie-indications'
-                      >
-                        {data?.category && (
-                          <Tag
-                            color={CATEGORIES[data?.category[0]]?.color}
-                            className='tag-major'
-                          >
-                            {CATEGORIES[data?.category[0]]?.title}
-                          </Tag>
-                        )}
-                      </Popover> */}
-                    </p>
-                    <div className='awards-columns'>
-                      <div>
-                        <p>
-                          <b>Oscar</b>
-                          <span className='banner-body'>
-                            {nomination_plural(data?.category?.length)}
-                          </span>
-                          {data?.nominees?.map((n) => (
-                            <span className='banner-body'>{n}</span>
-                          ))}
-                        </p>
-                        <p>
-                          <b>Premiações</b>
-                          <span className='banner-body'>
-                            {translate(omdb?.Awards)}
-                          </span>
-                        </p>
-                      </div>
-                      <Categories list={data?.category} />
-                    </div>
                   </div>
                 </div>
               </div>

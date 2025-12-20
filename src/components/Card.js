@@ -1,14 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import "./App.scss";
 import Icon from "./Icon";
 import Checkwatch from "./Checkwatch";
 import StarsDisplay from "./StarsDisplay";
-import { nomination_plural } from "../utils/functions";
 import { LoadingOutlined } from "@ant-design/icons";
+import { Dropdown } from "antd";
 
-function Card({ data, showDrawer, index, handleCheck, search }) {
+function Card({ data, showDrawer, index, handleCheck, search, handleCtx }) {
   const [omdb, setOmdb] = useState(null);
   const [tmdb, setTmdb] = useState(null);
   const { id } = useParams();
@@ -19,7 +18,12 @@ function Card({ data, showDrawer, index, handleCheck, search }) {
     omdb?.Actors || "",
     omdb?.Writer || "",
     omdb?.Director || "",
+    omdb?.Plot || "",
+    omdb?.imdbID || "",
+    omdb?.Year || "",
     omdb?.Title || "",
+    tmdb?.title || "",
+    tmdb?.overview || "",
     tmdb?.original_title || "",
     data?.movie?.name || "",
     data?.category?.join(",") || "",
@@ -84,7 +88,7 @@ function Card({ data, showDrawer, index, handleCheck, search }) {
   };
 
   useEffect(() => {
-    if (data?.movie.imdb.includes(id)) {
+    if (data?.movie.imdb?.includes(id)) {
       showDrawer({
         index: index,
         data: data,
@@ -96,60 +100,76 @@ function Card({ data, showDrawer, index, handleCheck, search }) {
   }, [id, data, tmdb, omdb]);
 
   return (
-    <div
-      className={`new-card ${data?.watched ? " checked" : ""} ${
-        hidden ? "hidden" : ""
-      }`}
+    <Dropdown
+      menu={{
+        items: [
+          {
+            label: "Deletar",
+            key: "delete",
+          },
+        ],
+        onClick: (e) => handleCtx(index, e),
+      }}
+      trigger={["contextMenu"]}
     >
-      <div>
-        {tmdb?.poster_path || omdb?.Poster ? (
-          <div className='poster-image-section'>
-            <img
-              className='poster-image'
-              alt='movie_poster'
-              src={
-                !!tmdb?.poster_path
-                  ? `https://image.tmdb.org/t/p/w500${tmdb?.poster_path}`
-                  : omdb?.Poster
-              }
-              title='Clique para marcar que viu'
-              onClick={handleShowDrawer}
-            />
-            <Checkwatch
-              handleCheck={handleCheck}
-              index={index}
-              value={data?.watched}
-              className='checkwatch-card'
-            />
-            <StarsDisplay stars={data?.rate} className='stars-poster' />
-          </div>
-        ) : (
-          <LoadingOutlined />
-        )}
-      </div>
-      <div className='card-data'>
-        <p className='card-title' onClick={handleShowDrawer}>
-          <span className='card-title-name'>{data?.movie.name} </span>
-          <span className='card-title-year'>{omdb?.Year}</span>
-        </p>
-        <p className='card-subtitle'>
-          <span>
-            {omdb?.Runtime} • {nomination_plural(data?.category?.length)}
-          </span>
-        </p>
-
-        <p className='plot-text'>
-          {!!tmdb?.overview ? tmdb?.overview : omdb?.Plot}
-        </p>
+      <div
+        className={`new-card ${data?.watched ? " checked" : ""} ${
+          hidden ? "hidden" : ""
+        }`}
+      >
         <div>
-          {data?.platform?.length > 0
-            ? data?.platform?.map((p) => (
-                <Icon key={p.name} type={p.name} url={p.url} debut={p?.debut} />
-              ))
-            : null}
+          {tmdb?.poster_path || omdb?.Poster ? (
+            <div className='poster-image-section'>
+              <img
+                className='poster-image'
+                alt='movie_poster'
+                src={
+                  !!tmdb?.poster_path
+                    ? `https://image.tmdb.org/t/p/w500${tmdb?.poster_path}`
+                    : omdb?.Poster
+                }
+                title='Clique para marcar que viu'
+                onClick={handleShowDrawer}
+              />
+              <Checkwatch
+                handleCheck={handleCheck}
+                index={index}
+                value={data?.watched}
+                className='checkwatch-card'
+              />
+              <StarsDisplay stars={data?.rate} className='stars-poster' />
+            </div>
+          ) : (
+            <LoadingOutlined />
+          )}
+        </div>
+        <div className='card-data'>
+          <p className='card-title' onClick={handleShowDrawer}>
+            <span className='card-title-name'>{tmdb?.title} </span>
+            <span className='card-title-year'>{omdb?.Year}</span>
+          </p>
+          <p className='card-subtitle'>
+            <span>{omdb?.Runtime}</span>
+          </p>
+
+          <p className='plot-text'>
+            {!!tmdb?.overview ? tmdb?.overview : omdb?.Plot}
+          </p>
+          <div>
+            {data?.platform?.length > 0
+              ? data?.platform?.map((p) => (
+                  <Icon
+                    key={p.name}
+                    type={p.name}
+                    url={p.url}
+                    debut={p?.debut}
+                  />
+                ))
+              : null}
+          </div>
         </div>
       </div>
-    </div>
+    </Dropdown>
   );
 }
 

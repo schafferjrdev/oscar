@@ -1,53 +1,13 @@
-import React from "react";
-import { message, Input } from "antd";
+import { Input } from "antd";
 import { UserOutlined } from "@ant-design/icons";
-import { detectMob, copyTextToClipboard, detectIOS } from "../utils/functions";
-import logo from "../icons/logo.png";
-import "./App.scss";
 
-function Header({ movies, openSettings, handleSearch, handleFocus, search }) {
-  const handleShare = async () => {
-    let text;
-    switch (movies.filter((e) => e.watched)?.length) {
-      case 0:
-        text = "";
-        break;
-      case 1:
-        text = `Eu só vi o filme '${movies
-          .filter((e) => e.watched)
-          .map((e) => e.movie.name)
-          .join(", ")}'`;
-
-        break;
-      default:
-        text = `Eu já assisti esses aqui: ${movies
-          .filter((e) => e.watched)
-          .map((e) => e.movie.name)
-          .join(", ")}`;
-        break;
-    }
-
-    const fernandaText =
-      "Cê viu a Fernanda Torres? TO-TAL-MEN-TE IN-DI-CA-DA, veja também os filmes em ";
-    const url = "https://oscars.netlify.app\n\n";
-
-    if (detectMob()) {
-      try {
-        await navigator.share({
-          title: text,
-          text: fernandaText + text,
-          url: url,
-        });
-      } catch (err) {
-        console.error(err);
-      }
-    } else {
-      copyTextToClipboard(fernandaText + url + text);
-
-      message.success("copiado para o ctrl+V");
-    }
-  };
-
+function Header({
+  openSettings,
+  handleSearch,
+  handleFocus,
+  search,
+  showModal,
+}) {
   const handleSettingsOpen = () => {
     openSettings(true);
   };
@@ -55,7 +15,6 @@ function Header({ movies, openSettings, handleSearch, handleFocus, search }) {
   return (
     <>
       <header className='oscar-header'>
-        <img src={logo} className='oscar-logo' alt='oscar-logo' />
         <div className='header-action'>
           <Input
             bordered={false}
@@ -79,12 +38,14 @@ function Header({ movies, openSettings, handleSearch, handleFocus, search }) {
               </span>
             }
           />
+
           <span
-            onClick={handleShare}
+            onClick={showModal}
             className='material-icons-outlined header-button'
           >
-            {detectIOS() ? "ios_share" : "share"}
+            {"add"}
           </span>
+
           <UserOutlined
             className='header-button'
             onClick={handleSettingsOpen}

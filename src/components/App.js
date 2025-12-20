@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, Routes, Route, useParams } from "react-router-dom";
-import { database } from "../db/firebase";
+import { database, checkMovie, rateMovie, deleteMovie } from "../db/firebase";
 import { ref, onValue } from "firebase/database";
-import "./App.scss";
 import Header from "./Header";
 import Card from "./Card";
 import Drawer from "./Drawer";
+import Modal from "./Modal";
 import Settings from "./Settings";
 import { LOCAL_STORAGE_KEY } from "../utils/constants";
 import { sparkles } from "../utils/functions";
@@ -23,28 +23,7 @@ function Home() {
       moviesRef,
       (snapshot) => {
         const data = snapshot.val();
-
-        const storage = localStorage.getItem(LOCAL_STORAGE_KEY);
-        if (storage) {
-          console.info("has oscar local data, loading...");
-          const parsed = JSON.parse(storage);
-          setMovies(
-            data.map((d, i) => ({
-              ...d,
-              rate: parsed[i]?.rate,
-              watched: parsed[i]?.watched,
-            }))
-          );
-        } else {
-          console.error("no local data found, loading from server...");
-          setMovies(
-            data.map((d, i) => ({
-              ...d,
-              rate: 0,
-              watched: false,
-            }))
-          );
-        }
+        setMovies(data);
       },
       {
         onlyOnce: true,
@@ -64,6 +43,7 @@ function Home() {
       const e = document.querySelector(`#${ref}`);
       sparkles(e);
     }
+    rateMovie(val, index);
   };
 
   const handleCheck = (index, val) => {
@@ -73,6 +53,7 @@ function Home() {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...newState]));
       return newState;
     });
+    checkMovie(val, index);
   };
 
   useEffect(() => {
@@ -94,12 +75,16 @@ function Home() {
   };
 
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
   const [selectedMovie, setselectedMovie] = useState({
     index: null,
     data: {},
     tmdb: {},
     omdb: {},
   });
+
+  const showModal = () => setModalOpen(true);
+  const closeModal = () => setModalOpen(false);
 
   const showDrawer = (information) => {
     console.info("[Opening the drawer...]", information);
@@ -140,6 +125,20 @@ function Home() {
     // eslint-disable-next-line
   }, [id]);
 
+  const ctxMenuClick = async (index, e) => {
+    if (e.key === "delete") {
+      console.log(`Deleting...`, index);
+      await deleteMovie(index);
+      setMovies((prevState) => {
+        const newState = [...prevState];
+        newState.splice(index, 1);
+        return newState;
+      });
+    } else {
+      console.log(`outro...`, index);
+    }
+  };
+
   return (
     <div className='oscar-body'>
       <Header
@@ -147,6 +146,7 @@ function Home() {
         openSettings={setSettingsOpen}
         handleSearch={handleSearch}
         handleFocus={handleFocus}
+        showModal={showModal}
         search={search}
       />
       <div className='movie-list'>
@@ -157,6 +157,7 @@ function Home() {
             index={index}
             key={`movies_${index}`}
             handleCheck={handleCheck}
+            handleCtx={ctxMenuClick}
             search={search}
           />
         ))}
@@ -167,6 +168,14 @@ function Home() {
         onClose={onClose}
         handleRate={handleRate}
         handleCheck={handleCheck}
+      />
+      <Modal
+        info={selectedMovie}
+        open={modalOpen}
+        onClose={closeModal}
+        handleAdd={handleRate}
+        movies={movies}
+        setMovies={setMovies}
       />
       <Settings
         open={settingsOpen}

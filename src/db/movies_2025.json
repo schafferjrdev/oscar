@@ -49,8 +49,8 @@
             },
             "platform": [
                 {
-                    "name": "debut",
-                    "debut": "Estreia 06/02/2025"
+                    "name": "ingresso",
+                    "url": "https://www.ingresso.com/filme/emilia-perez"
                 }
             ],
             "rate": 0,
@@ -313,8 +313,8 @@
             },
             "platform": [
                 {
-                    "name": "debut",
-                    "debut": "Estreia 30/01/2025"
+                    "name": "ingresso",
+                    "url": "https://www.ingresso.com/filme/a-verdadeira-dor"
                 }
             ],
             "rate": 0,
@@ -333,12 +333,7 @@
                 "imdb": "https://www.imdb.com/pt/title/tt8368368/",
                 "name": "O Aprendiz"
             },
-            "platform": [
-                {
-                    "name": "debut",
-                    "debut": "Estreia 30/01/2025"
-                }
-            ],
+            "platform": [],
             "rate": 0,
             "watched": false
         },

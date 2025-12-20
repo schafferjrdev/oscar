@@ -1,7 +1,4 @@
-import React from "react";
 import { conffeti } from "../utils/functions";
-import "./App.scss";
-
 import { EyeFilled, EyeInvisibleFilled } from "@ant-design/icons";
 
 function Checkwatch({ handleCheck, index, value, className }) {

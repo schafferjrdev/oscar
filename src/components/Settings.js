@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./App.scss";
 import { Drawer, Switch, Tag } from "antd";
-import Countdown from "react-countdown";
 import { StarFilled } from "@ant-design/icons";
-import oscars_logo from "../icons/oscars.svg";
 import Down from "../icons/Down";
-import { OSCAR_DATE } from "../utils/constants";
 import {
-  pluralize,
   pluralize_word,
   detectMob,
   convertMinutesToTimeObject,
@@ -16,8 +11,6 @@ import {
 
 function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
   const watched = info.filter((e) => e.watched);
-  const besties_movies = info.filter((e) => e.category.includes("BestPicture"));
-  const besties_watched = besties_movies.filter((e) => e.watched);
 
   const note = info.filter((e) => e.rate > 0).map((e) => e.rate);
   const average =
@@ -28,12 +21,8 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
     .map((e) => e.movie.imdb?.match(/tt\d+/));
 
   const runtimes = watched.map((e) => e.movie.imdb?.match(/tt\d+/));
-  const besties = watched
-    .filter((e) => e.category.includes("BestPicture"))
-    .map((e) => e.movie.imdb?.match(/tt\d+/));
 
   const [fiveStars, setFiveStars] = useState([]);
-  const [bestMovies, setBestMovies] = useState([]);
   const [timespent, setTimespent] = useState({
     days: 0,
     hours: 0,
@@ -75,7 +64,6 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
 
   const fetchAllData = async () => {
     try {
-      const best = await Promise.all(besties.map((id) => getTMDB(id)));
       const posters = await Promise.all(five_stars.map((id) => getTMDB(id)));
       const time = await Promise.all(runtimes.map((id) => getOMDB(id)));
       const all_time = time
@@ -83,7 +71,6 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
         .reduce((acumulador, elemento) => acumulador + elemento, 0);
       setTimespent(convertMinutesToTimeObject(all_time));
       setFiveStars(posters);
-      setBestMovies(best);
     } catch (error) {
       console.error("Erro ao buscar dados:", error);
     }
@@ -133,32 +120,7 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
             }
           />
         </div>
-        <div className='oscars-date settings-box'>
-          <div className='ceremony'>
-            <img
-              src={oscars_logo}
-              className='oscars-setting-logo'
-              alt='oscar-logo'
-            />
-            <span className='date-value'>
-              {OSCAR_DATE.toLocaleDateString("pt-BR", {
-                day: "2-digit",
-                month: "2-digit",
-              })}
-            </span>
-          </div>
-          <Countdown
-            date={OSCAR_DATE}
-            renderer={({ days, hours, minutes, seconds, completed }) => {
-              return completed ? null : (
-                <span className='remaining'>
-                  Faltam {pluralize(days, "dia")}, {pluralize(hours, "hora")} e{" "}
-                  {pluralize(minutes, "minuto")}
-                </span>
-              );
-            }}
-          />
-        </div>
+
         <div className='settings-box conclusion'>
           <div className='percent-movies'>
             <Tag color='#54788a' className='tag-category'>
@@ -192,38 +154,10 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
           </div>
         </div>
 
-        <div className='settings-box minilist-categories'>
-          <div className='percent-movies'>
-            <Tag color='gold' className='tag-category no-margin'>
-              Melhor Filme
-            </Tag>
-            <span>
-              {besties_watched.length}/{besties_movies.length} filmes
-            </span>
-            <span className='percent'>
-              {Math.floor(
-                (besties_watched.length * 100) / besties_movies.length
-              )}
-              %
-            </span>
-          </div>
-
-          <div className='miniposter-list'>
-            {bestMovies.map((i) => (
-              <img
-                key={`${i?.poster_path}_besties`}
-                className='miniposter'
-                alt='Movie Poster'
-                src={`https://image.tmdb.org/t/p/w500${i?.poster_path}`}
-              />
-            ))}
-          </div>
-        </div>
-
         <div className='settings-box average-stars'>
           {note.length === 0 ? (
             <div>
-              Você ainda não marcou <StarFilled /> nos filmes...
+              Vocês ainda não marcaram <StarFilled /> nos filmes...
             </div>
           ) : (
             <>

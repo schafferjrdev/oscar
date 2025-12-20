@@ -1,5 +1,3 @@
-import React from "react";
-import "./App.scss";
 import { Rate } from "antd";
 
 export default function StarsDisplay({ stars, ...rest }) {
