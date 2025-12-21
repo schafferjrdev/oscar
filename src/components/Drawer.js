@@ -7,7 +7,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import Down from "../icons/Down";
 
 function Drawer({ info, handleCheck, handleRate, open, onClose }) {
-  const { data, tmdb, omdb, index } = info;
+  const { data, tmdb, omdb } = info;
 
   return (
     <AntdDrawer
@@ -51,13 +51,13 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                   allowHalf
                   allowClear
                   onChange={(val) =>
-                    handleRate(index, val, "banner-stars-mobile")
+                    handleRate(data?.id, val, "banner-stars-mobile")
                   }
                   value={data?.rate}
                 />
                 <Checkwatch
                   handleCheck={handleCheck}
-                  index={index}
+                  index={data?.id}
                   value={data?.watched}
                   className='checkwatch-card-drawer round-button'
                 />
@@ -133,7 +133,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                 <div className='float-buttons'>
                   <Checkwatch
                     handleCheck={handleCheck}
-                    index={index}
+                    index={data?.id}
                     value={data?.watched}
                     className='round-button'
                   />
@@ -159,7 +159,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                         allowHalf
                         allowClear
                         onChange={(val) =>
-                          handleRate(index, val, "banner-stars-desktop")
+                          handleRate(data?.id, val, "banner-stars-desktop")
                         }
                         value={data?.rate}
                       />

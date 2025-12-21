@@ -29,10 +29,6 @@ function Modal({ movies, setMovies, open, onClose }) {
     };
     console.log("Success:", movies.length, json);
     addMovie(json, movies.length);
-    setMovies((prevState) => {
-      const newState = [...prevState, json];
-      return newState;
-    });
     closeForm();
   };
 

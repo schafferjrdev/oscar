@@ -144,3 +144,26 @@ export function translate(text) {
 
   return translated.join(" & ");
 }
+
+export const shallowEqual = (a, b) => {
+  if (a === b) return true;
+  if (!a || !b) return false;
+
+  const aKeys = Object.keys(a);
+  const bKeys = Object.keys(b);
+  if (aKeys.length !== bKeys.length) return false;
+
+  for (const k of aKeys) {
+    if (a[k] !== b[k]) return false;
+  }
+  return true;
+};
+
+export const mergeKeepIdentity = (prevItem, nextItem) => {
+  // se nunca existiu, cria
+  if (!prevItem) return nextItem;
+  // se não mudou nada, mantém a MESMA referência (não re-renderiza com React.memo)
+  if (shallowEqual(prevItem, nextItem)) return prevItem;
+  // se mudou algo, cria novo objeto só para esse item
+  return { ...prevItem, ...nextItem };
+};

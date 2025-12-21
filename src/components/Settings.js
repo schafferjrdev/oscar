@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import axios from "axios";
-import { Drawer, Switch, Tag } from "antd";
+import { Drawer, Switch, Tag, Button } from "antd";
+import { useNavigate } from "react-router-dom";
 import { StarFilled } from "@ant-design/icons";
 import Down from "../icons/Down";
 import {
@@ -10,17 +11,41 @@ import {
 } from "../utils/functions";
 
 function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
-  const watched = info.filter((e) => e.watched);
+  const navigate = useNavigate();
 
-  const note = info.filter((e) => e.rate > 0).map((e) => e.rate);
-  const average =
-    note.reduce((acumulador, elemento) => acumulador + elemento, 0) /
-    note?.length;
-  const five_stars = info
-    .filter((e) => e.rate === 5)
-    .map((e) => e.movie.imdb?.match(/tt\d+/));
+  // ✅ Remove buracos (null/undefined) que surgem por remoção sem "shift" de índices
+  const safeInfo = useMemo(() => (info ?? []).filter(Boolean), [info]);
 
-  const runtimes = watched.map((e) => e.movie.imdb?.match(/tt\d+/));
+  const watched = useMemo(() => safeInfo.filter((e) => e.watched), [safeInfo]);
+  const not_watched = useMemo(() => safeInfo.filter((e) => !e.watched), [safeInfo]);
+
+  const note = useMemo(
+    () => safeInfo.filter((e) => e.rate > 0).map((e) => e.rate),
+    [safeInfo]
+  );
+
+  const average = useMemo(() => {
+    if (note.length === 0) return 0;
+    return note.reduce((acc, el) => acc + el, 0) / note.length;
+  }, [note]);
+
+  // ids prontos como string "tt123..."
+  const five_stars = useMemo(
+    () =>
+      safeInfo
+        .filter((e) => e.rate === 5)
+        .map((e) => e.movie?.imdb?.match(/tt\d+/)?.[0])
+        .filter(Boolean),
+    [safeInfo]
+  );
+
+  const runtimes = useMemo(
+    () =>
+      watched
+        .map((e) => e.movie?.imdb?.match(/tt\d+/)?.[0])
+        .filter(Boolean),
+    [watched]
+  );
 
   const [fiveStars, setFiveStars] = useState([]);
   const [timespent, setTimespent] = useState({
@@ -29,7 +54,7 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
     minutes: 0,
   });
 
-  const getTMDB = async (uuid) => {
+  const getTMDB = useCallback(async (uuid) => {
     const options = {
       method: "GET",
       headers: {
@@ -43,43 +68,53 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
         `https://api.themoviedb.org/3/find/${uuid}?external_source=imdb_id&language=pt-BR`,
         options
       );
-      return response.data?.movie_results[0];
+      return response.data?.movie_results?.[0] ?? null;
     } catch (error) {
-      console.error(`Erro ao buscar dados para o ID ${uuid}:`, error.message);
-      throw error; // Rejeita a promessa para que o Promise.all() saiba que algo deu errado
+      console.error(`Erro ao buscar TMDB para o ID ${uuid}:`, error.message);
+      throw error;
     }
-  };
+  }, []);
 
-  const getOMDB = async (uuid) => {
+  const getOMDB = useCallback(async (uuid) => {
     try {
       const response = await axios.get(
         `https://www.omdbapi.com/?apikey=81750ce2&i=${uuid}`
       );
       return response.data;
     } catch (error) {
-      console.error(`Erro ao buscar dados para o ID ${uuid}:`, error.message);
-      throw error; // Rejeita a promessa para que o Promise.all() saiba que algo deu errado
+      console.error(`Erro ao buscar OMDB para o ID ${uuid}:`, error.message);
+      throw error;
     }
-  };
+  }, []);
 
-  const fetchAllData = async () => {
+  const fetchAllData = useCallback(async () => {
     try {
-      const posters = await Promise.all(five_stars.map((id) => getTMDB(id)));
-      const time = await Promise.all(runtimes.map((id) => getOMDB(id)));
-      const all_time = time
-        .map((e) => parseInt(e.Runtime.split(" ")[0]))
-        .reduce((acumulador, elemento) => acumulador + elemento, 0);
+      // posters dos 5 estrelas
+      const posters = five_stars.length
+        ? await Promise.all(five_stars.map((id) => getTMDB(id)))
+        : [];
+
+      // runtime do que foi assistido
+      const time = runtimes.length
+        ? await Promise.all(runtimes.map((id) => getOMDB(id)))
+        : [];
+
+      const all_time = time.length
+        ? time
+            .map((e) => parseInt((e?.Runtime ?? "0").split(" ")[0], 10) || 0)
+            .reduce((acc, el) => acc + el, 0)
+        : 0;
+
       setTimespent(convertMinutesToTimeObject(all_time));
-      setFiveStars(posters);
+      setFiveStars(posters.filter(Boolean));
     } catch (error) {
       console.error("Erro ao buscar dados:", error);
     }
-  };
+  }, [five_stars, runtimes, getTMDB, getOMDB]);
 
   useEffect(() => {
     fetchAllData();
-    // eslint-disable-next-line
-  }, [info]);
+  }, [fetchAllData]);
 
   return (
     <Drawer
@@ -127,12 +162,15 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
               Todos Filmes
             </Tag>
             <span className='percent'>
-              {Math.floor((watched?.length * 100) / info.length)}%
+              {safeInfo.length === 0
+                ? "0%"
+                : `${Math.floor((watched.length * 100) / safeInfo.length)}%`}
             </span>
             <span>
-              {watched?.length}/{info?.length} filmes
+              {watched.length}/{safeInfo.length} filmes
             </span>
           </div>
+
           <div className='timespent'>
             <div>
               <b>
@@ -169,7 +207,7 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
                   <div className='miniposter-list'>
                     {fiveStars.map((i) => (
                       <img
-                        key={i?.poster_path}
+                        key={i?.poster_path ?? Math.random()}
                         className='miniposter'
                         alt='Movie Poster'
                         src={`https://image.tmdb.org/t/p/w500${i?.poster_path}`}
@@ -179,16 +217,34 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
                   <hr />
                 </>
               ) : null}
+
               <span>
                 Sua média de notas é {average.toFixed(1)} <StarFilled />
               </span>
               <span>
-                Total de <b>{note.length}</b>{" "}
-                {pluralize_word(note.length, "filme")}
+                Total de <b>{note.length}</b> {pluralize_word(note.length, "filme")}
                 {pluralize_word(note.length, " avaliado")}
               </span>
             </>
           )}
+        </div>
+
+        <div className='settings-box lucky-button'>
+          <Button
+            className='form-button'
+            onClick={() => {
+              if (not_watched.length === 0) return;
+
+              const sorteado = not_watched[Math.floor(Math.random() * not_watched.length)];
+              const imdb = sorteado?.movie?.imdb?.match(/tt\d+/)?.[0];
+              if (!imdb) return;
+
+              onClose();
+              navigate(`/${imdb}`);
+            }}
+          >
+            Estou com sorte? :D
+          </Button>
         </div>
       </div>
     </Drawer>

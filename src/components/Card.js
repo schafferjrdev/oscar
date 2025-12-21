@@ -31,7 +31,6 @@ function Card({ data, showDrawer, index, handleCheck, search, handleCtx }) {
   ].some((str) => regex.test(str));
 
   const getOMDB = async (uuid) => {
-    await setOmdb(null);
     const imdb = uuid?.match(/tt\d+/);
     axios
       .get(`https://www.omdbapi.com/?apikey=81750ce2&i=${imdb}`)
@@ -46,7 +45,6 @@ function Card({ data, showDrawer, index, handleCheck, search, handleCtx }) {
   };
 
   const getTMDB = async (uuid) => {
-    await setTmdb(null);
     const options = {
       method: "GET",
       headers: {
@@ -72,10 +70,11 @@ function Card({ data, showDrawer, index, handleCheck, search, handleCtx }) {
       });
   };
 
-  useEffect(() => {
-    getOMDB(data?.movie.imdb);
-    getTMDB(data?.movie.imdb);
-  }, [data]);
+useEffect(() => {
+  if (!data?.movie?.imdb) return;
+  getOMDB(data?.movie?.imdb);
+  getTMDB(data?.movie?.imdb);
+}, [data?.movie?.imdb]);
 
   const handleShowDrawer = () => {
     navigate(`/${omdb?.imdbID}`);
@@ -108,7 +107,7 @@ function Card({ data, showDrawer, index, handleCheck, search, handleCtx }) {
             key: "delete",
           },
         ],
-        onClick: (e) => handleCtx(index, e),
+        onClick: (e) => handleCtx(data?.id, e),
       }}
       trigger={["contextMenu"]}
     >
@@ -128,12 +127,12 @@ function Card({ data, showDrawer, index, handleCheck, search, handleCtx }) {
                     ? `https://image.tmdb.org/t/p/w500${tmdb?.poster_path}`
                     : omdb?.Poster
                 }
-                title='Clique para marcar que viu'
+                title='Clique para marcar que viu!'
                 onClick={handleShowDrawer}
               />
               <Checkwatch
                 handleCheck={handleCheck}
-                index={index}
+                index={data?.id}
                 value={data?.watched}
                 className='checkwatch-card'
               />
@@ -173,4 +172,4 @@ function Card({ data, showDrawer, index, handleCheck, search, handleCtx }) {
   );
 }
 
-export default Card;
+export default React.memo(Card);

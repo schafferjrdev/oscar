@@ -35,6 +35,16 @@
   margin-top: 16px;
 }
 
+.lucky-button{
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: space-around;
+  align-items: center;
+  border: none;
+
+}
+
 .average-stars {
   color: #b4912f;
   font-size: 1rem;

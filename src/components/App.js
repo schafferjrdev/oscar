@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { useNavigate, Routes, Route, useParams } from "react-router-dom";
 import { database, checkMovie, rateMovie, deleteMovie } from "../db/firebase";
-import { ref, onValue } from "firebase/database";
+import {
+  ref,
+  onChildAdded,
+  onChildChanged,
+  onChildRemoved,
+} from "firebase/database";
 import Header from "./Header";
 import Card from "./Card";
 import Drawer from "./Drawer";
 import Modal from "./Modal";
 import Settings from "./Settings";
-import { LOCAL_STORAGE_KEY } from "../utils/constants";
 import { sparkles } from "../utils/functions";
 
 function Home() {
@@ -16,45 +20,56 @@ function Home() {
   const navigate = useNavigate();
   const { id } = useParams();
 
-  useEffect(() => {
-    const moviesRef = ref(database, "movies");
+useEffect(() => {
+  const moviesRef = ref(database, "movies");
 
-    onValue(
-      moviesRef,
-      (snapshot) => {
-        const data = snapshot.val();
-        setMovies(data);
-      },
-      {
-        onlyOnce: true,
-      }
+  const unsubAdd = onChildAdded(moviesRef, (snap) => {
+    const incoming = { id: snap.key, ...snap.val() };
+
+    setMovies((prev) => {
+      // ✅ evita duplicar em hot reload/reconexão
+      if (prev.some((m) => m.id === incoming.id)) return prev;
+      return [...prev, incoming];
+    });
+  });
+
+  const unsubChange = onChildChanged(moviesRef, (snap) => {
+    const incoming = { id: snap.key, ...snap.val() };
+
+    setMovies((prev) =>
+      prev.map((m) => (m.id === incoming.id ? { ...m, ...incoming } : m))
     );
-    // eslint-disable-next-line
+  });
+
+  const unsubRemove = onChildRemoved(moviesRef, (snap) => {
+    const id = snap.key;
+    setMovies((prev) => prev.filter((m) => m.id !== id));
+  });
+
+  return () => {
+    unsubAdd();
+    unsubChange();
+    unsubRemove();
+  };
+}, []);
+
+  const handleCheck = useCallback((id, val) => {
+    setMovies((prev) =>
+      prev.map((m) => (m.id === id ? { ...m, watched: val } : m))
+    );
+    checkMovie(id,val);
   }, []);
 
-  const handleRate = (index, val, ref) => {
-    setMovies((prevState) => {
-      const newState = [...prevState];
-      newState[index].rate = val;
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...newState]));
-      return newState;
-    });
+  const handleRate = useCallback((id, val, refElId) => {
+    setMovies((prev) =>
+      prev.map((m) => (m.id === id ? { ...m, rate: val } : m))
+    );
     if (val === 5) {
-      const e = document.querySelector(`#${ref}`);
+      const e = document.querySelector(`#${refElId}`);
       sparkles(e);
     }
-    rateMovie(val, index);
-  };
-
-  const handleCheck = (index, val) => {
-    setMovies((prevState) => {
-      const newState = [...prevState];
-      newState[index].watched = val;
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify([...newState]));
-      return newState;
-    });
-    checkMovie(val, index);
-  };
+    rateMovie(id, val);
+  }, []);
 
   useEffect(() => {
     const dark = localStorage.getItem("dark-mode");
@@ -125,20 +140,16 @@ function Home() {
     // eslint-disable-next-line
   }, [id]);
 
-  const ctxMenuClick = async (index, e) => {
+  const ctxMenuClick = async (id, e) => {
     if (e.key === "delete") {
-      console.log(`Deleting...`, index);
-      await deleteMovie(index);
-      setMovies((prevState) => {
-        const newState = [...prevState];
-        newState.splice(index, 1);
-        return newState;
-      });
+      console.log(`Deleting...`, id);
+      await deleteMovie(id);
     } else {
-      console.log(`outro...`, index);
+      console.log(`outro...`, id);
     }
   };
 
+  console.log(movies)
   return (
     <div className='oscar-body'>
       <Header
@@ -150,12 +161,12 @@ function Home() {
         search={search}
       />
       <div className='movie-list'>
-        {movies.map((movie, index) => (
+        {movies.filter(Boolean).map((movie, index) => (
           <Card
             showDrawer={showDrawer}
             data={movie}
             index={index}
-            key={`movies_${index}`}
+            key={movie?.id}
             handleCheck={handleCheck}
             handleCtx={ctxMenuClick}
             search={search}
