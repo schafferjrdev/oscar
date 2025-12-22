@@ -319,6 +319,10 @@
       display: flex;
       position: relative;
 
+      .modal-information{
+        background-color: #eee;
+      }
+      
       .banner-information {
         position: relative;
         padding: 30px 40px;
@@ -735,6 +739,13 @@ hr {
     width: 100%;
     overflow-y: scroll;
     scrollbar-gutter: stable both-edges;
+    padding-top: 65px;
+    .oscar-header{
+      position: fixed;
+      top:0;
+      z-index: 99;
+      width: 100vw;
+    }
   }
 
   /* Scrollbar styles for WebKit browsers */
@@ -920,4 +931,69 @@ a {
 
 .add-modal {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.search-mini-list-grid{
+  max-height: 300px;
+  overflow-y: scroll;
+  scrollbar-gutter: stable both-edges;
+
+  margin-top: 12px;
+  margin-bottom: 12px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+
+  .search-item-poster{
+    cursor: pointer;
+    transition: all ease-in-out 0.3s;
+    &:hover{
+      transform: scale(1.1);
+    }
+  }
+}
+
+.search-input-box{
+  margin-right: 16px;
+  color: #c79f27 !important;
+  background-color: transparent;
+  border: none;
+  
+
+.ant-input-wrapper{
+  border: none;
+  .ant-input-affix-wrapper{
+    background-color: #09111d;
+    border-top-left-radius: 30px !important;
+    border-bottom-left-radius: 30px !important;
+    input{
+      color: #c79f27 !important;
+      background-color: #09111d;
+      
+    }
+    &:focus,
+      &:focus-within {
+        border: 1px solid #c79f27 !important;
+      }
+      .ant-input-suffix{
+        svg {
+          fill:#c79f27
+        }
+      }
+  }
+}
+
+.ant-input-group-addon{
+  background-color: transparent;
+  .ant-btn {
+    background-color: #09111d;
+    border-top-right-radius: 30px !important;
+    border-bottom-right-radius: 30px !important;
+    svg{
+      fill:#eee
+    }
+  }
+
+}
+
 }

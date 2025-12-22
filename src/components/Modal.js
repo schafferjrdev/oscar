@@ -4,6 +4,7 @@ import { addMovie } from "../db/firebase";
 import { CloseOutlined } from "@ant-design/icons";
 import Down from "../icons/Down";
 import Icon from "./Icon";
+import RemoteSearch from './RemoteSearch'
 
 function Modal({ movies, setMovies, open, onClose }) {
   const [form] = Form.useForm();
@@ -36,6 +37,10 @@ function Modal({ movies, setMovies, open, onClose }) {
     console.log("Failed:", errorInfo);
   };
 
+  const handleSearch = (value) => {
+    form.setFieldValue('imdb', value)
+  };
+
   return (
     <AntdDrawer
       placement='bottom'
@@ -50,7 +55,7 @@ function Modal({ movies, setMovies, open, onClose }) {
             <Down onClick={() => closeForm()} alt='Icon Caret Down' />
           </div>
 
-          <div className='banner-information'>
+          <div className='banner-information modal-information'>
             <Form
               className='form-layout'
               name='basic'
@@ -65,6 +70,7 @@ function Modal({ movies, setMovies, open, onClose }) {
               onFinishFailed={onFinishFailed}
               autoComplete='off'
             >
+              <RemoteSearch handleSearch={handleSearch} />
               <Form.Item
                 name='imdb'
                 rules={[
@@ -178,13 +184,14 @@ function Modal({ movies, setMovies, open, onClose }) {
         <div className='movie-banner desktop'>
           <div className='banner-backdrop'>
             <div className='banner-content'>
-              <div className='banner-information'>
+              <div className='banner-information modal-information'>
                 <div className='float-buttons'>
                   <CloseOutlined
                     className='close-button round-button'
                     onClick={(e) => onClose(e)}
                   />
                 </div>
+                
                 <Form
                   className='form-layout'
                   name='basic'
@@ -199,6 +206,7 @@ function Modal({ movies, setMovies, open, onClose }) {
                   onFinishFailed={onFinishFailed}
                   autoComplete='off'
                 >
+                  <RemoteSearch handleSearch={handleSearch} />
                   <Form.Item
                     name='imdb'
                     rules={[
@@ -212,10 +220,13 @@ function Modal({ movies, setMovies, open, onClose }) {
                       },
                     ]}
                   >
+                    
                     <Input
                       className='input'
                       placeholder='ID do IMDB (ex: tt1684562)'
                     />
+
+                    
                   </Form.Item>
 
                   <h3 className='label-form'>Escolha onde ver</h3>
@@ -312,6 +323,7 @@ function Modal({ movies, setMovies, open, onClose }) {
                     Salvar filme
                   </Button>
                 </Form>
+                
               </div>
             </div>
           </div>
