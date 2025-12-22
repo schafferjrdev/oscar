@@ -279,4 +279,8 @@
     .new-card {
         width: 100%;
     }
+
+    .search-mini-list-grid{
+        grid-template-columns: repeat(4, 1fr); 
+    }
 }
