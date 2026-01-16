@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useRef, useState, useCallback } from "react";
-import { Input } from "antd";
+import { Input, Form } from "antd";
 import axios from "axios";
 
 const { Search } = Input;
@@ -7,7 +7,7 @@ const { Search } = Input;
 const TMDB_HEADERS = {
   headers: {
     accept: "application/json",
-    Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OWUyMWU1NWNjMTg0YzBmNTBkYjc4Njk1NzlhYWE3MCIsInN1YiI6IjY0NDAwZDc1MzdiM2E5MDQ0NTQzMmZhYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uB0qMp0SyCG2Lph-6EUJK4eopBlIurD7SdBw8bTb_Uw`, // ✅ melhor que hardcode
+    Authorization: `Bearer ${process.env.REACT_APP_TMDB_BEARER}`,
   },
 };
 
@@ -31,7 +31,7 @@ const getImdbIdFromTmdb = async (tmdbId) => {
   return res.data?.external_ids?.imdb_id ?? null;
 };
 
-const RemoteSearch = ({handleSearch}) => {
+const RemoteSearch = ({handleSearch, form}) => {
   const [query, setQuery] = useState("");
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -100,6 +100,7 @@ const RemoteSearch = ({handleSearch}) => {
   // key estável mesmo sem imdb_id (use tmdb id)
   const posters = useMemo(() => movies.filter((m) => m?.poster_path), [movies]);
 
+  const imdb = Form.useWatch('imdb', form);
 
   return (
     <>
@@ -117,7 +118,7 @@ const RemoteSearch = ({handleSearch}) => {
           <img
             onClick={() => {handleSearch(movie?.imdb_id)}}
             key={`search_movie_${movie.id}`} // ✅ estável
-            className="miniposter search-item-poster"
+            className={`miniposter search-item-poster${imdb===movie.imdb_id? ' search-item-poster-selected':''}`}
             alt={movie.title ?? "Movie Poster"}
             src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
             title={`${movie.title ?? ""}${movie.imdb_id ? ` • ${movie.imdb_id}` : ""}`}

@@ -115,6 +115,11 @@
                 color: #eee;
 
             }
+            &:disabled{
+                background-color: #666;
+                pointer-events: none;
+
+            }
         }
     }
 

@@ -1,17 +1,26 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import Icon from "./Icon";
 import Checkwatch from "./Checkwatch";
 import StarsDisplay from "./StarsDisplay";
 import { LoadingOutlined } from "@ant-design/icons";
 import { Dropdown } from "antd";
+import { useOmdb } from "../hooks/useOmdb";
+import { useTmdb } from "../hooks/useTmdb";
 
 function Card({ data, showDrawer, index, handleCheck, search, handleCtx }) {
-  const [omdb, setOmdb] = useState(null);
-  const [tmdb, setTmdb] = useState(null);
   const { id } = useParams();
   const navigate = useNavigate();
+
+  const uuid = data?.movie?.imdb;
+
+  const { data: omdb, error: omdbError, isLoading: omdbLoading } = useOmdb(uuid);
+  const { data: tmdb, error: tmdbError, isLoading: tmdbLoading } = useTmdb(uuid);
+
+  useEffect(() => {
+    if (omdbError) console.error("OMDb error:", omdbError);
+    if (tmdbError) console.error("TMDb error:", tmdbError);
+  }, [omdbError, tmdbError]);
 
   const regex = new RegExp(search, "i"); // 'i' makes the search case-insensitive
   const hidden = ![
@@ -30,73 +39,38 @@ function Card({ data, showDrawer, index, handleCheck, search, handleCtx }) {
     data?.platform?.map((e) => e?.name).join(",") || "",
   ].some((str) => regex.test(str));
 
-  const getOMDB = async (uuid) => {
-    const imdb = uuid?.match(/tt\d+/);
-    axios
-      .get(`https://www.omdbapi.com/?apikey=81750ce2&i=${imdb}`)
-      .then(function (response) {
-        // handle success
-        setOmdb(response.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.error(error);
-      });
-  };
-
-  const getTMDB = async (uuid) => {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OWUyMWU1NWNjMTg0YzBmNTBkYjc4Njk1NzlhYWE3MCIsInN1YiI6IjY0NDAwZDc1MzdiM2E5MDQ0NTQzMmZhYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uB0qMp0SyCG2Lph-6EUJK4eopBlIurD7SdBw8bTb_Uw",
-      },
-    };
-    const imdb = uuid?.match(/tt\d+/);
-
-    axios
-      .get(
-        `https://api.themoviedb.org/3/find/${imdb}?external_source=imdb_id&language=pt-BR`,
-        options
-      )
-      .then(function (response) {
-        // handle success
-        setTmdb(response.data?.movie_results[0]);
-      })
-      .catch(function (error) {
-        // handle error
-        console.error(error);
-      });
-  };
-
-useEffect(() => {
-  if (!data?.movie?.imdb) return;
-  getOMDB(data?.movie?.imdb);
-  getTMDB(data?.movie?.imdb);
-}, [data?.movie?.imdb]);
-
   const handleShowDrawer = () => {
-    navigate(`/${omdb?.imdbID}`);
+    // se omdb ainda não chegou, você pode navegar pelo uuid mesmo (imdbId dentro dele)
+    // mas se você quer garantir imdbID certo, usa omdb?.imdbID quando existir
+    if (omdb?.imdbID) navigate(`/${omdb.imdbID}`);
+
     showDrawer({
-      index: index,
-      data: data,
-      tmdb: tmdb,
-      omdb: omdb,
+      index,
+      data,
+      tmdb: tmdb ?? {},
+      omdb: omdb ?? {},
     });
   };
 
-  useEffect(() => {
-    if (data?.movie.imdb?.includes(id)) {
-      showDrawer({
-        index: index,
-        data: data,
-        tmdb: tmdb,
-        omdb: omdb,
-      });
-    }
+useEffect(() => {
+    if (!id) return;
+
+    const matchesThisCard = typeof uuid === "string" && uuid.includes(id);
+    if (!matchesThisCard) return;
+
+    // só abre quando pelo menos um dos dois já chegou
+    if (!omdb && !tmdb) return;
+
+    showDrawer({
+      index,
+      data,
+      tmdb: tmdb ?? {},
+      omdb: omdb ?? {},
+    });
     // eslint-disable-next-line
-  }, [id, data, tmdb, omdb]);
+  }, [id, uuid, index, data, omdb, tmdb]);
+
+  const isLoading = omdbLoading || tmdbLoading;
 
   return (
     <Dropdown
@@ -122,6 +96,8 @@ useEffect(() => {
               <img
                 className='poster-image'
                 alt='movie_poster'
+                loading="lazy"
+                decoding="async"
                 src={
                   !!tmdb?.poster_path
                     ? `https://image.tmdb.org/t/p/w500${tmdb?.poster_path}`
@@ -138,7 +114,9 @@ useEffect(() => {
               />
               <StarsDisplay stars={data?.rate} className='stars-poster' />
             </div>
-          ) : (
+          ) : isLoading ? (
+            <LoadingOutlined />)
+            : (
             <LoadingOutlined />
           )}
         </div>

@@ -1,12 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
+import useSWR from "swr";
 import { useNavigate, Routes, Route, useParams } from "react-router-dom";
 import { database, checkMovie, rateMovie, deleteMovie } from "../db/firebase";
-import {
-  ref,
-  onChildAdded,
-  onChildChanged,
-  onChildRemoved,
-} from "firebase/database";
+import { ref, onValue } from "firebase/database";
 import Header from "./Header";
 import Card from "./Card";
 import Drawer from "./Drawer";
@@ -15,7 +11,7 @@ import Settings from "./Settings";
 import { sparkles } from "../utils/functions";
 
 function Home() {
-  const [movies, setMovies] = useState([]);
+  const { data: movies = [], mutate } = useSWR("movies", null, { fallbackData: [] });
   const [darkMode, setDarkMode] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -23,53 +19,57 @@ function Home() {
 useEffect(() => {
   const moviesRef = ref(database, "movies");
 
-  const unsubAdd = onChildAdded(moviesRef, (snap) => {
-    const incoming = { id: snap.key, ...snap.val() };
+  const unsub = onValue(moviesRef, (snap) => {
+    const val = snap.val() || {};
+    const list = Object.entries(val).map(([id, data]) => ({ id, ...data }));
 
-    setMovies((prev) => {
-      // ✅ evita duplicar em hot reload/reconexão
-      if (prev.some((m) => m.id === incoming.id)) return prev;
-      return [...prev, incoming];
-    });
+    mutate(list, { revalidate: false }); // SWR vira só o store
   });
 
-  const unsubChange = onChildChanged(moviesRef, (snap) => {
-    const incoming = { id: snap.key, ...snap.val() };
+  return () => unsub();
+}, [mutate]);
 
-    setMovies((prev) =>
-      prev.map((m) => (m.id === incoming.id ? { ...m, ...incoming } : m))
+const handleCheck = useCallback(
+  async (id, val) => {
+    await mutate(
+      async (current = []) => {
+        // chama backend/firebase
+        await checkMovie(id, val);
+        return current.map((m) => (m.id === id ? { ...m, watched: val } : m));
+      },
+      {
+        optimisticData: (current = []) =>
+          current.map((m) => (m.id === id ? { ...m, watched: val } : m)),
+        rollbackOnError: true,
+        revalidate: false, // como você já tem realtime, não precisa "refetch"
+      }
     );
-  });
+  },
+  [mutate]
+);
 
-  const unsubRemove = onChildRemoved(moviesRef, (snap) => {
-    const id = snap.key;
-    setMovies((prev) => prev.filter((m) => m.id !== id));
-  });
-
-  return () => {
-    unsubAdd();
-    unsubChange();
-    unsubRemove();
-  };
-}, []);
-
-  const handleCheck = useCallback((id, val) => {
-    setMovies((prev) =>
-      prev.map((m) => (m.id === id ? { ...m, watched: val } : m))
-    );
-    checkMovie(id,val);
-  }, []);
-
-  const handleRate = useCallback((id, val, refElId) => {
-    setMovies((prev) =>
-      prev.map((m) => (m.id === id ? { ...m, rate: val } : m))
-    );
+const handleRate = useCallback(
+  async (id, val, refElId) => {
     if (val === 5) {
       const e = document.querySelector(`#${refElId}`);
       sparkles(e);
     }
-    rateMovie(id, val);
-  }, []);
+
+    await mutate(
+      async (current = []) => {
+        await rateMovie(id, val);
+        return current.map((m) => (m.id === id ? { ...m, rate: val } : m));
+      },
+      {
+        optimisticData: (current = []) =>
+          current.map((m) => (m.id === id ? { ...m, rate: val } : m)),
+        rollbackOnError: true,
+        revalidate: false,
+      }
+    );
+  },
+  [mutate]
+);
 
   useEffect(() => {
     const dark = localStorage.getItem("dark-mode");
@@ -149,7 +149,6 @@ useEffect(() => {
     }
   };
 
-  console.log(movies)
   return (
     <div className='oscar-body'>
       <Header
@@ -186,7 +185,6 @@ useEffect(() => {
         onClose={closeModal}
         handleAdd={handleRate}
         movies={movies}
-        setMovies={setMovies}
       />
       <Settings
         open={settingsOpen}

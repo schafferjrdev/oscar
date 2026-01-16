@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useMemo, useCallback } from "react";
-import axios from "axios";
+import React, {  useMemo } from "react";
+import { useSWRConfig, unstable_serialize } from "swr";
 import { Drawer, Switch, Tag, Button } from "antd";
 import { useNavigate } from "react-router-dom";
 import { StarFilled } from "@ant-design/icons";
@@ -47,75 +47,33 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
     [watched]
   );
 
-  const [fiveStars, setFiveStars] = useState([]);
-  const [timespent, setTimespent] = useState({
-    days: 0,
-    hours: 0,
-    minutes: 0,
-  });
+  const { cache } = useSWRConfig();
 
-  const getTMDB = useCallback(async (uuid) => {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OWUyMWU1NWNjMTg0YzBmNTBkYjc4Njk1NzlhYWE3MCIsInN1YiI6IjY0NDAwZDc1MzdiM2E5MDQ0NTQzMmZhYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uB0qMp0SyCG2Lph-6EUJK4eopBlIurD7SdBw8bTb_Uw",
-      },
-    };
-    try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/find/${uuid}?external_source=imdb_id&language=pt-BR`,
-        options
-      );
-      return response.data?.movie_results?.[0] ?? null;
-    } catch (error) {
-      console.error(`Erro ao buscar TMDB para o ID ${uuid}:`, error.message);
-      throw error;
-    }
-  }, []);
+const fiveStars = useMemo(() => {
+  return five_stars
+    .map((imdbId) => {
+      const entry = cache.get(unstable_serialize(["tmdb", imdbId, "pt-BR"]));
+      return entry?.data ?? null; // ✅ pega o data do SWR
+    })
+    .filter(Boolean);
+}, [five_stars, cache]);
 
-  const getOMDB = useCallback(async (uuid) => {
-    try {
-      const response = await axios.get(
-        `https://www.omdbapi.com/?apikey=81750ce2&i=${uuid}`
-      );
-      return response.data;
-    } catch (error) {
-      console.error(`Erro ao buscar OMDB para o ID ${uuid}:`, error.message);
-      throw error;
-    }
-  }, []);
+const watchedOmdb = useMemo(() => {
+  return runtimes
+    .map((imdbId) => {
+      const entry = cache.get(unstable_serialize(["omdb", imdbId]));
+      return entry?.data ?? null; // ✅ pega o data do SWR
+    })
+    .filter(Boolean);
+}, [runtimes, cache]);
 
-  const fetchAllData = useCallback(async () => {
-    try {
-      // posters dos 5 estrelas
-      const posters = five_stars.length
-        ? await Promise.all(five_stars.map((id) => getTMDB(id)))
-        : [];
+const timespent = useMemo(() => {
+  const total = watchedOmdb
+    .map((e) => parseInt((e?.Runtime ?? "0").split(" ")[0], 10) || 0)
+    .reduce((acc, el) => acc + el, 0);
 
-      // runtime do que foi assistido
-      const time = runtimes.length
-        ? await Promise.all(runtimes.map((id) => getOMDB(id)))
-        : [];
-
-      const all_time = time.length
-        ? time
-            .map((e) => parseInt((e?.Runtime ?? "0").split(" ")[0], 10) || 0)
-            .reduce((acc, el) => acc + el, 0)
-        : 0;
-
-      setTimespent(convertMinutesToTimeObject(all_time));
-      setFiveStars(posters.filter(Boolean));
-    } catch (error) {
-      console.error("Erro ao buscar dados:", error);
-    }
-  }, [five_stars, runtimes, getTMDB, getOMDB]);
-
-  useEffect(() => {
-    fetchAllData();
-  }, [fetchAllData]);
-
+  return convertMinutesToTimeObject(total);
+}, [watchedOmdb]);
   return (
     <Drawer
       className='settings-drawer'

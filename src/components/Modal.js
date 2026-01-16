@@ -6,7 +6,7 @@ import Down from "../icons/Down";
 import Icon from "./Icon";
 import RemoteSearch from './RemoteSearch'
 
-function Modal({ movies, setMovies, open, onClose }) {
+function Modal({ movies, open, onClose }) {
   const [form] = Form.useForm();
 
   const closeForm = () => {
@@ -41,6 +41,8 @@ function Modal({ movies, setMovies, open, onClose }) {
     form.setFieldValue('imdb', value)
   };
 
+  const imdb = Form.useWatch('imdb', form);
+
   return (
     <AntdDrawer
       placement='bottom'
@@ -70,7 +72,7 @@ function Modal({ movies, setMovies, open, onClose }) {
               onFinishFailed={onFinishFailed}
               autoComplete='off'
             >
-              <RemoteSearch handleSearch={handleSearch} />
+              <RemoteSearch form={form} handleSearch={handleSearch} />
               <Form.Item
                 name='imdb'
                 rules={[
@@ -86,7 +88,7 @@ function Modal({ movies, setMovies, open, onClose }) {
               >
                 <Input
                   className='input'
-                  placeholder='ID do IMDB (ex: tt1684562)'
+                  placeholder='ou coloque o ID do IMDB (ex: tt1684562)'
                 />
               </Form.Item>
 
@@ -163,6 +165,7 @@ function Modal({ movies, setMovies, open, onClose }) {
                 type='ghost'
                 key='save'
                 className='form-button'
+                disabled={!imdb}
                 onClick={() => {
                   form
                     .validateFields()
@@ -223,7 +226,7 @@ function Modal({ movies, setMovies, open, onClose }) {
                     
                     <Input
                       className='input'
-                      placeholder='ID do IMDB (ex: tt1684562)'
+                      placeholder='ou coloque o ID do IMDB (ex: tt1684562)'
                     />
 
                     
@@ -308,6 +311,7 @@ function Modal({ movies, setMovies, open, onClose }) {
                     type='ghost'
                     key='save'
                     className='form-button'
+                    disabled={!imdb}
                     onClick={() => {
                       form
                         .validateFields()
