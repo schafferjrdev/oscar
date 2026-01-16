@@ -1,6 +1,13 @@
 {
   "short_name": "Filmin",
   "name": "Lista de Filmes",
+  "id": "/",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "theme_color": "#c79f27",
+  "background_color": "#c79f27",
+  "orientation": "portrait",
   "icons": [
     {
       "src": "favicon.ico",
@@ -8,7 +15,7 @@
       "type": "image/x-icon"
     },
     {
-      "src": "android-chrome-192x192",
+      "src": "android-chrome-192x192.png",
       "type": "image/png",
       "sizes": "192x192"
     },
@@ -17,10 +24,5 @@
       "type": "image/png",
       "sizes": "512x512"
     }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#c79f27",
-  "background_color": "#0e0e0e",
-  "orientation": "portrait"
+  ]
 }
