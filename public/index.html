@@ -50,14 +50,10 @@
     // Check compatibility for the browser we're running this in
     if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => {
-      navigator.serviceWorker
-        .register("/pwabuilder-sw.js", { scope: "/" })
-        .then((reg) => {
-          console.info("[PWA] SW registered:", reg.scope);
-        })
-        .catch((err) => {
-          console.error("[PWA] SW registration failed:", err);
-        });
+      navigator.serviceWorker.register("/pwabuilder-sw.js", {
+        scope: "/",
+        updateViaCache: "none"
+      });
     });
   }
 
