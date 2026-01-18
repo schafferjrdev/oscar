@@ -1,86 +1,76 @@
-// This is the service worker with the Cache-first network
+/* eslint-disable no-restricted-globals */
+// Better SW for SPA: network-first for HTML, cache for assets
+const VERSION = "v6"; // <-- incremente a cada deploy importante
+const CACHE = `filmin-${VERSION}`;
 
-const CACHE = "pwabuilder-precache";
-const precacheFiles = [
-  /* Add an array of files to precache for your app */
-  "./index.html",
-];
-
-self.addEventListener("install", function (event) {
-  console.info("[PWA Builder] Install Event processing");
-
-  console.info("[PWA Builder] Skip waiting on install");
+self.addEventListener("install", (event) => {
   self.skipWaiting();
-
-  event.waitUntil(
-    caches.open(CACHE).then(function (cache) {
-      console.info("[PWA Builder] Caching pages during install");
-      return cache.addAll(precacheFiles);
-    })
-  );
+  // não precisa precachear index.html aqui
 });
 
-// Allow sw to control of current page
-self.addEventListener("activate", function (event) {
-  console.info("[PWA Builder] Claiming clients for current page");
-  event.waitUntil(self.clients.claim());
+self.addEventListener("activate", (event) => {
+  event.waitUntil((async () => {
+    // limpa caches antigos
+    const keys = await caches.keys();
+    await Promise.all(keys.map((k) => (k !== CACHE ? caches.delete(k) : null)));
+
+    await self.clients.claim();
+  })());
 });
 
-// If any fetch fails, it will look for the request in the cache and serve it from there first
-self.addEventListener("fetch", function (event) {
-  if (event.request.method !== "GET") return;
+self.addEventListener("fetch", (event) => {
+  const req = event.request;
 
-  event.respondWith(
-    fromCache(event.request).then(
-      function (response) {
-        // The response was found in the cache so we responde with it and update the entry
+  if (req.method !== "GET") return;
 
-        // This is where we call the server to get the newest version of the
-        // file to use the next time we show view
-        event.waitUntil(
-          fetch(event.request).then(function (response) {
-            return updateCache(event.request, response);
-          })
-        );
+  const url = new URL(req.url);
 
-        return response;
-      },
-      function () {
-        // The response was not found in the cache so we look for it on the server
-        return fetch(event.request)
-          .then(function (response) {
-            // If request was success, add or update it in the cache
-            event.waitUntil(updateCache(event.request, response.clone()));
+  // ✅ 1) Network-first para navegação/HTML (SPA)
+  // isso impede ficar preso em index.html velho
+  if (req.mode === "navigate" || (req.headers.get("accept") || "").includes("text/html")) {
+    event.respondWith(networkFirst(req));
+    return;
+  }
 
-            return response;
-          })
-          .catch(function (error) {
-            console.info(
-              "[PWA Builder] Network request failed and no cache." + error
-            );
-          });
-      }
-    )
-  );
+  // ✅ 2) Não cachear Firebase / APIs externas (evita dados fantasmas)
+  const isApi =
+    url.hostname.includes("firebaseio.com") ||
+    url.hostname.includes("googleapis.com") ||
+    url.hostname.includes("omdbapi.com") ||
+    url.hostname.includes("themoviedb.org") ||
+    url.pathname.includes("/__/");
+
+  if (isApi) {
+    event.respondWith(fetch(req));
+    return;
+  }
+
+  // ✅ 3) Assets (js/css/img/fonts): cache-first com atualização em background
+  event.respondWith(staleWhileRevalidate(req));
 });
 
-function fromCache(request) {
-  // Check to see if you have it in the cache
-  // Return response
-  // If not in the cache, then return
-  return caches.open(CACHE).then(function (cache) {
-    return cache.match(request).then(function (matching) {
-      if (!matching || matching.status === 404) {
-        return Promise.reject("no-match");
-      }
-
-      return matching;
-    });
-  });
+async function networkFirst(req) {
+  const cache = await caches.open(CACHE);
+  try {
+    const fresh = await fetch(req, { cache: "no-store" });
+    cache.put(req, fresh.clone());
+    return fresh;
+  } catch (e) {
+    const cached = await cache.match(req);
+    return cached || Response.error();
+  }
 }
 
-function updateCache(request, response) {
-  return caches.open(CACHE).then(function (cache) {
-    return cache.put(request, response);
-  });
+async function staleWhileRevalidate(req) {
+  const cache = await caches.open(CACHE);
+  const cached = await cache.match(req);
+
+  const fetchPromise = fetch(req)
+    .then((fresh) => {
+      cache.put(req, fresh.clone());
+      return fresh;
+    })
+    .catch(() => null);
+
+  return cached || fetchPromise || Response.error();
 }
