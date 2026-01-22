@@ -655,6 +655,46 @@ hr {
   }
 }
 
+.lucky-button {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  justify-content: space-around;
+  align-items: center;
+  border: none;
+}
+
+.spotify-button {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: space-around;
+  align-items: center;
+  border: none;
+  span{
+    color: #b4912f;
+    font-size: 1.5rem;
+  }
+  img{
+    max-width: 300px;
+  }
+}
+
+.form-button {
+  color: #09111d;
+  border: 1px solid #09111d;
+  align-self: flex-end;
+
+  &:hover,
+  &:focus,
+  &:focus-within {
+    background-color: #c79f27;
+    border: 1px solid #c79f27;
+    color: #eee;
+
+  }
+}
+
 .dark-mode {
   .ant-drawer-content {
     background-color: #0f1c2f;
@@ -970,7 +1010,7 @@ hr {
     font-weight: 700;
     cursor: pointer;
     width: 100%;
-    height: 55px;
+    height: fit-content;
     padding: 0 16px;
     display: flex;
     justify-content: space-between;
@@ -981,6 +1021,7 @@ hr {
       flex-direction: column;
       padding: 0;
       line-height: 1.2rem;
+      margin: 0;
     }
 
     .drawer-main {

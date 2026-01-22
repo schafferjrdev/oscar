@@ -1,0 +1,806 @@
+{
+    "movies": [
+        {
+            "category": [
+                "BestPicture",
+                "InternationalFeature",
+                "BestActor",
+                "Casting"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt27847051/",
+                "name": "O Agente Secreto"
+            },
+            "nominees": [
+                "Wagner Moura - Indicado a Melhor Ator"
+            ],
+            "platform": [
+                {
+                    "name": "ingresso",
+                    "url": "https://www.ingresso.com/filme/o-agente-secreto"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "BestDirector",
+                "BestActor",
+                "SupportingActor",
+                "SupportingActress",
+                "Casting",
+                "Cinematography",
+                "CostumeDesign",
+                "FilmEditing",
+                "Sound",
+                "ProductionDesign",
+                "OriginalScore",
+                "OriginalScreenplay",
+                "VisualEffects",
+                "MakeupandHairstyling",
+                "OriginalSong"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt31193180/",
+                "name": "Pecadores"
+            },
+            "nominees": [
+                "Michael B. Jordan - Indicado a Melhor Ator",
+                "Delroy Lindo - Indicado a Melhor Ator Coadjuvante",
+                "Wunmi Mosaku - Indicada a Melhor Atriz Coadjuvante",
+                "Ryan Coogler - Indicado a Melhor Direção"
+            ],
+            "platform": [
+                {
+                    "name": "hbo",
+                    "url": "https://play.hbomax.com/video/watch/d43bd66a-a83c-40eb-890f-5b14eb9ef7c9/468e8e0c-a6d2-45c1-a327-465e670ce186"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "BestDirector",
+                "BestActor",
+                "SupportingActor",
+                "SupportingActress",
+                "Casting",
+                "Cinematography",
+                "FilmEditing",
+                "Sound",
+                "ProductionDesign",
+                "OriginalScore",
+                "AdaptedScreenplay"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt30144839/",
+                "name": "Uma Batalha Após a Outra"
+            },
+            "nominees": [
+                "Leonardo DiCaprio - Indicado a Melhor Ator",
+                "Benicio Del Toro - Indicado a Melhor Ator Coadjuvante",
+                "Sean Penn - Indicado a Melhor Ator Coadjuvante",
+                "Teyana Taylor - Indicada a Melhor Atriz Coadjuvante",
+                "Paul Thomas Anderson - Indicado a Melhor Direção"
+            ],
+            "platform": [
+                {
+                    "name": "hbo",
+                    "url": "https://play.hbomax.com/video/watch/d99a3348-adb5-4206-8989-20c574cbf038/e11906cd-ace6-4365-aeb5-88396d53610b"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "SupportingActor",
+                "Cinematography",
+                "CostumeDesign",
+                "Sound",
+                "ProductionDesign",
+                "OriginalScore",
+                "AdaptedScreenplay",
+                "MakeupandHairstyling"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt1312221/",
+                "name": "Frankenstein"
+            },
+            "nominees": [
+                "Jacob Elordi - Indicado a Melhor Ator Coadjuvante"
+            ],
+            "platform": [
+                {
+                    "name": "netflix",
+                    "url": "https://www.netflix.com/watch/81507921"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "BestDirector",
+                "BestActress",
+                "SupportingActor",
+                "SupportingActress",
+                "FilmEditing",
+                "OriginalScreenplay",
+                "InternationalFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt27714581/",
+                "name": "Valor Sentimental"
+            },
+            "nominees": [
+                "Renate Reinsve - Indicada a Melhor Atriz",
+                "Stellan Skarsgård - Indicado a Melhor Ator Coadjuvante",
+                "Elle Fanning - Indicada a Melhor Atriz Coadjuvante",
+                "Inga Ibsdotter Lilleaas - Indicada a Melhor Atriz Coadjuvante",
+                "Joachim Trier - Indicado a Melhor Direção"
+            ],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "BestDirector",
+                "BestActor",
+                "Casting",
+                "Cinematography",
+                "CostumeDesign",
+                "FilmEditing",
+                "ProductionDesign",
+                "OriginalScreenplay"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt32916440/",
+                "name": "Marty Supreme"
+            },
+            "nominees": [
+                "Timothée Chalamet - Indicado a Melhor Ator",
+                "Josh Safdie - Indicado a Melhor Direção"
+            ],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "BestDirector",
+                "BestActress",
+                "Casting",
+                "CostumeDesign",
+                "ProductionDesign",
+                "OriginalScore",
+                "AdaptedScreenplay"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt14905854/",
+                "name": "Hamnet"
+            },
+            "nominees": [
+                "Jessie Buckley - Indicada a Melhor Atriz",
+                "Chloé Zhao - Indicada a Melhor Direção"
+            ],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "BestActress",
+                "OriginalScore",
+                "AdaptedScreenplay"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt12300742/",
+                "name": "Bugonia"
+            },
+            "nominees": [
+                "Emma Stone - Indicada a Melhor Atriz"
+            ],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "FilmEditing",
+                "Sound",
+                "VisualEffects"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt16311594/",
+                "name": "F1"
+            },
+            "nominees": [],
+            "platform": [
+                {
+                    "name": "apple",
+                    "url": "https://tv.apple.com/br/movie/f1---o-filme/umc.cmc.3t6dvnnr87zwd4wmvpdx5came?action=play"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestPicture",
+                "Cinematography",
+                "AdaptedScreenplay",
+                "OriginalSong"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt29768334/",
+                "name": "Sonhos de Trem"
+            },
+            "nominees": [],
+            "platform": [
+                {
+                    "name": "netflix",
+                    "url": "https://www.netflix.com/br/title/82020378"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestActor",
+                "OriginalScreenplay"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt32536315/",
+                "name": "Blue Moon"
+            },
+            "nominees": [
+                "Ethan Hawke - Indicado a Melhor Ator"
+            ],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestActress"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt30343021/",
+                "name": "Song Sung Blue"
+            },
+            "nominees": [
+                "Kate Hudson - Indicada a Melhor Atriz"
+            ],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "BestActress"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt18382850/",
+                "name": "Se Eu Tivesse Pernas Eu Te Chutaria"
+            },
+            "nominees": [
+                "Rose Byrne - Indicada a Melhor Atriz"
+            ],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "SupportingActress"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt26581740/",
+                "name": "A Hora do Mal"
+            },
+            "nominees": [
+                "Amy Madigan - Indicada a Melhor Atriz Coadjuvante"
+            ],
+            "platform": [
+                {
+                    "name": "hbo",
+                    "url": "https://play.hbomax.com/video/watch/5b6aa3a2-93cd-4bbc-baf8-8689fb9d6224/2101774f-1971-4c9c-aea4-c0f713b63ac4"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedFeature",
+                "OriginalSong"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt14205554/",
+                "name": "Guerreiras do K-Pop"
+            },
+            "nominees": [],
+            "platform": [
+                {
+                    "name": "netflix",
+                    "url": "https://www.netflix.com/watch/81498621"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt4900148/",
+                "name": "Elio"
+            },
+            "nominees": [],
+            "platform": [
+                {
+                    "name": "disney",
+                    "url": "https://www.disneyplus.com/pt-br/play/367ee1b6-1a50-413a-96f6-655175166f38"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt26443597/",
+                "name": "Zootopia 2"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt14883538/",
+                "name": "Arco"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt29313285/",
+                "name": "A Pequena Amélie"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "Sound",
+                "InternationalFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt32298285/",
+                "name": "Sirât"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "InternationalFeature",
+                "OriginalScreenplay"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt36491653/",
+                "name": "Foi Apenas um Acidente"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "InternationalFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt36943034/",
+                "name": "The Voice of Hind Rajab"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "VisualEffects"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt21103218/",
+                "name": "O Ônibus Perdido"
+            },
+            "nominees": [],
+            "platform": [
+                {
+                    "name": "apple",
+                    "url": "https://tv.apple.com/br/movie/o-onibus-perdido/umc.cmc.4p7gv4trt1rt0kuiwzmitibiv?action=play"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "CostumeDesign",
+                "VisualEffects"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt1757678/",
+                "name": "Avatar - Fogo e Cinzas"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "VisualEffects"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt31036941/",
+                "name": "Jurassic World: Recomeço"
+            },
+            "nominees": [],
+            "platform": [
+                {
+                    "name": "prime",
+                    "url": "https://www.primevideo.com/region/na/detail/0LDEOBW5YKKQBSLD80CPD0J6UY"
+                }
+            ],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt34962891/",
+                "name": "The Perfect Neighbor"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt35307139/",
+                "name": "The Alabama Solution"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt34966013/",
+                "name": "Come See Me In The Good Light"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt10196414/",
+                "name": "Rompendo Rochas"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryFeature"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt34965515/",
+                "name": "Mr. Nobody Against Putin"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt37798645/",
+                "name": "All the Empty Rooms"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt35515733/",
+                "name": "Armado com uma Câmera - Vida e Morte de Brent Renaud"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt38691874/",
+                "name": "Children No More: Were and are Gone"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt32205767/",
+                "name": "Perfectly a Strangeness"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "DocumentaryShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt34205548/",
+                "name": "O Diabo Não Tem Descanso"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt37645479/",
+                "name": "Butterfly"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt36454323/",
+                "name": "Forevergreen"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt33019507/",
+                "name": "Retirement Plan"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt36956820/",
+                "name": "The Girl Who Cried Pearls"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "AnimatedShort"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt35676079/",
+                "name": "The Three Sisters"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "MakeupandHairstyling"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt11214558/",
+                "name": "The Smashing Machine"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "MakeupandHairstyling"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt35231039/",
+                "name": "Kokuho"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "OriginalSong"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt14588692/",
+                "name": "Diane Warren - Relentless"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "OriginalSong"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt3595454/",
+                "name": "Viva Verdi!"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "ShortMovie"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/title/tt35489516/",
+                "name": "A Friend of Dorothy"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "ShortMovie"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt39232815/",
+                "name": "Butcher's Stain"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "ShortMovie"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt31171760/",
+                "name": "Jane Austen's Period Drama"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "ShortMovie"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt33508491/",
+                "name": "The Singers"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "ShortMovie"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt33365259/",
+                "name": "Two People Exchanging Saliva"
+            },
+            "nominees": [],
+            "platform": [],
+            "rate": 0,
+            "watched": false
+        }
+    ]
+}

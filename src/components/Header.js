@@ -28,7 +28,7 @@ function Header({ movies, openSettings, handleSearch, handleFocus, search }) {
     }
 
     const fernandaText =
-      "Cê viu a Fernanda Torres? TO-TAL-MEN-TE IN-DI-CA-DA, veja também os filmes em ";
+      "Veja os filmes em ";
     const url = "https://oscars.netlify.app\n\n";
 
     if (detectMob()) {

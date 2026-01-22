@@ -93,7 +93,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
               {data?.platform?.length > 0 ? (
                 <>
                   <hr />
-                  <p className='banner-topic'>ASSISTA AGORA</p>
+                  <p className='banner-topic'>ASSISTA EM:</p>
                   <div>
                     {data?.platform.map((p) => (
                       <Icon
@@ -234,7 +234,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                   {data?.platform?.length > 0 ? (
                     <>
                       <hr />
-                      <p className='banner-topic'>ASSISTA AGORA</p>
+                      <p className='banner-topic'>ASSISTA EM:</p>
                       <div>
                         {data?.platform.map((p) => (
                           <Icon type={p.name} url={p.url} debut={p?.debut} />

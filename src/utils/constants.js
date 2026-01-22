@@ -1,4 +1,4 @@
-export const OSCAR_DATE = new Date("03/02/2025 21:00");
+export const OSCAR_DATE = new Date("03/15/2026 21:00");
 
 export const CATEGORIES = {
   BestPicture: {
@@ -93,6 +93,10 @@ export const CATEGORIES = {
     title: "Roteiro Original",
     color: "geekblue",
   },
+  Casting: {
+    title: "Melhor Elenco",
+    color: "gold",
+  },
 };
 
 export const NOMINEES = [
@@ -120,12 +124,14 @@ export const all_categories = [
   "BestActress",
   "SupportingActor",
   "SupportingActress",
+  "Casting",
   "Cinematography",
   "CostumeDesign",
   "FilmEditing",
   "Sound",
   "ProductionDesign",
   "OriginalScore",
+  "OriginalSong",
   "AdaptedScreenplay",
   "OriginalScreenplay",
   "AnimatedFeature",
@@ -135,8 +141,9 @@ export const all_categories = [
   "InternationalFeature",
   "VisualEffects",
   "ShortMovie",
+  "MakeupandHairstyling"
 ];
 
 export const minilist_categories = ["BestPicture", "AnimatedFeature"];
 
-export const LOCAL_STORAGE_KEY = "oscar-data-2025";
+export const LOCAL_STORAGE_KEY = "oscar-data-2026";

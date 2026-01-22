@@ -14,15 +14,23 @@ function Card({ data, showDrawer, index, handleCheck, search }) {
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const visto = data?.watched === true ? 'visto': '';
   const regex = new RegExp(search, "i"); // 'i' makes the search case-insensitive
-  const hidden = ![
+    const hidden = ![
     omdb?.Actors || "",
     omdb?.Writer || "",
     omdb?.Director || "",
+    omdb?.Plot || "",
+    omdb?.imdbID || "",
+    omdb?.Year || "",
     omdb?.Title || "",
+    tmdb?.title || "",
+    tmdb?.overview || "",
     tmdb?.original_title || "",
     data?.movie?.name || "",
     data?.category?.join(",") || "",
+    data?.nominees?.join(",") || "",
+    visto,
     data?.platform?.map((e) => e?.name).join(",") || "",
   ].some((str) => regex.test(str));
 
@@ -84,7 +92,7 @@ function Card({ data, showDrawer, index, handleCheck, search }) {
   };
 
   useEffect(() => {
-    if (data?.movie.imdb.includes(id)) {
+    if (data?.movie.imdb?.includes(id)) {
       showDrawer({
         index: index,
         data: data,

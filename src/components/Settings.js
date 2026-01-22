@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 import "./App.scss";
-import { Drawer, Switch, Tag } from "antd";
+import { Drawer, Switch, Tag, Button } from "antd";
 import Countdown from "react-countdown";
 import { StarFilled } from "@ant-design/icons";
 import oscars_logo from "../icons/oscars.svg";
 import Down from "../icons/Down";
+import spotify from "../icons/spotify_2026.png";
 import { OSCAR_DATE } from "../utils/constants";
 import {
   pluralize,
@@ -18,6 +20,9 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
   const watched = info.filter((e) => e.watched);
   const besties_movies = info.filter((e) => e.category.includes("BestPicture"));
   const besties_watched = besties_movies.filter((e) => e.watched);
+  const navigate = useNavigate();
+
+  const not_watched = useMemo(() => info.filter((e) => !e.watched), [info]);
 
   const note = info.filter((e) => e.rate > 0).map((e) => e.rate);
   const average =
@@ -256,6 +261,32 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
             </>
           )}
         </div>
+        <div className='settings-box spotify-button'>
+          <a  
+            href='https://open.spotify.com/playlist/7dqeBKHaCghOQ0WWSf2vMo?si=8a34c075b6fa41c5' 
+            rel="noreferrer" 
+            target="_blank"
+          >
+            <img alt='Playlist do Spotify' src={spotify}/>
+          </a> 
+        </div>  
+        <div className='settings-box lucky-button'>
+          <Button
+            className='form-button'
+            onClick={() => {
+              if (not_watched.length === 0) return;
+
+              const sorteado = not_watched[Math.floor(Math.random() * not_watched.length)];
+              const imdb = sorteado?.movie?.imdb?.match(/tt\d+/)?.[0];
+              if (!imdb) return;
+
+              onClose();
+              navigate(`/${imdb}`);
+            }}
+          >
+            Estou com sorte? :D
+          </Button>
+        </div>        
       </div>
     </Drawer>
   );
