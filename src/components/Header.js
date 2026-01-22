@@ -28,8 +28,8 @@ function Header({ movies, openSettings, handleSearch, handleFocus, search }) {
     }
 
     const fernandaText =
-      "Veja os filmes em ";
-    const url = "https://oscars.netlify.app\n\n";
+      "Bora torcer igual copa do mundo pro Agente Secreto?\n";
+    const url = "\nhttps://oscars.netlify.app\n\n";
 
     if (detectMob()) {
       try {
