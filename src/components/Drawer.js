@@ -5,7 +5,7 @@ import Icon from "./Icon";
 import Checkwatch from "./Checkwatch";
 import { CloseOutlined } from "@ant-design/icons";
 import Down from "../icons/Down";
-import { CATEGORIES } from "../utils/constants";
+import { CATEGORIES, GENRES } from "../utils/constants";
 import { nomination_plural, translate } from "../utils/functions";
 
 function Drawer({ info, handleCheck, handleRate, open, onClose }) {
@@ -46,7 +46,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
             src={
               !!tmdb?.backdrop_path
                 ? `https://image.tmdb.org/t/p/original${tmdb?.backdrop_path}`
-                : omdb?.Poster
+                : omdb?.Poster ?? `https://image.tmdb.org/t/p/original${tmdb?.poster_path}`
             }
           />
 
@@ -54,10 +54,10 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
             <p className='drawer-name'>
               <span>
                 <b className='drawer-main'>{data?.movie?.name}</b>
-                <span className='drawer-sub'>{omdb?.Year}</span>
+                <span className='drawer-sub'>{omdb?.Year ?? tmdb?.release_date?.split('-')[0]}</span>
               </span>
               <span>
-                <i className='drawer-sub'>{omdb?.Title}</i>
+                <i className='drawer-sub'>{omdb?.Title ?? tmdb?.original_title}</i>
               </span>
             </p>
           </div>
@@ -81,7 +81,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                 />
               </p>
               <p className='banner-subtitle'>
-                {omdb?.Runtime} • {omdb?.Genre}
+                {omdb?.Runtime ?? 'N/A'} • {tmdb?.genre_ids?.map(g => GENRES[g]?.name).join(', ') ?? omdb?.Genre ?? 'N/A'}
               </p>
             </div>
             <div className='movie-plot'>
@@ -106,8 +106,11 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                   </div>
                 </>
               ) : null}
-              <hr />
               <div>
+                {omdb?.Director ? 
+                (
+                  <>
+                  <hr />
                 <p className='banner-topic'>ELENCO & EQUIPE</p>
                 <p>
                   <b>Diretor</b>
@@ -121,6 +124,9 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                   <b>Elenco</b>
                   <span className='banner-body'>{omdb?.Actors}</span>
                 </p>
+                </>
+                )
+                : null }
 
                 <hr />
                 <p className='banner-topic awards'>
@@ -170,7 +176,7 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
             src={
               !!tmdb?.backdrop_path
                 ? `https://image.tmdb.org/t/p/original${tmdb?.backdrop_path}`
-                : omdb?.Poster
+                : omdb?.Poster ?? `https://image.tmdb.org/t/p/original${tmdb?.poster_path}`
             }
           />
           <div className='banner-backdrop'>
@@ -221,8 +227,8 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                     </span>
                   </span>
                   <span className='banner-subtitle'>
-                    {omdb?.Title} • {omdb?.Year} • {omdb?.Runtime} •{" "}
-                    {omdb?.Genre}
+                    {omdb?.Title ?? tmdb?.original_title} • {omdb?.Year??tmdb?.release_date?.split('-')[0]} • {omdb?.Runtime ?? 'N/A'} •{" "}
+                    {tmdb?.genre_ids?.map(g => GENRES[g]?.name).join(', ') ?? omdb?.Genre ?? 'N/A' }
                   </span>
                 </div>
                 <div className='movie-plot'>
@@ -242,21 +248,27 @@ function Drawer({ info, handleCheck, handleRate, open, onClose }) {
                       </div>
                     </>
                   ) : null}
-                  <hr />
                   <div>
-                    <p className='banner-topic'>ELENCO & EQUIPE</p>
-                    <p>
-                      <b>Diretor</b>
-                      <span className='banner-body'>{omdb?.Director}</span>
-                    </p>
-                    <p>
-                      <b>Roteiristas</b>
-                      <span className='banner-body'>{omdb?.Writer}</span>
-                    </p>
-                    <p>
-                      <b>Elenco</b>
-                      <span className='banner-body'>{omdb?.Actors}</span>
-                    </p>
+                    {omdb?.Director ? 
+                (
+                  <>
+                  <hr />
+                <p className='banner-topic'>ELENCO & EQUIPE</p>
+                <p>
+                  <b>Diretor</b>
+                  <span className='banner-body'>{omdb?.Director}</span>
+                </p>
+                <p>
+                  <b>Roteiristas</b>
+                  <span className='banner-body'>{omdb?.Writer}</span>
+                </p>
+                <p>
+                  <b>Elenco</b>
+                  <span className='banner-body'>{omdb?.Actors}</span>
+                </p>
+                </>
+                )
+                : null }
 
                     <hr />
                     <p className='banner-topic awards'>

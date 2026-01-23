@@ -1,20 +1,23 @@
-import React, { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
 import "./App.scss";
 import Icon from "./Icon";
 import Checkwatch from "./Checkwatch";
 import StarsDisplay from "./StarsDisplay";
-import { nomination_plural } from "../utils/functions";
+import { nomination_plural, get_imdb_id } from "../utils/functions";
 import { LoadingOutlined } from "@ant-design/icons";
+import { CATEGORIES } from "../utils/constants";
+import { useMovies } from "../hooks/useMovies";
 
 function Card({ data, showDrawer, index, handleCheck, search }) {
-  const [omdb, setOmdb] = useState(null);
-  const [tmdb, setTmdb] = useState(null);
+
   const { id } = useParams();
   const navigate = useNavigate();
 
+  const { omdb, tmdb } = useMovies(data?.movie?.imdb);
+
   const visto = data?.watched === true ? 'visto': '';
+  const categoria = data?.category.map(cat => CATEGORIES[cat]?.title) ?? ''
   const regex = new RegExp(search, "i"); // 'i' makes the search case-insensitive
     const hidden = ![
     omdb?.Actors || "",
@@ -29,60 +32,14 @@ function Card({ data, showDrawer, index, handleCheck, search }) {
     tmdb?.original_title || "",
     data?.movie?.name || "",
     data?.category?.join(",") || "",
+    categoria,
     data?.nominees?.join(",") || "",
     visto,
     data?.platform?.map((e) => e?.name).join(",") || "",
   ].some((str) => regex.test(str));
 
-  const getOMDB = async (uuid) => {
-    await setOmdb(null);
-    const imdb = uuid?.match(/tt\d+/);
-    axios
-      .get(`https://www.omdbapi.com/?apikey=81750ce2&i=${imdb}`)
-      .then(function (response) {
-        // handle success
-        setOmdb(response.data);
-      })
-      .catch(function (error) {
-        // handle error
-        console.error(error);
-      });
-  };
-
-  const getTMDB = async (uuid) => {
-    await setTmdb(null);
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OWUyMWU1NWNjMTg0YzBmNTBkYjc4Njk1NzlhYWE3MCIsInN1YiI6IjY0NDAwZDc1MzdiM2E5MDQ0NTQzMmZhYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uB0qMp0SyCG2Lph-6EUJK4eopBlIurD7SdBw8bTb_Uw",
-      },
-    };
-    const imdb = uuid?.match(/tt\d+/);
-
-    axios
-      .get(
-        `https://api.themoviedb.org/3/find/${imdb}?external_source=imdb_id&language=pt-BR`,
-        options
-      )
-      .then(function (response) {
-        // handle success
-        setTmdb(response.data?.movie_results[0]);
-      })
-      .catch(function (error) {
-        // handle error
-        console.error(error);
-      });
-  };
-
-  useEffect(() => {
-    getOMDB(data?.movie.imdb);
-    getTMDB(data?.movie.imdb);
-  }, [data]);
-
   const handleShowDrawer = () => {
-    navigate(`/${omdb?.imdbID}`);
+    navigate(`/${get_imdb_id(data?.movie?.imdb)}`);
     showDrawer({
       index: index,
       data: data,
@@ -147,7 +104,7 @@ function Card({ data, showDrawer, index, handleCheck, search }) {
         </p>
 
         <p className='plot-text'>
-          {!!tmdb?.overview ? tmdb?.overview : omdb?.Plot}
+          {!!Boolean(tmdb?.overview.trim()) ? tmdb?.overview : omdb?.Plot}
         </p>
         <div>
           {data?.platform?.length > 0

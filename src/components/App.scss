@@ -411,6 +411,10 @@ hr {
   color: #111;
   background-color: #eee;
   border-bottom: 1px solid #ccc;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 10;
 }
 
 .header-action {
@@ -463,6 +467,7 @@ hr {
   padding: 16px;
   background-color: #eee;
   max-width: 100vw;
+  padding-top: 110px;
 }
 
 .new-card {
@@ -681,8 +686,7 @@ hr {
 }
 
 .form-button {
-  color: #09111d;
-  border: 1px solid #09111d;
+  color: #c79f27;
   align-self: flex-end;
 
   &:hover,

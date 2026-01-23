@@ -1,5 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
-import axios from "axios";
+import React, { useState, useEffect, useMemo, useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import "./App.scss";
 import { Drawer, Switch, Tag, Button } from "antd";
@@ -16,88 +15,138 @@ import {
   convertMinutesToTimeObject,
 } from "../utils/functions";
 
+import { useMovies } from "../hooks/useMovies";
+
+/**
+ * Loader invisível que usa o hook (um por imdbId) e
+ * "sobe" os dados pro Settings via callback.
+ */
+function MovieMetaLoader({ imdbId, enabled, onMeta }) {
+  // seu hook extrai tt\d+ via regex, então passar "tt123..." já funciona
+  const { omdb, tmdb } = useMovies(enabled ? imdbId : null);
+
+  useEffect(() => {
+    if (!enabled || !imdbId) return;
+    if (omdb || tmdb) onMeta(imdbId, { omdb, tmdb });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [enabled, imdbId, omdb, tmdb]);
+
+  return null;
+}
+
 function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
+  const navigate = useNavigate();
+
   const watched = info.filter((e) => e.watched);
   const besties_movies = info.filter((e) => e.category.includes("BestPicture"));
   const besties_watched = besties_movies.filter((e) => e.watched);
-  const navigate = useNavigate();
 
   const not_watched = useMemo(() => info.filter((e) => !e.watched), [info]);
 
   const note = info.filter((e) => e.rate > 0).map((e) => e.rate);
   const average =
-    note.reduce((acumulador, elemento) => acumulador + elemento, 0) /
-    note?.length;
-  const five_stars = info
-    .filter((e) => e.rate === 5)
-    .map((e) => e.movie.imdb?.match(/tt\d+/));
+    note.length === 0
+      ? 0
+      : note.reduce((acc, n) => acc + n, 0) / note.length;
 
-  const runtimes = watched.map((e) => e.movie.imdb?.match(/tt\d+/));
-  const besties = watched
-    .filter((e) => e.category.includes("BestPicture"))
-    .map((e) => e.movie.imdb?.match(/tt\d+/));
+  // IDs normalizados (match retorna array -> pega [0])
+  const five_stars_ids = useMemo(
+    () =>
+      info
+        .filter((e) => e.rate === 5)
+        .map((e) => e.movie.imdb?.match(/tt\d+/)?.[0])
+        .filter(Boolean),
+    [info]
+  );
 
-  const [fiveStars, setFiveStars] = useState([]);
-  const [bestMovies, setBestMovies] = useState([]);
+  const runtimes_ids = useMemo(
+    () =>
+      watched
+        .map((e) => e.movie.imdb?.match(/tt\d+/)?.[0])
+        .filter(Boolean),
+    [watched]
+  );
+
+  const besties_ids = useMemo(
+    () =>
+      watched
+        .filter((e) => e.category.includes("BestPicture"))
+        .map((e) => e.movie.imdb?.match(/tt\d+/)?.[0])
+        .filter(Boolean),
+    [watched]
+  );
+
+  // união dos ids que precisamos carregar no Settings
+  const neededIds = useMemo(() => {
+    const set = new Set([
+      ...five_stars_ids,
+      ...runtimes_ids,
+      ...besties_ids,
+    ]);
+    return Array.from(set);
+  }, [five_stars_ids, runtimes_ids, besties_ids]);
+
+  // Map id -> { omdb, tmdb }
+  const [metaById, setMetaById] = useState({});
+
+  const handleMeta = useCallback((imdbId, meta) => {
+    setMetaById((prev) => {
+      const prevItem = prev[imdbId] || {};
+      // merge sem apagar o que já existe
+      return {
+        ...prev,
+        [imdbId]: {
+          ...prevItem,
+          ...meta,
+          omdb: meta.omdb ?? prevItem.omdb,
+          tmdb: meta.tmdb ?? prevItem.tmdb,
+        },
+      };
+    });
+  }, []);
+
+  // Derivados: posters best picture / 5 estrelas
+  const bestMovies = useMemo(() => {
+    return besties_ids
+      .map((id) => metaById[id]?.tmdb)
+      .filter(Boolean)
+      .filter((m) => Boolean(m?.poster_path));
+  }, [besties_ids, metaById]);
+
+  const fiveStars = useMemo(() => {
+    return five_stars_ids
+      .map((id) => metaById[id]?.tmdb)
+      .filter(Boolean)
+      .filter((m) => Boolean(m?.poster_path));
+  }, [five_stars_ids, metaById]);
+
   const [timespent, setTimespent] = useState({
     days: 0,
     hours: 0,
     minutes: 0,
   });
 
-  const getTMDB = async (uuid) => {
-    const options = {
-      method: "GET",
-      headers: {
-        accept: "application/json",
-        Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2OWUyMWU1NWNjMTg0YzBmNTBkYjc4Njk1NzlhYWE3MCIsInN1YiI6IjY0NDAwZDc1MzdiM2E5MDQ0NTQzMmZhYiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.uB0qMp0SyCG2Lph-6EUJK4eopBlIurD7SdBw8bTb_Uw",
-      },
-    };
-    try {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/find/${uuid}?external_source=imdb_id&language=pt-BR`,
-        options
-      );
-      return response.data?.movie_results[0];
-    } catch (error) {
-      console.error(`Erro ao buscar dados para o ID ${uuid}:`, error.message);
-      throw error; // Rejeita a promessa para que o Promise.all() saiba que algo deu errado
-    }
-  };
-
-  const getOMDB = async (uuid) => {
-    try {
-      const response = await axios.get(
-        `https://www.omdbapi.com/?apikey=81750ce2&i=${uuid}`
-      );
-      return response.data;
-    } catch (error) {
-      console.error(`Erro ao buscar dados para o ID ${uuid}:`, error.message);
-      throw error; // Rejeita a promessa para que o Promise.all() saiba que algo deu errado
-    }
-  };
-
-  const fetchAllData = async () => {
-    try {
-      const best = await Promise.all(besties.map((id) => getTMDB(id)));
-      const posters = await Promise.all(five_stars.map((id) => getTMDB(id)));
-      const time = await Promise.all(runtimes.map((id) => getOMDB(id)));
-      const all_time = time
-        .map((e) => parseInt(e.Runtime.split(" ")[0]))
-        .reduce((acumulador, elemento) => acumulador + elemento, 0);
-      setTimespent(convertMinutesToTimeObject(all_time));
-      setFiveStars(posters);
-      setBestMovies(best);
-    } catch (error) {
-      console.error("Erro ao buscar dados:", error);
-    }
-  };
-
+  // Recalcula tempo conforme runtimes forem chegando no cache
   useEffect(() => {
-    fetchAllData();
-    // eslint-disable-next-line
-  }, [info]);
+    if (!open) return;
+
+    const totalMinutes = runtimes_ids
+      .map((id) => metaById[id]?.omdb?.Runtime) // "123 min"
+      .map((runtime) => {
+        const n = parseInt(String(runtime || "").split(" ")[0], 10);
+        return Number.isFinite(n) ? n : 0;
+      })
+      .reduce((acc, n) => acc + n, 0);
+
+    setTimespent(convertMinutesToTimeObject(totalMinutes));
+  }, [open, runtimes_ids, metaById]);
+
+  // opcional: ao fechar, você pode manter o cache do SWR,
+  // mas limpar o metaById pra reduzir memória do componente.
+  useEffect(() => {
+    if (!open) return;
+    // quando abre, não faz nada
+  }, [open]);
 
   return (
     <Drawer
@@ -107,6 +156,16 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
       closable={false}
       open={open}
     >
+      {/* loaders invisíveis: só buscam se o Drawer estiver aberto */}
+      {neededIds.map((id) => (
+        <MovieMetaLoader
+          key={id}
+          imdbId={id}
+          enabled={open}
+          onMeta={handleMeta}
+        />
+      ))}
+
       <div className='settings-content'>
         <div className='settings-header'>
           {detectMob() ? (
@@ -123,6 +182,25 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
               arrow_back_ios_new
             </span>
           )}
+
+          <Button
+            className='form-button'
+            type='link'
+            onClick={() => {
+              if (not_watched.length === 0) return;
+
+              const sorteado =
+                not_watched[Math.floor(Math.random() * not_watched.length)];
+              const imdb = sorteado?.movie?.imdb?.match(/tt\d+/)?.[0];
+              if (!imdb) return;
+
+              onClose();
+              navigate(`/${imdb}`);
+            }}
+          >
+            Estou com sorte? :D
+          </Button>
+
           <Switch
             onChange={(e) => handleDarkMode(e)}
             defaultChecked={darkMode}
@@ -138,6 +216,7 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
             }
           />
         </div>
+
         <div className='oscars-date settings-box'>
           <div className='ceremony'>
             <img
@@ -152,9 +231,10 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
               })}
             </span>
           </div>
+
           <Countdown
             date={OSCAR_DATE}
-            renderer={({ days, hours, minutes, seconds, completed }) => {
+            renderer={({ days, hours, minutes, completed }) => {
               return completed ? null : (
                 <span className='remaining'>
                   Faltam {pluralize(days, "dia")}, {pluralize(hours, "hora")} e{" "}
@@ -164,6 +244,7 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
             }}
           />
         </div>
+
         <div className='settings-box conclusion'>
           <div className='percent-movies'>
             <Tag color='#54788a' className='tag-category'>
@@ -176,6 +257,7 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
               {watched?.length}/{info?.length} filmes
             </span>
           </div>
+
           <div className='timespent'>
             <div>
               <b>
@@ -240,7 +322,7 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
                   <div className='miniposter-list'>
                     {fiveStars.map((i) => (
                       <img
-                        key={i?.poster_path}
+                        key={`${i?.poster_path}_five`}
                         className='miniposter'
                         alt='Movie Poster'
                         src={`https://image.tmdb.org/t/p/w500${i?.poster_path}`}
@@ -250,6 +332,7 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
                   <hr />
                 </>
               ) : null}
+
               <span>
                 Sua média de notas é {average.toFixed(1)} <StarFilled />
               </span>
@@ -261,32 +344,16 @@ function Settings({ info, darkMode, handleDarkMode, open, onClose }) {
             </>
           )}
         </div>
+
         <div className='settings-box spotify-button'>
-          <a  
-            href='https://open.spotify.com/playlist/7dqeBKHaCghOQ0WWSf2vMo?si=8a34c075b6fa41c5' 
-            rel="noreferrer" 
-            target="_blank"
+          <a
+            href='https://open.spotify.com/playlist/7dqeBKHaCghOQ0WWSf2vMo?si=8a34c075b6fa41c5'
+            rel='noreferrer'
+            target='_blank'
           >
-            <img alt='Playlist do Spotify' src={spotify}/>
-          </a> 
-        </div>  
-        <div className='settings-box lucky-button'>
-          <Button
-            className='form-button'
-            onClick={() => {
-              if (not_watched.length === 0) return;
-
-              const sorteado = not_watched[Math.floor(Math.random() * not_watched.length)];
-              const imdb = sorteado?.movie?.imdb?.match(/tt\d+/)?.[0];
-              if (!imdb) return;
-
-              onClose();
-              navigate(`/${imdb}`);
-            }}
-          >
-            Estou com sorte? :D
-          </Button>
-        </div>        
+            <img alt='Playlist do Spotify' src={spotify} />
+          </a>
+        </div>
       </div>
     </Drawer>
   );

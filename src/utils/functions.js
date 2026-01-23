@@ -144,3 +144,5 @@ export function translate(text) {
 
   return translated.join(" & ");
 }
+
+export const get_imdb_id = (url) => url?.match(/tt\d+/) ?? ''

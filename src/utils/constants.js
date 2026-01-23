@@ -147,3 +147,82 @@ export const all_categories = [
 export const minilist_categories = ["BestPicture", "AnimatedFeature"];
 
 export const LOCAL_STORAGE_KEY = "oscar-data-2026";
+
+export const GENRES = {
+    28:{
+      "id": 28,
+      "name": "Ação"
+    },
+    12:{
+      "id": 12,
+      "name": "Aventura"
+    },
+    16:{
+      "id": 16,
+      "name": "Animação"
+    },
+    35:{
+      "id": 35,
+      "name": "Comédia"
+    },
+    80:{
+      "id": 80,
+      "name": "Crime"
+    },
+    99:{
+      "id": 99,
+      "name": "Documentário"
+    },
+    18:{
+      "id": 18,
+      "name": "Drama"
+    },
+    10751:{
+      "id": 10751,
+      "name": "Família"
+    },
+    14:{
+      "id": 14,
+      "name": "Fantasia"
+    },
+    36:{
+      "id": 36,
+      "name": "História"
+    },
+    27:{
+      "id": 27,
+      "name": "Terror"
+    },
+    10402:{
+      "id": 10402,
+      "name": "Música"
+    },
+    9648:{
+      "id": 9648,
+      "name": "Mistério"
+    },
+    10749:{
+      "id": 10749,
+      "name": "Romance"
+    },
+    878:{
+      "id": 878,
+      "name": "Ficção científica"
+    },
+    10770:{
+      "id": 10770,
+      "name": "Cinema TV"
+    },
+    53:{
+      "id": 53,
+      "name": "Thriller"
+    },
+    10752:{
+      "id": 10752,
+      "name": "Guerra"
+    },
+    37:{
+      "id": 37,
+      "name": "Faroeste"
+    }
+}

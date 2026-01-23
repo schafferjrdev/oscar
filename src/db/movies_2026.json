@@ -146,7 +146,12 @@
                 "Inga Ibsdotter Lilleaas - Indicada a Melhor Atriz Coadjuvante",
                 "Joachim Trier - Indicado a Melhor Direção"
             ],
-            "platform": [],
+            "platform": [
+                {
+                    "name": "ingresso",
+                    "url": "https://www.ingresso.com/filme/valor-sentimental"
+                }
+            ],
             "rate": 0,
             "watched": false
         },
@@ -170,7 +175,12 @@
                 "Timothée Chalamet - Indicado a Melhor Ator",
                 "Josh Safdie - Indicado a Melhor Direção"
             ],
-            "platform": [],
+            "platform": [
+                {
+                    "name": "ingresso",
+                    "url": "https://www.ingresso.com/filme/marty-supreme"
+                }
+            ],
             "rate": 0,
             "watched": false
         },
@@ -193,7 +203,12 @@
                 "Jessie Buckley - Indicada a Melhor Atriz",
                 "Chloé Zhao - Indicada a Melhor Direção"
             ],
-            "platform": [],
+            "platform": [
+                {
+                    "name": "ingresso",
+                    "url": "https://www.ingresso.com/filme/hamnet-a-vida-antes-de-hamlet"
+                }
+            ],
             "rate": 0,
             "watched": false
         },
@@ -499,7 +514,12 @@
                 "name": "The Perfect Neighbor"
             },
             "nominees": [],
-            "platform": [],
+            "platform": [
+                {
+                "name": "netflix",
+                "url": "https://www.netflix.com/watch/82018736"
+            }
+            ],
             "rate": 0,
             "watched": false
         },
@@ -512,7 +532,12 @@
                 "name": "The Alabama Solution"
             },
             "nominees": [],
-            "platform": [],
+            "platform": [
+                {
+                "name": "hbo",
+                "url": "https://play.hbomax.com/movie/a035980c-668b-4a80-aa01-a92ec58d06cc"
+            }
+            ],
             "rate": 0,
             "watched": false
         },
@@ -522,10 +547,15 @@
             ],
             "movie": {
                 "imdb": "https://www.imdb.com/title/tt34966013/",
-                "name": "Come See Me In The Good Light"
+                "name": "Embaixo da Luz de Neon"
             },
             "nominees": [],
-            "platform": [],
+            "platform": [
+            {
+                "name": "apple",
+                "url": "https://tv.apple.com/br/movie/embaixo-da-luz-de-neon/umc.cmc.27uh51l7oh3ghql2gxb6xvb1s?action=playc"
+            }
+            ],
             "rate": 0,
             "watched": false
         },
@@ -625,7 +655,7 @@
                 "AnimatedShort"
             ],
             "movie": {
-                "imdb": "https://www.imdb.com/pt/title/tt37645479/",
+                "imdb": "https://www.imdb.com/pt/title/tt30970587/",
                 "name": "Butterfly"
             },
             "nominees": [],
@@ -708,6 +738,28 @@
             },
             "nominees": [],
             "platform": [],
+            "rate": 0,
+            "watched": false
+        },
+        {
+            "category": [
+                "MakeupandHairstyling"
+            ],
+            "movie": {
+                "imdb": "https://www.imdb.com/pt/title/tt29344903/",
+                "name": "A Meia-Irmã Feia"
+            },
+            "nominees": [],
+            "platform": [
+            {
+                "name": "mubi",
+                "url": "https://mubi.com/pt/br/films/the-ugly-stepsister"
+            },
+            {
+                "name": "prime",
+                "url": "https://www.primevideo.com/-/pt/detail/A-Meia-Irmã-Feia/0IWICFLY61004PU4U3OV5XTBHW"
+            }            
+            ],
             "rate": 0,
             "watched": false
         },
